@@ -1,0 +1,271 @@
+{
+  "codificacion": {
+    "aplica_a": [
+      "human_decision",
+      "model_output",
+      "ground_truth"
+    ],
+    "comprobacion": "Después de subir, Vigía compara cuántas veces recomienda lo favorable el modelo en tu registro con cuántas veces lo predice en producción. Si no casan, avisa de que el fichero puede estar al revés. Es solo un aviso: el registro se guarda igual. Con menos de 200 filas, o sin lotes de producción de esa versión, no se puede comprobar.",
+    "frase": "refer (o 1) es la decisión favorable para la persona afectada, en el mismo sentido que la etiqueta favorable del modelo.",
+    "opciones": [
+      {
+        "significa": "En mi fichero, refer es la decisión favorable para la persona. Es la opción por defecto.",
+        "valor": "refer"
+      },
+      {
+        "significa": "En mi fichero, no-refer es la favorable (por ejemplo, un modelo de riesgo donde refer es marcar a la persona). Vigía invierte las tres columnas al guardar.",
+        "valor": "no-refer"
+      },
+      {
+        "significa": "Igual que refer, escrito con números.",
+        "valor": "1"
+      },
+      {
+        "significa": "Igual que no-refer, escrito con números: Vigía invierte las tres columnas al guardar.",
+        "valor": "0"
+      }
+    ],
+    "por_defecto": "refer",
+    "pregunta": "¿Qué valor del fichero es la decisión favorable para la persona?"
+  },
+  "columnas_obligatorias": [
+    {
+      "ejemplo": "2026-03-02",
+      "nombre": "date",
+      "que_es": "Fecha de la decisión.",
+      "valores": "aaaa-mm-dd, dd/mm/aaaa o dd-mm-aaaa. Cualquier otro formato da error con el número de fila."
+    },
+    {
+      "ejemplo": "refer",
+      "nombre": "human_decision",
+      "que_es": "Lo que decidió la persona profesional.",
+      "valores": "refer o no-refer (también 1 o 0). En blanco se guarda como sin dato."
+    },
+    {
+      "ejemplo": "no-refer",
+      "nombre": "model_output",
+      "que_es": "Lo que recomendó el modelo en esa decisión.",
+      "valores": "refer o no-refer (también 1 o 0). En blanco se guarda como sin dato."
+    },
+    {
+      "ejemplo": "refer",
+      "nombre": "ground_truth",
+      "que_es": "El desenlace real, cuando se conoce.",
+      "valores": "refer o no-refer (también 1 o 0). En blanco si todavía no se sabe."
+    }
+  ],
+  "columnas_opcionales": [
+    {
+      "ejemplo": "prof-01",
+      "nombre": "clinician_pseudonym",
+      "que_es": "Seudónimo de la persona profesional. Permite ver a cada profesional por separado.",
+      "valores": "Texto libre, ya seudonimizado: Vigía no oculta identificadores."
+    },
+    {
+      "ejemplo": "unidad-a",
+      "nombre": "subgroup",
+      "que_es": "Unidad o grupo de personas afectadas, para separar el deskilling por subgrupo.",
+      "valores": "Texto libre."
+    },
+    {
+      "ejemplo": "17",
+      "nombre": "record_seq",
+      "que_es": "Número de la fila del lote al que corresponde la decisión. Se guarda como referencia; no se cruza con las filas del lote.",
+      "valores": "Número entero. Un valor que no sea número da error."
+    },
+    {
+      "ejemplo": "v1",
+      "nombre": "model_version",
+      "que_es": "Versión del modelo. Se admite porque la exportación la escribe, pero la subida no la lee.",
+      "valores": "La versión se elige en el formulario de subida, no en el fichero."
+    }
+  ],
+  "ejemplo": {
+    "columnas": [
+      "date",
+      "human_decision",
+      "model_output",
+      "ground_truth",
+      "clinician_pseudonym",
+      "subgroup"
+    ],
+    "csv": "date,human_decision,model_output,ground_truth,clinician_pseudonym,subgroup\n2026-03-02,refer,refer,refer,prof-01,unidad-a\n2026-03-03,no-refer,refer,refer,prof-02,unidad-a\n2026-03-04,no-refer,no-refer,no-refer,prof-01,unidad-b\n2026-03-05,refer,refer,no-refer,prof-03,unidad-b\n2026-03-06,refer,no-refer,refer,prof-02,unidad-a\n",
+    "filas": [
+      [
+        "2026-03-02",
+        "refer",
+        "refer",
+        "refer",
+        "prof-01",
+        "unidad-a"
+      ],
+      [
+        "2026-03-03",
+        "no-refer",
+        "refer",
+        "refer",
+        "prof-02",
+        "unidad-a"
+      ],
+      [
+        "2026-03-04",
+        "no-refer",
+        "no-refer",
+        "no-refer",
+        "prof-01",
+        "unidad-b"
+      ],
+      [
+        "2026-03-05",
+        "refer",
+        "refer",
+        "no-refer",
+        "prof-03",
+        "unidad-b"
+      ],
+      [
+        "2026-03-06",
+        "refer",
+        "no-refer",
+        "refer",
+        "prof-02",
+        "unidad-a"
+      ]
+    ],
+    "n_filas": 5,
+    "nombre_fichero": "registro-uso-ejemplo.csv",
+    "nota": "Datos sintéticos. Sirve para ver el formato; no tiene filas suficientes para la comprobación de codificación."
+  },
+  "ejemplo_multiclase": {
+    "columnas": [
+      "date",
+      "human_decision",
+      "model_output",
+      "ground_truth",
+      "clinician_pseudonym",
+      "subgroup"
+    ],
+    "csv": "date,human_decision,model_output,ground_truth,clinician_pseudonym,subgroup\n2026-03-02,leve,leve,leve,prof-01,unidad-a\n2026-03-03,grave,moderada,grave,prof-02,unidad-a\n2026-03-04,moderada,moderada,moderada,prof-01,unidad-b\n2026-03-05,leve,grave,moderada,prof-03,unidad-b\n2026-03-06,grave,grave,,prof-02,unidad-a\n",
+    "filas": [
+      [
+        "2026-03-02",
+        "leve",
+        "leve",
+        "leve",
+        "prof-01",
+        "unidad-a"
+      ],
+      [
+        "2026-03-03",
+        "grave",
+        "moderada",
+        "grave",
+        "prof-02",
+        "unidad-a"
+      ],
+      [
+        "2026-03-04",
+        "moderada",
+        "moderada",
+        "moderada",
+        "prof-01",
+        "unidad-b"
+      ],
+      [
+        "2026-03-05",
+        "leve",
+        "grave",
+        "moderada",
+        "prof-03",
+        "unidad-b"
+      ],
+      [
+        "2026-03-06",
+        "grave",
+        "grave",
+        "",
+        "prof-02",
+        "unidad-a"
+      ]
+    ],
+    "n_filas": 5,
+    "nombre_fichero": "registro-uso-ejemplo-multiclase.csv",
+    "nota": "Datos sintéticos de un modelo de tres clases (leve, moderada, grave). Cambia los nombres por las clases de tu modelo: tres columnas de decisión llevan la clase, nunca refer ni no-refer."
+  },
+  "ejemplo_regresion": {
+    "columnas": [
+      "date",
+      "human_decision",
+      "model_output",
+      "ground_truth",
+      "clinician_pseudonym",
+      "subgroup"
+    ],
+    "csv": "date,human_decision,model_output,ground_truth,clinician_pseudonym,subgroup\n2026-03-02,46,46,47.5,prof-01,unidad-a\n2026-03-03,42,36,41,prof-02,unidad-a\n2026-03-04,28,30,29.5,prof-01,unidad-b\n2026-03-05,55,52,54,prof-03,unidad-b\n2026-03-06,38.5,38.5,,prof-02,unidad-a\n",
+    "filas": [
+      [
+        "2026-03-02",
+        "46",
+        "46",
+        "47.5",
+        "prof-01",
+        "unidad-a"
+      ],
+      [
+        "2026-03-03",
+        "42",
+        "36",
+        "41",
+        "prof-02",
+        "unidad-a"
+      ],
+      [
+        "2026-03-04",
+        "28",
+        "30",
+        "29.5",
+        "prof-01",
+        "unidad-b"
+      ],
+      [
+        "2026-03-05",
+        "55",
+        "52",
+        "54",
+        "prof-03",
+        "unidad-b"
+      ],
+      [
+        "2026-03-06",
+        "38.5",
+        "38.5",
+        "",
+        "prof-02",
+        "unidad-a"
+      ]
+    ],
+    "n_filas": 5,
+    "nombre_fichero": "registro-uso-ejemplo-regresion.csv",
+    "nota": "Datos sintéticos de un modelo de regresión en horas por semana, con el rango favorable de 40 horas o más. Las tres columnas de decisión llevan cifras en la unidad del modelo, con punto decimal y sin la unidad; nunca refer ni no-refer. Vigía calcula si cada cifra cae dentro del rango favorable. Un cambio de la persona que no cruza el corte del rango (de 55 a 52 horas) no cuenta como override. El registro de regresión necesita un rango favorable en el modelo."
+  },
+  "formato_fichero": "CSV con cabecera. Separador coma, punto y coma o tabulador; UTF-8 con o sin BOM, o Windows-1252 (el CSV de Excel en español). Una columna con un número de campos distinto al de la cabecera da error.",
+  "formatos_fecha": [
+    {
+      "ejemplo": "2026-03-02",
+      "formato": "aaaa-mm-dd",
+      "nota": "Formato ISO. Es el recomendado."
+    },
+    {
+      "ejemplo": "02/03/2026",
+      "formato": "dd/mm/aaaa",
+      "nota": "Fecha española con barras: día primero."
+    },
+    {
+      "ejemplo": "02-03-2026",
+      "formato": "dd-mm-aaaa",
+      "nota": "Fecha española con guiones: día primero."
+    }
+  ],
+  "resumen": "El registro de uso es un CSV con una fila por decisión: qué decidió la persona profesional, qué recomendó el modelo y qué pasó de verdad. Vigía lo usa para medir el deskilling, los overrides y las alertas cruzadas.",
+  "titulo": "Cómo preparar el registro de uso"
+}

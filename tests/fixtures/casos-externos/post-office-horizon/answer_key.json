@@ -1,0 +1,74 @@
+[
+  {
+    "id": "PO-01-deferencia-a-la-maquina",
+    "description": "El operador profesional defiere a la máquina sobre su propio conocimiento contable: aunque sabe que la cifra no cuadra con sus libros, acaba fiándose de la pantalla porque el sistema tiene los datos y la última palabra. Automation bias del operador.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Relación de confianza operador-sistema en el cierre de caja",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "PO-02-cifra-opaca-no-auditable",
+    "description": "El descuadre se presenta como una única cantidad sin desglose de las transacciones que lo originan, y los registros detallados están en los servidores del proveedor sin acceso para el operador: no puede auditar ni reconstruir el cálculo.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Presentación del descuadre (cifra agregada sin detalle ni acceso a los logs)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "PO-03-sin-explicacion-del-porque",
+    "description": "El sistema no explica por qué aparece el descuadre en este caso concreto; el operador pide el porqué y solo recibe que «el sistema tiene razón». La salida es una caja negra sin explicación accesible.",
+    "guideline_ids": ["HAX-G11", "PAIR-EF-2"],
+    "locus": "Contenido del aviso de diferencia (sin explicación del origen)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "PO-04-sin-incertidumbre-falsa-autoridad",
+    "description": "La cifra se muestra como un dato contable cierto, sin margen de error ni señal de que el propio cálculo pueda fallar (duplica o no completa operaciones y aun así cierra). Falsa precisión que el operador no puede calibrar.",
+    "guideline_ids": ["PAIR-ET-2", "HAX-G2"],
+    "locus": "Formato del saldo teórico (sin incertidumbre ni aviso de posible fallo del sistema)",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "PO-05-helpdesk-inutil-empeora",
+    "description": "El canal de ayuda no resuelve la incidencia: parte de que el fallo es del operador, no entrega el detalle y en algunas llamadas los pasos indicados aumentan el importe reclamado (de 2.000 a 4.000 libras). Fallo de recuperación que empeora el estado.",
+    "guideline_ids": ["PAIR-EF-2", "HAX-G7"],
+    "locus": "Línea de soporte / proceso de resolución de descuadres",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "PO-06-sin-via-de-override-ni-contestacion",
+    "description": "El operador no puede anular ni marcar la cifra como disputada: para cerrar el periodo está obligado a aceptar y asumir la diferencia («o la aceptaba, o no podía cerrar»). No hay vía real de override ni de contestación.",
+    "guideline_ids": ["PAIR-FC-2", "HAX-G9"],
+    "locus": "Flujo de cierre (aceptación forzada del descuadre, sin opción de disputa)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "PO-07-discrepancia-no-capturada",
+    "description": "El sistema no ofrece ningún mecanismo para que el operador deje constancia formal de su desacuerdo ni para registrar el motivo; la discrepancia entre el juicio del operador y la máquina se pierde y no alimenta ninguna supervisión.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-1"],
+    "locus": "Ausencia de captura estructurada del desacuerdo del operador",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "PO-08-sin-abstencion-bajo-fallo",
+    "description": "Ante operaciones que el propio sistema puede haber registrado mal (duplicadas o incompletas), no se abstiene ni degrada con elegancia: fuerza un saldo confiado y una deuda imputada en lugar de marcar que el cálculo es dudoso o derivar a revisión.",
+    "guideline_ids": ["HAX-G10", "PAIR-EF-1"],
+    "locus": "Comportamiento del sistema ante posible error propio (cierre confiado vs abstención)",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "PO-09-sin-formacion-modelo-mental",
+    "description": "No hay formación que ayude al operador a entender qué hace el sistema, cuándo puede equivocarse o qué hacer ante un descuadre; cada operador improvisa su criterio y termina dudando de sí mismo antes que del programa. Modelo mental no calibrado.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Onboarding/formación del operador sobre el sistema y sus límites",
+    "severity": "medium",
+    "revealed_by": "user_only"
+  }
+]

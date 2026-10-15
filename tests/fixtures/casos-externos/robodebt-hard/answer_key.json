@@ -1,0 +1,82 @@
+[
+  {
+    "id": "RD-01-aviso-sin-explicacion-calculo",
+    "description": "Las cartas de deuda enviadas a los ciudadanos no explicaban cómo se había calculado el importe reclamado ni cuándo habría ocurrido el supuesto cobro indebido. El Ombudsman (2017) documentó que el sistema 'did not explain the details of the overpayment including when the overpayment occurred or how the debts were calculated'. El ciudadano recibía una cifra sin trazabilidad ni justificación comprensible.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Carta de notificación de deuda (OCI letter)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "RD-02-omision-deliberada-telefono",
+    "description": "Las cartas de deuda enviadas durante fases del esquema omitieron deliberadamente el número de la línea de ayuda de cumplimiento (1800 compliance helpline), de modo que los ciudadanos no disponían de un canal directo para resolver dudas o pedir explicaciones. El análisis de la University of Queensland documenta esta omisión como una decisión de diseño que forzaba la respuesta por el portal online. La Royal Commission recogió que el sistema eliminó progresivamente la intervención humana accesible.",
+    "guideline_ids": ["PAIR-FC-2", "HAX-G7"],
+    "locus": "Carta de notificación de deuda (campo de contacto)",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "RD-03-canal-unico-online-forzado",
+    "description": "Los ciudadanos eran dirigidos exclusivamente al portal myGov para acreditar sus ingresos y contestar la deuda. La Royal Commission señaló que muchos receptores 'no tenían los medios ni la capacidad para negociar un sistema en línea', incluyendo personas sin acceso tecnológico, con discapacidades o que vivían en zonas rurales. El informe recomienda explícitamente que los servicios futuros ofrezcan opciones online, presencial y telefónica.",
+    "guideline_ids": ["PAIR-EF-1", "HAX-G7"],
+    "locus": "Portal myGov como único canal de respuesta",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "RD-04-inversion-carga-de-la-prueba",
+    "description": "Antes de Robodebt, Centrelink verificaba manualmente las discrepancias de ingresos con el propio ciudadano o con el empleador antes de reclamar una deuda. El OCI invirtió esta carga: el ciudadano recibía una deuda presunta y debía demostrar que no la debía, aportando nóminas y extractos bancarios de hasta cinco años atrás. La Royal Commission lo caracterizó como una inversión del deber de prueba institucional sobre el receptor de bienestar.",
+    "guideline_ids": ["PAIR-UN-2", "PAIR-FC-2"],
+    "locus": "Flujo de reclamación: quién debe aportar la prueba",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "RD-05-ausencia-revision-humana-previa",
+    "description": "El sistema generaba y enviaba avisos de deuda de forma completamente automatizada, sin que ningún agente humano revisara el cálculo antes del envío. El Ombudsman (2017) y la Royal Commission documentan que 'no había intervención humana significativa en el cálculo y notificación de deudas bajo la fase OCI'. Las deudas basadas en datos incorrectos o aplicados incorrectamente se emitían sin ninguna revisión.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G10", "IX-1"],
+    "locus": "Proceso de generación del aviso de deuda (back-end automatizado)",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "RD-06-presuncion-de-deuda-por-promedio",
+    "description": "El sistema promediaba los ingresos anuales declarados al fisco y los distribuía en quincenas iguales, asumiendo que el ciudadano había cobrado esa cantidad uniforme durante todo el año. Esta suposición generaba deudas ficticias para trabajadores estacionales o con empleo variable. La Royal Commission calificó el mecanismo como 'esencialmente injusto, tratando a muchas personas como si hubieran recibido ingresos en momentos en que no lo habían hecho'. El cálculo nunca fue explicado ni cuestionado antes del envío.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Motor de cálculo por promediado de ingresos (income averaging)",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "RD-07-documentacion-imposible-de-aportar",
+    "description": "Para impugnar la deuda, el sistema exigía nóminas y extractos bancarios de hasta cinco años atrás. La Royal Commission y Victoria Legal Aid documentan que esta exigencia era imposible de cumplir para personas en situación de vulnerabilidad económica, sin archivos personales organizados o sin capacidad administrativa. Centrelink se negaba a revisar deudas sin esa documentación. La carga administrativa diseñada así favorecía implícitamente el cobro sobre la justicia.",
+    "guideline_ids": ["PAIR-EF-2", "HAX-G9"],
+    "locus": "Proceso de impugnación / revisión de la deuda",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "RD-08-ausencia-de-incertidumbre-comunicada",
+    "description": "Las cartas notificaban el importe de la deuda como un dato objetivo y definitivo, sin indicar que el cálculo era una estimación basada en promedios ni que podía ser erróneo. No se informaba al ciudadano de que la deuda podía ser incorrecta, de la tasa de error del sistema ni de las posibilidades reales de que el importe cambiara si aportaba sus ingresos reales. La autoridad aparente del número inducia automation bias institucional sobre el propio ciudadano.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Formato e importe en la carta de notificación",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "RD-09-ignorancia-de-resoluciones-del-tribunal",
+    "description": "El Tribunal Administrativo de Apelaciones (AAT) dictó numerosas resoluciones de nivel 1 que anulaban deudas generadas por promediado de ingresos por ilegales, pero el Departamento de Servicios Humanos no apeló esas decisiones ni trasladó el problema al Departamento de Seguridad Social, y el esquema continuó emitiendo avisos idénticos. Los ciudadanos que no llegaban al AAT seguían recibiendo deudas con el mismo defecto de interacción ya conocido y judicialmente cuestionado.",
+    "guideline_ids": ["PAIR-FC-1", "HAX-G9"],
+    "locus": "Ausencia de mecanismo de retroalimentación entre resoluciones del AAT y el sistema emisor",
+    "severity": "high",
+    "revealed_by": "unknown"
+  },
+  {
+    "id": "RD-10-tono-intimidatorio-y-trauma-documentado",
+    "description": "La Royal Commission documentó que las comunicaciones del esquema 'desempoderó a las personas, causando trauma emocional, estrés y vergüenza', haciendo 'que muchas personas se sintieran criminales'. Holmes concluyó: 'La gente fue traumatizada con la posibilidad de que debiera dinero'. El lenguaje y el tono de las cartas —con referencias a recuperación de deuda y derivación a terceros— no se ajustaba a las normas sociales esperables en la comunicación entre un Estado de bienestar y ciudadanos que estaban o habían estado en situación de vulnerabilidad.",
+    "guideline_ids": ["HAX-G5", "PAIR-MM-1"],
+    "locus": "Tono y encuadre de la carta de notificación de deuda",
+    "severity": "medium",
+    "revealed_by": "both"
+  }
+]

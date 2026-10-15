@@ -1,0 +1,82 @@
+[
+  {
+    "id": "FH-01-incertidumbre-no-mostrada",
+    "description": "El modelo es internamente probabilístico (predice una distribución del caudal y muestra su mediana), pero a quien decide se le presenta una única línea de pronóstico más categorías de severidad y, como mucho, una etiqueta binaria de confianza alta/baja del gauge. No hay banda de incertidumbre ni probabilidad numérica alrededor del valor, así que el decisor no puede calibrar cuánta fe poner en un aviso concreto.",
+    "guideline_ids": ["PAIR-ET-2", "HAX-G2"],
+    "locus": "Presentación de la predicción en el panel del gauge y en la alerta",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "FH-02-marco-periodo-de-retorno-malinterpretable",
+    "description": "Los niveles de severidad se anclan a periodos de retorno (evento de ~2, ~5 y ~20 años). Ese marco se malinterpreta con facilidad: sugiere que el evento ocurre una vez cada X años y alimenta la idea de que una inundación 'ya toca' o 'no toca', oscureciendo su significado probabilístico para quien tiene que decidir con el aviso.",
+    "guideline_ids": ["HAX-G2", "PAIR-MM-2"],
+    "locus": "Marco de periodo de retorno de los niveles de severidad (warning/danger/extreme)",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "FH-03-nivel-del-sistema-no-es-el-trigger-de-accion",
+    "description": "El sistema emite una categoría fija (warning/danger/extreme) mientras que la organización que decide necesita un disparador operativo distinto (por ejemplo, un porcentaje del área o del pueblo pronosticado como inundable). Esa traducción del nivel del sistema al trigger de acción la hace cada organización a mano, cruzando además con gauges oficiales y observación local; el sistema no ofrece forma de fijar el umbral operativo propio.",
+    "guideline_ids": ["HAX-G17", "PAIR-FC-2"],
+    "locus": "Traducción entre el nivel de severidad del sistema y el trigger de acción de la organización",
+    "severity": "medium",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "FH-04-sin-canal-de-feedback-al-sistema",
+    "description": "Los avisos van en un solo sentido (buscador, mapas, notificaciones, suscripción por correo). No hay un canal por el que quien decide o quien recibe la alerta pueda reportar si el aviso fue acertado o una falsa alarma para recalibrar el sistema; la señal de si la predicción sirvió no se captura.",
+    "guideline_ids": ["HAX-G15", "PAIR-FC-1"],
+    "locus": "Ausencia de canal de retorno del usuario hacia el sistema",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "FH-05-fiabilidad-en-extremos-no-comunicada",
+    "description": "El sistema se presenta con cifras de cobertura y acierto globales, pero su fiabilidad no es predecible localmente (las correlaciones entre atributos de la cuenca y la fiabilidad son bajas) y opera en cuencas sin aforo por transferencia. Ese límite no se traslada a la categoría con la que el decisor actúa, lo que invita a una confianza mayor de la que el rendimiento en eventos extremos justifica.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-3"],
+    "locus": "Comunicación del rendimiento en eventos extremos y en cuencas sin aforo",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "FH-06-sin-explicacion-del-porque",
+    "description": "El panel del gauge muestra un hidrograma y los umbrales, pero no una explicación accesible de por qué el modelo predice que se cruzará un umbral en un evento concreto. Quien decide no puede inspeccionar en qué se basa esa predicción para calibrar su confianza en ese aviso.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Ausencia de explicación del porqué de una predicción concreta",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "FH-07-caveat-de-confianza-no-llega-al-usuario-final",
+    "description": "La distinción entre gauges de confianza alta y baja existe solo como una capa/toggle del mapa. Ese matiz no sobrevive a la cadena de distribución (buscador, SMS, boca a boca) hasta la población, que recibe una alerta categórica despojada de su advertencia de confianza. El aviso llega con más aparente certeza de la que tiene.",
+    "guideline_ids": ["HAX-G2", "PAIR-EF-1"],
+    "locus": "Pérdida del matiz de confianza del gauge en la cadena de distribución de la alerta",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "FH-08-la-alerta-no-alcanza-a-la-poblacion-vulnerable",
+    "description": "El canal directo (notificaciones, buscador, mapas) asume smartphone y datos. En las zonas más vulnerables, sin electrificar y con pocos smartphones, el pronóstico solo llega mediado por intermediarios humanos, con retraso y pérdida de información, cuando llega. La persona a la que más protegería el aviso es la que menos probablemente lo recibe a tiempo.",
+    "guideline_ids": ["PAIR-UN-1", "HAX-G3"],
+    "locus": "Alcance de la alerta a la población sin conectividad",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "FH-09-fatiga-de-alerta-por-falsas-alarmas",
+    "description": "Las falsas alarmas repetidas desensibilizan a quien recibe el aviso, que empieza a ignorarlo. No hay un control por usuario para descartar o ajustar los avisos, de modo que la erosión de la confianza no tiene válvula: el aviso siguiente pesa menos aunque sea el bueno.",
+    "guideline_ids": ["HAX-G8", "PAIR-ET-3"],
+    "locus": "Fatiga de alerta por falsas alarmas repetidas sin control de descarte por usuario",
+    "severity": "medium",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "FH-10-no-fuente-unica-sin-medios-de-integracion",
+    "description": "El sistema advierte de que no debe usarse como fuente única y de que hay que combinarlo con otras fuentes, pero emite una categoría de aspecto confiado y no ofrece medios para integrar o contrastar esas otras fuentes. La carga de manejar la incertidumbre se traslada al decisor vía un descargo, en lugar de abstenerse o degradar cuando la señal es débil.",
+    "guideline_ids": ["HAX-G10", "HAX-G2"],
+    "locus": "Descargo de 'no usar como fuente única' sin medios de integración con otras fuentes",
+    "severity": "high",
+    "revealed_by": "both"
+  }
+]

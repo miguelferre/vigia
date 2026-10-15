@@ -1,0 +1,21 @@
+{
+  "alertas": {
+    "protocolo_que_es": "El protocolo es la pauta de respuesta ante esta alerta: reconocer, investigar, contener, escalar, cerrar. Se edita en la configuración del monitor; aquí solo se lee."
+  },
+  "diario": {
+    "carriles": "El diario tiene cuatro carriles: Usuario (lo que hace una persona desde la interfaz), Agente de IA (lo que hace un agente conectado por MCP o por la API), Vigía (lo que Vigía calcula y registra sobre el modelo vigilado) y Sistema (arranque, colas, migraciones). Filtra por carril para ver solo lo que te interesa."
+  },
+  "explicabilidad": {
+    "metodos": "Elige entre importancia por permutación, siempre disponible, y SHAP, más preciso pero no siempre instalado en el equipo. Para explicar un caso concreto, Vigía usa LIME.",
+    "que_ves": "Un ranking de las características que más pesan en las predicciones del modelo, con su importancia relativa; para un caso concreto, el sentido en el que cada característica empujó la decisión."
+  },
+  "modelos": {
+    "guardar_variables_ayuda": "Necesario para la explicabilidad. Si se desmarca, Vigía guarda de cada registro solo la predicción, la etiqueta, el grupo y el identificador de la fila, tal como llegó; la explicabilidad global y local quedan desactivadas.",
+    "linea_base_por_que": "La línea base es el lote contra el que se mide la deriva de esta versión del modelo. Se fija una vez y no cambia: si la mueves, pierdes la comparación con lo que ya se vigiló."
+  },
+  "subida_datos": {
+    "formatos": "Admite CSV y JSON (si tus datos están en Excel, guárdalos como CSV). Mapea las columnas de tu fichero a los campos que Vigía necesita (predicción, etiqueta, atributo protegido) en el propio formulario de subida.",
+    "que_pasa_despues": "Vigía valida las columnas y guarda el lote tal como llega. Los datos deben venir ya desidentificados: Vigía no sustituye ni oculta identificadores.",
+    "que_subir": "Sube un fichero con las predicciones de tu modelo, o con las etiquetas reales cuando ya las tengas, para el proyecto y la versión que quieres vigilar."
+  }
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "MI-01-notificacion-solo-portal",
+    "description": "MiDAS notificaba las sospechas de fraude únicamente a través del portal web de la UIA, no por correo postal ni otro canal proactivo. Muchos reclamantes ya no cobraban beneficios y no tenían motivo para revisar el portal, por lo que corría un plazo de 10 días para responder sin que la persona supiera que el reloj había empezado. Documentado por el Benefits Tech Advocacy Hub (BTAH) y descrito en el litigio Cahoo v. SAS Analytics (6th Cir., 2019).",
+    "guideline_ids": [
+      "HAX-G18",
+      "PAIR-MM-1"
+    ],
+    "locus": "canal y momento de la notificación inicial de sospecha de fraude",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "MI-02-cuestionario-autoincriminatorio",
+    "description": "El formulario de disputa que MiDAS enviaba era un cuestionario de opción múltiple diseñado de forma que casi garantizaba que la persona admitiera fraude inadvertidamente, sin explicar la base concreta de la sospecha. El Sexto Circuito (Cahoo v. SAS Analytics, 912 F.3d 887, 2019) describió las notificaciones como construidas de manera que casi asegurarían una admisión involuntaria.",
+    "guideline_ids": [
+      "HAX-G11",
+      "PAIR-ET-1"
+    ],
+    "locus": "diseño del cuestionario de opción múltiple / formulario de respuesta a la acusación",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "MI-03-adjudicacion-sin-revision-humana",
+    "description": "Entre octubre de 2013 y agosto/septiembre de 2015, MiDAS adjudicó por algoritmo, sin intervención humana posible, unos 40195 casos de fraude (frente al sistema legado, que sí requería revisión humana). El acuerdo Zynda (2017) obligó al estado a dejar de emitir determinaciones de fraude de forma puramente automatizada. Documentado por la Oficina del Auditor General de Michigan (informe de 2016) y por la propia UIA al reconocer el cambio de proceso.",
+    "guideline_ids": [
+      "HAX-G10",
+      "PAIR-FC-2",
+      "IX-1"
+    ],
+    "locus": "punto de decisión de fraude (auto-adjudicación) previo a cualquier sanción",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "MI-04-sin-explicacion-de-causa",
+    "description": "El sistema no informaba al reclamante de la base concreta de la sospecha (qué discrepancia de datos la había disparado), impidiendo una respuesta orientada a los hechos reales del caso. Recogido en la demanda y en la opinión del Sexto Circuito en Cahoo v. SAS Analytics.",
+    "guideline_ids": [
+      "HAX-G11",
+      "PAIR-ET-1"
+    ],
+    "locus": "contenido del aviso de sospecha de fraude",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "MI-05-no-investiga-explicaciones-alternativas",
+    "description": "MiDAS no investigaba si la discrepancia de datos provenía de un error administrativo del empleador o de una disputa de buena fe antes de calificarla como fraude; trataba cualquier discrepancia, sin importar cuán trivial, como indicio suficiente. Señalado en el litigio Cahoo v. SAS Analytics y en la cobertura de IEEE Spectrum (2018).",
+    "guideline_ids": [
+      "HAX-G2",
+      "PAIR-ET-3"
+    ],
+    "locus": "lógica de triage previa a marcar un caso como fraude",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "MI-06-sancion-antes-de-poder-defenderse",
+    "description": "Las consecuencias (embargo de salario, retención de reembolsos fiscales estatales y federales) se ejecutaban ligadas directamente a la determinación algorítmica, sin garantizar que la persona hubiera tenido oportunidad real de aportar evidencia antes de que se activara el cobro. La Oficina del Auditor General (2016) halló que de 22427 auto-adjudicaciones revisadas, más del 93% no correspondían a fraude real.",
+    "guideline_ids": [
+      "PAIR-EF-1",
+      "HAX-G16"
+    ],
+    "locus": "secuencia adjudicación de fraude -> cobro automatizado",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "MI-07-penalizacion-400-no-comunicada",
+    "description": "El estado aplicaba una penalización del 400% sobre el monto reclamado de fraude, la más alta del país, sin que el aviso inicial comunicara con claridad la magnitud real de las consecuencias de una respuesta equivocada o de la falta de respuesta al cuestionario. Documentado de forma consistente en cobertura de IEEE Spectrum, TIME y el explicador de Ford School (STPP) sobre el caso.",
+    "guideline_ids": [
+      "HAX-G16",
+      "PAIR-MM-2"
+    ],
+    "locus": "comunicación de consecuencias en el aviso de fraude / cuestionario",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "MI-08-sin-senal-de-incertidumbre-del-sistema",
+    "description": "En ningún punto del proceso el sistema comunicó un grado de confianza o umbral de revisión antes de convertir una discrepancia en una acusación firme de fraude con consecuencias económicas severas. La Oficina del Auditor General de Michigan documentó una tasa de error del 93% sobre los casos de auto-adjudicación revisados (informe de 2016).",
+    "guideline_ids": [
+      "PAIR-ET-2",
+      "HAX-G2"
+    ],
+    "locus": "ausencia de señal de confianza/incertidumbre en la comunicación de la determinación de fraude",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "MI-09-apelacion-obstaculizada",
+    "description": "Aunque existía formalmente una vía de apelación ante un tribunal administrativo, los obstáculos procedimentales (plazos cortos, dependencia del portal, falta de explicación previa) fueron tan severos que una gran proporción de reclamantes no pudo presentar defensa efectiva a tiempo. El acuerdo del caso Bauserman v. UIA (aprobado en 2024, 20 millones de dólares) reconoció el daño acumulado de años de apelaciones sin evidencia de respaldo por parte del estado.",
+    "guideline_ids": [
+      "HAX-G9",
+      "PAIR-FC-2"
+    ],
+    "locus": "mecanismo de apelación/corrección posterior a la determinación de fraude",
+    "severity": "medium",
+    "revealed_by": "both"
+  }
+]

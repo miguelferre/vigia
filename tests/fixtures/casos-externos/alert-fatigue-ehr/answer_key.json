@@ -1,0 +1,66 @@
+[
+  {
+    "id": "AF-01-volumen-fatiga",
+    "description": "El volumen de alertas es muy alto y casi todas exigen una acción para cerrarse: el clínico las despacha en serie («whack-a-mole», cancelar tras cancelar) sin llegar a procesarlas. Fatiga de alerta por sobrecarga de avisos.",
+    "guideline_ids": ["HAX-G8", "PAIR-UN-2"],
+    "locus": "Volumen y carácter modal de las alertas",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AF-02-automation-bias-habituacion",
+    "description": "Por habituación, el clínico cancela o acepta de forma automática sin leer («sí, sí, sí a todas las casillas») y deja de ejercer supervisión crítica; la desensibilización reaparece tras periodos sin incidentes. Automation bias.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-3"],
+    "locus": "Respuesta repetida y automática del usuario a las alertas",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AF-03-override-sin-motivo",
+    "description": "El sistema cuenta cuántas alertas se cancelan pero no captura el motivo de cada override: la discrepancia del clínico no se registra de forma útil ni alimenta la supervisión o la mejora de las reglas.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-1"],
+    "locus": "Captura del override (sin motivo estructurado)",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AF-04-temporizacion",
+    "description": "Las alertas interrumpen en mal momento (por ejemplo, forzar la actualización de la orden de resucitación cuando el clínico abrió el historial con otro objetivo), cortando la tarea en curso.",
+    "guideline_ids": ["HAX-G3"],
+    "locus": "Momento en que se dispara la alerta respecto a la tarea del usuario",
+    "severity": "medium",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AF-05-sin-onboarding",
+    "description": "No hay formación sobre cómo interpretar las alertas ni qué hacer con ellas; cada residente improvisa su criterio («nadie me explicó, nadie lo sabe»).",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Onboarding/formación del usuario sobre las alertas",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AF-06-sin-explicacion-accionable",
+    "description": "La alerta interrumpe pero no explica de forma accionable por qué salta en este caso concreto ni qué se espera que el clínico haga; solo exige cerrarla.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Contenido de la alerta (sin explicación ni acción clara)",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AF-07-baja-especificidad-umbral",
+    "description": "Los umbrales y reglas del proveedor, sin ajuste local, generan muchas alertas irrelevantes para el contexto del paciente; el coste del exceso de falsos positivos (ruido) no se gestiona y erosiona la atención.",
+    "guideline_ids": ["PAIR-UN-2", "HAX-G4"],
+    "locus": "Calibración de reglas/umbrales y relevancia contextual",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AF-08-sin-controles-config",
+    "description": "El clínico no puede ajustar ni silenciar los tipos de alerta que sabe que no le sirven; cambiar una regla exige un cambio central que rara vez se solicita. Falta de controles de configuración para el usuario.",
+    "guideline_ids": ["HAX-G17", "PAIR-FC-2"],
+    "locus": "Controles de configuración de las alertas",
+    "severity": "medium",
+    "revealed_by": "both"
+  }
+]

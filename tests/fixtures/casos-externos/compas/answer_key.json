@@ -1,0 +1,65 @@
+[
+  {
+    "id": "CO-01-decil-sin-incertidumbre",
+    "description": "El juez recibe un decil 1-10 y una etiqueta, sin intervalo de confianza ni probabilidad individual: falsa precision, no puede calibrar cuanto fiarse.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Formato de la puntuacion en el informe presentencial",
+    "severity": "high"
+  },
+  {
+    "id": "CO-02-rendimiento-no-comunicado",
+    "description": "La exactitud real es modesta (AUC ~0,63-0,66; legos igualan al software) pero no se comunica junto al score, que se presenta con autoridad de dato objetivo.",
+    "guideline_ids": ["HAX-G2", "PAIR-MM-2"],
+    "locus": "Presentacion del decil sin datos de rendimiento del modelo",
+    "severity": "high"
+  },
+  {
+    "id": "CO-03-sin-explicacion-por-caso",
+    "description": "El informe no indica que factores movieron el decil de ESTE acusado; el juez no puede detectar cuando se apoya en un proxy enganoso (empleo, vivienda).",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Contenido del informe (decil sin explicacion local)",
+    "severity": "high"
+  },
+  {
+    "id": "CO-04-modelo-opaco-propietario",
+    "description": "El modelo es secreto comercial: ni juez ni defensa pueden inspeccionar o impugnar como se calcula la puntuacion.",
+    "guideline_ids": ["HAX-G11", "PAIR-MM-2"],
+    "locus": "Naturaleza propietaria del calculo",
+    "severity": "medium"
+  },
+  {
+    "id": "CO-05-anclaje-automation-bias",
+    "description": "El decil se presenta como dato neutral y duro y ancla la deliberacion; el 'factor mas' se vuelve de facto determinante (jueces reconocen que cambio la pena).",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Encaje del score en la deliberacion judicial",
+    "severity": "high"
+  },
+  {
+    "id": "CO-06-sin-captura-desacuerdo",
+    "description": "No hay mecanismo para registrar que el juez discrepa del decil ni el desenlace real; el sistema no aprende de sus errores ni audita los override.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-1"],
+    "locus": "Ausencia de captura del override/desenlace",
+    "severity": "medium"
+  },
+  {
+    "id": "CO-07-sin-onboarding-juez",
+    "description": "No hay formacion reglada del juez sobre como interpretar el decil ni sus limitaciones; cada juez improvisa su modelo mental.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Formacion/onboarding del juez",
+    "severity": "medium"
+  },
+  {
+    "id": "CO-08-sin-rendimiento-por-subgrupo",
+    "description": "La disparidad de falsos positivos por raza no se comunica junto a la puntuacion individual; la presentacion uniforme oculta el rendimiento desigual.",
+    "guideline_ids": ["PAIR-DE-1", "HAX-G6"],
+    "locus": "Presentacion sin contexto de rendimiento por subgrupo",
+    "severity": "high"
+  },
+  {
+    "id": "CO-09-advertencia-no-abstencion",
+    "description": "La advertencia legal es texto generico estatico; el sistema nunca se abstiene ni marca 'aqui no deberia fiarse' cuando el caso cae fuera de su poblacion de validacion.",
+    "guideline_ids": ["HAX-G10", "PAIR-EF-1"],
+    "locus": "Aviso estatico al pie vs abstension ante incertidumbre",
+    "severity": "medium"
+  }
+]

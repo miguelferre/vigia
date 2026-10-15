@@ -1,0 +1,38 @@
+{
+  "_nota": "HELD-OUT no clínico (público). Dossier NEUTRALIZADO (hechos y experiencia de uso, sin etiquetar el problema) sintetizado de fuente independiente citada: Lieber R. & Bernard T. S., «Why Banks Are Suddenly Closing Down Customer Accounts», The New York Times, 5-nov-2023 (la redacción revisó más de 500 casos); verbatims del ex-programador del sistema y del cliente afectado reproducidos como experiencia de uso. Entrada ciega para validar el revisor.",
+  "system_name": "Sistema automático de detección de actividad sospechosa para prevención de fraude y blanqueo (antifraude/AML)",
+  "domain": "Banca minorista. Sistema de scoring que monitoriza transacciones y comportamiento de las cuentas, marca «actividad sospechosa» y dispara avisos internos que pueden derivar en el cierre de la cuenta. Es una capa de apoyo: el cierre lo ejecuta la entidad a partir de la señal del modelo.",
+  "summary": "El sistema vigila de forma continua los movimientos de cada cuenta (importes, frecuencia, contrapartes, patrones que se desvían del histórico del cliente, coincidencias con listas) y asigna una señal de riesgo. Cuando se supera un umbral, genera un aviso de «actividad sospechosa» (SAR) que llega a un operador interno y, en muchos casos, dispara el cierre de la cuenta. El cliente recibe una notificación de cierre sin explicación del motivo (la normativa antiblanqueo prohíbe a la entidad revelar que se ha presentado un reporte). El operador que atiende al cliente ve la alerta del modelo, pero no la lógica que la produjo. La metodología de scoring es propietaria del proveedor.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha del sistema de scoring antifraude/AML",
+      "content": "El sistema procesa el flujo de transacciones y rasgos de la cuenta (importes, frecuencia, contrapartes, depósitos en efectivo, transferencias internacionales, desviaciones del patrón histórico, coincidencia parcial con listas de vigilancia) y produce una señal de riesgo con marcas («banderas rojas»). Cuando la señal supera un umbral, abre un caso de «actividad sospechosa». La salida que recibe el operador es la marca y un código de motivo genérico, sin el detalle de qué transacciones ni qué combinación de factores dispararon el caso ni con qué probabilidad. El cliente no recibe ninguna explicación: la normativa antiblanqueo obliga a la entidad a no revelar que ha cursado un reporte de operación sospechosa. Las reglas y ponderaciones las fija el proveedor y son las mismas para todos los perfiles; el método exacto es secreto comercial. El sistema registra los casos abiertos y los cierres ejecutados, pero no recoge si el operador consideró que la marca era un falso positivo."
+    },
+    {
+      "id": "cumplimiento",
+      "kind": "technician",
+      "label": "Responsable de cumplimiento (AML)",
+      "content": "El sistema existe para cumplir la obligación legal de detectar y reportar operaciones sospechosas; no reportar a tiempo expone a la entidad a sanciones cuantiosas, así que el incentivo es marcar de más antes que de menos. Cuando el modelo abre un caso, lo revisamos, pero el volumen es enorme y los plazos son cortos. Por ley no podemos avisar al cliente de que existe un reporte (la prohibición de «tipping-off»), de modo que la carta de cierre no explica el motivo. Sabemos que se cierran cuentas de gente que probablemente no ha hecho nada ilícito, pero el coste de equivocarnos por exceso recae en el cliente, no en nosotros."
+    },
+    {
+      "id": "ex-programador",
+      "kind": "technician",
+      "label": "Ex-programador del sistema de detección",
+      "content": "No hay ninguna humanización en todo esto. El sistema funciona así: oye, has marcado estas casillas que son una bandera roja, estás fuera. Es una lista de comprobación que se ejecuta sola: si tu actividad encaja con el patrón, salta la marca y el caso avanza hacia el cierre. Nadie se sienta a mirar tu caso concreto como una persona; el modelo decide qué es sospechoso y el resto es papeleo para ejecutar lo que el modelo ya ha dicho. La lógica fina de por qué tú y no otro casi nunca se puede reconstruir desde la pantalla del operador."
+    },
+    {
+      "id": "operador-atencion",
+      "kind": "end_user",
+      "label": "Operador de atención al cliente (actúa sobre la alerta)",
+      "content": "A mí me llega un aviso de que la cuenta está marcada y que procede el cierre, pero en la pantalla no tengo el porqué: ni qué movimiento lo disparó, ni con qué nivel de certeza, ni cómo de fiable es la marca. El cliente me llama desesperado preguntando qué ha hecho mal y yo, sinceramente, no lo sé y, aunque lo supiera, tengo prohibido contárselo. No tengo un botón para decir «esto es un error, parad el cierre»; lo único que puedo hacer es escalarlo y esperar, y para entonces la cuenta ya suele estar cerrada. Acabo confiando en que la máquina tendrá razón, porque no me dan forma de comprobar si la tiene."
+    },
+    {
+      "id": "cliente-afectado",
+      "kind": "end_user",
+      "label": "Cliente con la cuenta cerrada",
+      "content": "Me llegó una carta diciendo que cerraban mis cuentas en treinta días, sin un solo motivo. Llamé y nadie supo (o nadie quiso) decirme qué había disparado aquello; me repetían que era una decisión del banco y que no podían dar detalles. Llevo años con la nómina y los recibos del negocio ahí y de repente me quedo sin operar, sin saber qué hice mal ni cómo demostrar que no hice nada. No hay a quién recurrir: no es una persona la que decide, es el sistema, y contra eso no puedo presentar pruebas ni pedir que reconsideren mirando mi caso de verdad."
+    }
+  ]
+}

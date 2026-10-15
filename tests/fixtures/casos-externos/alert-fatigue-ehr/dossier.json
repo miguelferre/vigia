@@ -1,0 +1,32 @@
+{
+  "_nota": "HELD-OUT clínico (público). Dossier NEUTRALIZADO (hechos y experiencia de uso, sin etiquetar el problema) sintetizado de fuente independiente citada: Newton N. et al., «Experiences of Alert Fatigue and Its Contributing Factors in Hospitals: Qualitative Study», J Med Internet Res 2026;28:e78676 (N=20 médicos junior, 10 hospitales, Australia). Verbatims de participantes traducidos y reproducidos como experiencia de uso. Entrada ciega para validar el revisor.",
+  "system_name": "Sistema de alertas clínicas interruptivas del historial electrónico (HCE/EHR)",
+  "domain": "Sanidad hospitalaria. Alertas automáticas embebidas en el historial clínico electrónico que avisan al personal médico (sobre todo médicos junior) durante la prescripción y la consulta del paciente. Es una capa de apoyo: la acción final la decide el clínico.",
+  "summary": "Durante la prescripción y la revisión del historial, el sistema lanza alertas emergentes (interacciones farmacológicas, alergias, duplicidades, rango de dosis, recordatorios de tareas como actualizar la orden de resucitación). La mayoría son modales: interrumpen el flujo y exigen una acción (aceptar, cancelar o anular) para poder continuar. El clínico ve el aviso y debe decidir en el momento si es relevante. Conviven varios sistemas (Epic, Cerner, Sunrise y desarrollos propios). El volumen diario de alertas por clínico es alto.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha técnica del sistema de alertas",
+      "content": "Las alertas se disparan por reglas sobre la prescripción y los datos del paciente (interacción farmacológica, alergia, duplicidad, rango de dosis, recordatorios de protocolo). Se presentan como ventanas modales que bloquean la pantalla hasta que el usuario actúa. Para continuar, el usuario pulsa «cancelar»/«anular» o «aceptar». El sistema registra cuántas alertas se disparan y cuántas se cancelan (la tasa de override suele superar el 90% según la literatura del producto), pero no recoge el motivo de cada cancelación. Los umbrales y reglas vienen configurados por el proveedor y son los mismos para todos los servicios y perfiles de usuario. Todas las alertas se presentan con el mismo formato visual, sin gradación de severidad."
+    },
+    {
+      "id": "impl-clinico",
+      "kind": "technician",
+      "label": "Responsable de informática clínica / farmacia",
+      "content": "Las alertas existen para reducir errores de medicación y mejorar la seguridad del paciente, y cubren un requisito de acreditación. Sabemos que se cancelan muchas, pero asumimos que el clínico valora cada una antes de cerrarla. No tenemos un programa formal para enseñar a los residentes nuevos a interpretarlas; se aprende sobre la marcha. Registramos el número de overrides para auditoría, aunque no pedimos el motivo porque ralentizaría el trabajo. Ajustar o desactivar una regla concreta exige un cambio central que rara vez se solicita."
+    },
+    {
+      "id": "medico-junior-1",
+      "kind": "end_user",
+      "label": "Médico residente (uso diario)",
+      "content": "Cuando llevas un tiempo, es mecánico. Lo único que procesas es: es una de ECG, cancelar; es una de ACD, cancelar. Es como el whack-a-mole, vas quitando todo lo más rápido que puedes. La primera vez sí que leí la alerta, pero al día siguiente ya no recuerdas ni qué fármacos mencionaba; solo sabes que no es relevante para ti y la cierras automáticamente. Después de un tiempo te vuelves a desensibilizar, el cerebro se acomoda otra vez y vas diciendo que sí, que sí, que sí a todas las casillas. Nadie me explicó qué hacer con ellas; nadie lo sabe, así que eliges algo que tenga sentido y sigues."
+    },
+    {
+      "id": "medico-junior-2",
+      "kind": "end_user",
+      "label": "Médico residente (otra unidad)",
+      "content": "Muchas veces abro el historial de un paciente con un objetivo muy concreto y justo entonces me salta el aviso para actualizar la orden de resucitación; en ese momento eso no es mi prioridad, pero tengo que lidiar con él para seguir. Estoy tan acostumbrado a pulsar casillas que lo hago casi sin mirar. Si una alerta saltara solo cuando de verdad importa, le haría caso; pero como saltan siempre, acaban no significando nada. Tampoco puedo quitar las que sé que no me sirven."
+    }
+  ]
+}

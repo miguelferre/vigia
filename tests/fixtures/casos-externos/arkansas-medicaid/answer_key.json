@@ -1,0 +1,114 @@
+[
+  {
+    "id": "AR-01-sin-explicacion-recorte",
+    "description": "Beneficiarios como Tammy Dobbs vieron sus horas de cuidado a domicilio recortadas casi a la mitad (de 56 a 32 horas/semana en el caso de Bradley Ledgerwood) sin poder obtener ninguna explicación de por qué el algoritmo llegó a ese número. Documentado por The Verge (Colin Lecher, 2018) y corroborado por Center for Democracy & Technology (CDT, 2020) y Benefits Tech Advocacy Hub.",
+    "guideline_ids": [
+      "HAX-G11",
+      "PAIR-ET-1"
+    ],
+    "locus": "notificación de resultado del algoritmo al beneficiario tras la evaluación",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AR-02-enfermera-sin-discrecion",
+    "description": "El sistema ARChoices eliminó la discreción clínica de la enfermera evaluadora: bajo el modelo anterior la enfermera podía ajustar las horas al alza si su juicio profesional lo indicaba; con el algoritmo la enfermera no tiene discreción y el resultado del cuestionario determina el nivel de forma automática (Arkansas Times, 2017). El propio estado defendió esto como una feature (quitar subjetividad).",
+    "guideline_ids": [
+      "PAIR-FC-2",
+      "HAX-G9",
+      "IX-1"
+    ],
+    "locus": "interfaz/protocolo de evaluacion en el punto de asignacion de tier de cuidado",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AR-03-formula-secreto-comercial",
+    "description": "Cuando los afectados intentaron entender cómo se calculaban sus horas, el estado se negó a divulgar la fórmula alegando que constituía un secreto comercial del proveedor, según reportó ACLU de Nueva Jersey y confirmó CDT en su análisis de litigios sobre determinación de beneficios por algoritmo (2020).",
+    "guideline_ids": [
+      "HAX-G1",
+      "PAIR-MM-2"
+    ],
+    "locus": "politica de divulgacion de la logica del algoritmo ante solicitud del usuario/abogado",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AR-04-dhs-no-entendia-su-propio-sistema",
+    "description": "Según CDT y Benefits Tech Advocacy Hub, el algoritmo fue adoptado por decisión de responsables de DHS que no comprendían el sistema lo suficiente como para explicar su funcionamiento, lo que hacía estructuralmente imposible que la agencia diera respuestas coherentes a las apelaciones de los beneficiarios.",
+    "guideline_ids": [
+      "PAIR-MM-2",
+      "HAX-G2",
+      "IX-1"
+    ],
+    "locus": "gobernanza interna previa al despliegue; capacidad de la agencia de responder a impugnaciones",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AR-05-aviso-insuficiente-cambio-normativo",
+    "description": "En Arkansas Dept. of Human Services v. Ledgerwood (2017), el juez determinó que el estado incumplió la Administrative Procedures Act al no dar aviso adecuado en 2016 de que el nuevo mecanismo de asignación de horas podía reducir beneficios, violando el debido proceso.",
+    "guideline_ids": [
+      "HAX-G18",
+      "PAIR-MM-1"
+    ],
+    "locus": "comunicacion previa al despliegue del nuevo sistema de asignacion",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AR-06-apelacion-sin-info-para-impugnar",
+    "description": "El proceso de apelación no explicaba las razones concretas del recorte, por lo que los beneficiarios no sabían qué debían demostrar para mantener su nivel de cuidado anterior; documentado por Benefits Tech Advocacy Hub y coincidente con el relato de Kevin De Liban (Legal Aid of Arkansas).",
+    "guideline_ids": [
+      "PAIR-FC-1",
+      "HAX-G11"
+    ],
+    "locus": "carta de notificacion de accion adversa / formulario de apelacion administrativa",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AR-07-beneficios-suspendidos-durante-apelacion",
+    "description": "La ley exigía mantener la cobertura mientras una apelación estuviera en curso, pero según Benefits Tech Advocacy Hub los beneficiarios perdieron horas de forma inmediata al aplicarse el algoritmo, sin esa protección; solo tras el litigio federal la corte forzó al estado a mantener beneficios durante las apelaciones.",
+    "guideline_ids": [
+      "HAX-G16",
+      "PAIR-EF-1"
+    ],
+    "locus": "momento de aplicacion del cambio de horas vs. inicio del periodo de impugnacion",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AR-08-errores-codificacion-invisibles",
+    "description": "Durante el litigio se descubrió que el proveedor del algoritmo no había contabilizado correctamente variables como diabetes y parálisis cerebral, generando cálculos erróneos de horas para cientos de personas; el error fue estructural e invisible para los afectados y para el estado hasta que la revisión judicial lo sacó a la luz (Center for Democracy & Technology, 2020; The Verge).",
+    "guideline_ids": [
+      "PAIR-UN-2",
+      "HAX-G2"
+    ],
+    "locus": "motor de codificacion de variables clinicas del cuestionario de evaluacion",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AR-09-impacto-humano-sin-canal-de-feedback",
+    "description": "Kevin De Liban (Legal Aid of Arkansas) relató que, tras los recortes, personas quedaron postradas sin poder ser atendidas a tiempo, con úlceras por presión y aisladas, sin entender por qué (STAT News, 2024). El sistema no tenía mecanismo para captar ni escalar señales de deterioro grave asociadas al propio cambio de horas que había provocado.",
+    "guideline_ids": [
+      "PAIR-EF-1",
+      "HAX-G15"
+    ],
+    "locus": "ausencia de canal de feedback/monitorizacion posterior al recorte de horas",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AR-10-narrativa-objetividad-oculta-incertidumbre",
+    "description": "El estado defendió el algoritmo argumentando que quitaba la subjetividad de las enfermeras y basaba las decisiones en criterios objetivos y consistentes, sin comunicar a beneficiarios ni enfermeras el margen de error o la incertidumbre real del cálculo, lo que el litigio reveló infundado dado el hallazgo de errores sistemáticos de codificación.",
+    "guideline_ids": [
+      "PAIR-ET-2",
+      "PAIR-ET-3"
+    ],
+    "locus": "comunicacion institucional sobre la fiabilidad del sistema frente a los usuarios",
+    "severity": "medium",
+    "revealed_by": "both"
+  }
+]

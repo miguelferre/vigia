@@ -1,0 +1,203 @@
+# HAX-18 — Guidelines for Human-AI Interaction (Amershi et al., CHI 2019, Microsoft).
+# Codificadas como items atomicos y enlazables. Cada hallazgo del sistema se ata
+# a uno o varios de estos ids. Descripcion en espanol; titulo original entre ().
+corpus: HAX
+guidelines:
+  # --- Inicialmente ---
+  - id: HAX-G1
+    group: Inicialmente
+    title: "Dejar claro qué puede hacer el sistema (Make clear what the system can do)"
+    description: >-
+      El usuario debe poder entender de qué es capaz el sistema de IA antes y
+      durante el uso, sin tener que descubrirlo por ensayo y error.
+    good_example: "Al iniciar, una nota explica que el cribado solo sugiere prioridad de derivación, no diagnostica."
+    bad_example: "El usuario no sabe si la herramienta decide la derivación o solo la sugiere."
+    anti_patterns:
+      - "Ausencia de descripción de capacidades/alcance en el onboarding."
+      - "Capacidades implicitas que el usuario debe inferir del comportamiento."
+
+  - id: HAX-G2
+    group: Inicialmente
+    title: "Dejar claro cómo de bien lo hace (Make clear how well the system can do what it can do)"
+    description: >-
+      Comunicar el rendimiento y sus límites (cuando puede equivocarse) para
+      calibrar la confianza del usuario y evitar sobre-confianza (automation bias).
+    good_example: "Se muestra el rendimiento por subgrupo y se avisa de menor fiabilidad en población pediátrica."
+    bad_example: "Se presenta la salida como certera sin indicar tasa de error ni limitaciones."
+    anti_patterns:
+      - "No comunicar incertidumbre ni tasas de error."
+      - "Presentar todas las salidas con la misma autoridad aparente."
+      - "Confianza no calibrada por subgrupo."
+      - "Señal de confianza vehiculada por una categoría binaria (fiable / no fiable) que colapsa todo el rango de incertidumbre en dos estados y transmite más certeza de la que el modelo soporta."
+    remediations:
+      - "Sustituir la señal binaria de confianza por un score continuo o al menos 3-4 tramos calibrados, y validar que cada tramo corresponde a la tasa de acierto real observada."
+      - "Mostrar el rendimiento desagregado por subgrupo relevante (p. ej. población pediátrica) allí donde el usuario lee la salida, no solo en la ficha técnica."
+    # Anti-remediaciones descartadas (registradas para que un informe NO las proponga ingenuamente):
+    #  - Inputs intermitentes / ocultar la salida del modelo cada N casos para "mantener el criterio":
+    #    problema etico con el paciente al que le toca el hueco; no se degrada la atencion por diseno.
+    #  - Trampas tipo phishing / inyectar fallos controlados para medir la vigilancia del clinico:
+    #    inviable en urgencias saturadas y erosiona la confianza en la herramienta.
+
+  # --- Durante la interaccion ---
+  - id: HAX-G3
+    group: Durante la interacción
+    title: "Temporizar el servicio según el contexto (Time services based on context)"
+    description: "Actuar o interrumpir en el momento adecuado según la tarea y el entorno del usuario."
+    good_example: "La sugerencia aparece al cerrar la consulta, no en mitad de la exploración del paciente."
+    bad_example: "La alerta interrumpe justo cuando el clínico está escribiendo la anamnesis."
+    anti_patterns:
+      - "Interrupciones mal temporizadas que cortan el flujo de trabajo."
+
+  - id: HAX-G4
+    group: Durante la interacción
+    title: "Mostrar información contextualmente relevante (Show contextually relevant information)"
+    description: "Presentar la información pertinente a la tarea y al contexto actuales."
+    good_example: "Junto a la prioridad se muestran los factores del paciente que la motivan."
+    bad_example: "Se muestra una puntuación aislada sin el contexto clínico que la explica."
+    anti_patterns:
+      - "Información genérica no adaptada a la tarea concreta."
+
+  - id: HAX-G5
+    group: Durante la interacción
+    title: "Ajustarse a las normas sociales relevantes (Match relevant social norms)"
+    description: "Entregar la experiencia respetando las normas sociales y culturales esperadas en el contexto."
+    good_example: "El lenguaje y el tono se ajustan al registro clínico y a la relación médico-paciente."
+    bad_example: "Mensajes con tono inadecuado o terminología que no encaja en el entorno sanitario."
+    anti_patterns:
+      - "Tono o registro inapropiado para el contexto de uso."
+
+  - id: HAX-G6
+    group: Durante la interacción
+    title: "Mitigar los sesgos sociales (Mitigate social biases)"
+    description: "Asegurar que el lenguaje y el comportamiento no refuerzan estereotipos ni sesgos indeseados."
+    good_example: "Se audita que las recomendaciones no varíen injustamente por sexo o etnia a igual cuadro clínico."
+    bad_example: "La prioridad cambia por variables protegidas sin justificación clínica."
+    anti_patterns:
+      - "Refuerzo de estereotipos en lenguaje o decisiones."
+      - "Sesgo de subgrupo no monitorizado en la interacción."
+
+  # --- Cuando se equivoca ---
+  - id: HAX-G7
+    group: Cuando se equivoca
+    title: "Permitir invocación eficiente (Support efficient invocation)"
+    description: "Facilitar que el usuario invoque o solicite el servicio de IA cuando lo necesita."
+    good_example: "El clínico puede pedir un re-cálculo de prioridad con un solo clic."
+    bad_example: "Re-ejecutar el cribado exige navegar por varios menús."
+    anti_patterns:
+      - "Invocación del servicio costosa o escondida."
+
+  - id: HAX-G8
+    group: Cuando se equivoca
+    title: "Permitir descarte eficiente (Support efficient dismissal)"
+    description: "Permitir ignorar o descartar fácilmente las sugerencias no deseadas."
+    good_example: "La sugerencia puede descartarse sin fricción y no reaparece de inmediato."
+    bad_example: "No hay forma clara de cerrar o ignorar la recomendación."
+    anti_patterns:
+      - "Sugerencias persistentes que no se pueden descartar."
+      - "Fatiga de alerta por avisos no descartables."
+      - "Un nivel entero del output (p. ej. la señal de duda o de baja confianza) se aprende a ignorar en bloque por acumulación de falsos positivos: fatiga de alerta estructural, no puntual."
+    remediations:
+      - "Priorizar y agrupar las alertas por gravedad para que la señal de duda no compita con avisos triviales; medir la tasa de descarte por tipo de alerta."
+      - "Retirar o recalibrar el umbral de los tipos de alerta con mayor tasa de descarte, en lugar de dejar que el usuario aprenda a ignorar un nivel entero del output."
+
+  - id: HAX-G9
+    group: Cuando se equivoca
+    title: "Permitir corrección eficiente (Support efficient correction)"
+    description: >-
+      Facilitar que el usuario edite, refine o anule (override) la salida cuando
+      discrepa, y capturar esa corrección de forma útil.
+    good_example: "El override del clínico se registra con motivo estructurado y alimenta la supervisión."
+    bad_example: "El clínico puede ignorar la sugerencia, pero su discrepancia no se captura en ningún sitio."
+    anti_patterns:
+      - "Override no capturado o capturado sin motivo/estructura."
+      - "Corrección posible pero invisible para la supervisión del sistema."
+      - "Fricción alta para corregir, que empuja a aceptar por defecto."
+    remediations:
+      - "Capturar cada override con un motivo estructurado (desplegable + texto libre) y un sello temporal, no solo el hecho de anular."
+      - "Enrutar los overrides a la supervisión del sistema (revisión por subgrupo, recalibración), para que la corrección sea visible y no muera en la interfaz."
+      - "Reducir la fricción de corregir hasta que sea más barata que aceptar por defecto (edición en línea, un clic para discrepar con motivo)."
+
+  - id: HAX-G10
+    group: Cuando se equivoca
+    title: "Acotar el servicio ante la duda (Scope services when in doubt)"
+    description: "Limitar o desactivar el servicio (o pedir desambiguación) cuando la incertidumbre es alta."
+    good_example: "Ante datos insuficientes, el sistema se abstiene y lo indica en lugar de forzar una prioridad."
+    bad_example: "Emite una prioridad confiada aun con datos claramente incompletos."
+    anti_patterns:
+      - "No abstenerse ni degradar con elegancia bajo alta incertidumbre."
+
+  - id: HAX-G11
+    group: Cuando se equivoca
+    title: "Dejar claro por qué hizo lo que hizo (Make clear why the system did what it did)"
+    description: "Permitir acceder a una explicación de por qué el sistema actuó como actuó."
+    good_example: "El usuario puede ver los factores que más pesaron en la prioridad asignada."
+    bad_example: "La salida es una caja negra sin explicación accesible."
+    anti_patterns:
+      - "Ausencia de explicación accesible de las decisiones."
+
+  # --- Con el tiempo ---
+  - id: HAX-G12
+    group: Con el tiempo
+    title: "Recordar interacciones recientes (Remember recent interactions)"
+    description: "Mantener memoria a corto plazo de la interacción para no obligar a repetir contexto."
+    good_example: "El sistema recuerda el paciente en curso entre pasos del flujo."
+    bad_example: "El usuario debe reintroducir datos ya aportados en el mismo episodio."
+    anti_patterns:
+      - "Pérdida de contexto reciente que obliga a repetir trabajo."
+
+  - id: HAX-G13
+    group: Con el tiempo
+    title: "Aprender del comportamiento del usuario (Learn from user behavior)"
+    description: "Personalizar la experiencia aprendiendo de las acciones del usuario a lo largo del tiempo."
+    good_example: "El sistema adapta el detalle mostrado según cómo cada perfil usa la herramienta."
+    bad_example: "La experiencia es idéntica e ignora patrones de uso evidentes."
+    anti_patterns:
+      - "No aprovechar señales de comportamiento para mejorar la experiencia."
+
+  - id: HAX-G14
+    group: Con el tiempo
+    title: "Actualizar y adaptarse con cautela (Update and adapt cautiously)"
+    description: "Limitar cambios disruptivos en el comportamiento del sistema que rompan los modelos mentales del usuario."
+    good_example: "Los cambios de comportamiento se introducen de forma gradual y avisada."
+    bad_example: "Una actualización cambia el significado de la puntuación sin aviso."
+    anti_patterns:
+      - "Cambios disruptivos no gestionados que rompen el modelo mental."
+
+  - id: HAX-G15
+    group: Con el tiempo
+    title: "Fomentar feedback granular (Encourage granular feedback)"
+    description: "Permitir al usuario dar feedback detallado durante el uso habitual."
+    good_example: "El usuario puede marcar por qué una sugerencia fue útil o no, con categorías."
+    bad_example: "Solo existe un pulgar arriba/abajo sin matiz, o ningún feedback."
+    anti_patterns:
+      - "Canales de feedback inexistentes o demasiado gruesos."
+
+  - id: HAX-G16
+    group: Con el tiempo
+    title: "Transmitir las consecuencias de las acciones del usuario (Convey the consequences of user actions)"
+    description: "Dejar claro cómo las acciones o el feedback del usuario afectarán al comportamiento futuro del sistema."
+    good_example: "Se indica que registrar el motivo del override mejorará la supervisión del subgrupo."
+    bad_example: "El usuario no sabe si su corrección tiene algún efecto."
+    anti_patterns:
+      - "Consecuencias de las acciones del usuario opacas."
+    remediations:
+      - "Devolver a cada usuario su propia métrica de uso frente a la media anonimizada del servicio ('la media y tú'), para que se autorregule al ver su desviación (analogía del pulsómetro al correr)."
+      - "Indicar de forma explícita qué efecto tendrá la acción del usuario (p. ej. 'registrar el motivo del override mejorará la supervisión del subgrupo'), para que el feedback no se perciba como un vacío."
+
+  - id: HAX-G17
+    group: Con el tiempo
+    title: "Proveer controles globales (Provide global controls)"
+    description: "Permitir al usuario configurar globalmente qué monitoriza y cómo se comporta el sistema."
+    good_example: "El servicio permite activar/desactivar tipos de alerta o ajustar umbrales."
+    bad_example: "No hay forma de configurar el comportamiento global del sistema."
+    anti_patterns:
+      - "Ausencia de controles globales de configuración."
+
+  - id: HAX-G18
+    group: Con el tiempo
+    title: "Notificar los cambios (Notify users about changes)"
+    description: "Informar al usuario cuando el sistema añade o cambia capacidades."
+    good_example: "Un aviso explica que ha cambiado el cálculo de prioridad y por qué."
+    bad_example: "El comportamiento cambia sin que nadie lo comunique."
+    anti_patterns:
+      - "Cambios de capacidad no notificados."

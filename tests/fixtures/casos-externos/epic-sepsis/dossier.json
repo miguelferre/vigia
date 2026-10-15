@@ -1,0 +1,26 @@
+{
+  "_nota": "HELD-OUT clinico distinto al EII (publico). Dossier NEUTRALIZADO (hechos, sin diagnostico) desde fuentes citadas en data/external/casos-externos.md (caso E1, Epic Sepsis Model). Entrada ciega para A1.",
+  "system_name": "Epic Sepsis Model (ESM) — alerta predictiva de sepsis en el HCE",
+  "domain": "Sanidad hospitalaria. Modelo predictivo integrado en la historia clinica electronica de Epic, desplegado en cientos de hospitales de EE. UU. Avisa al clinico de pacientes que pueden estar desarrollando sepsis.",
+  "summary": "El ESM calcula de forma continua una puntuacion de riesgo de sepsis a partir de datos del HCE. Cuando la puntuacion supera un umbral fijado por el hospital (en un despliegue, >=6), el sistema genera avisos/pages al clinico (en la estacion de trabajo, en la habitacion del paciente o en el movil). El clinico ve la alerta y decide si evalua al paciente, pide pruebas/antibioticos o la descarta. Es apoyo: la decision es del clinico.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha del modelo + validacion",
+      "content": "Modelo propietario de riesgo de sepsis integrado en el HCE de Epic. Salida: una puntuacion continua; al superar el umbral del hospital, dispara avisos. En una validacion externa (38.455 hospitalizaciones), una puntuacion de 6+ se produjo en el 18% de las hospitalizaciones; el valor predictivo positivo fue del 12% (1 de cada 8 alertas correspondio a sepsis real); el modelo no identifico al 67% de los pacientes con sepsis. La interfaz presenta un conjunto limitado de acciones sugeridas, no muestra datos de tendencia, y una vez cerrada la pantalla de la alerta no se puede reabrir. No se ofrece al clinico una explicacion de que factores dispararon la alerta."
+    },
+    {
+      "id": "user-clinico",
+      "kind": "end_user",
+      "label": "Clinico (medico/enfermeria que recibe la alerta)",
+      "content": "Me llega una alerta de que el paciente ha superado el umbral de sepsis; puede aparecer en la estacion de trabajo, en la habitacion o en el movil. Decido si lo evaluo, pido pruebas o antibioticos, o la descarto. No me dice por que ha saltado ni en que factores se basa; no veo la tendencia del paciente. Si cierro la alerta no la puedo volver a abrir. Las alertas en el movil interrumpen bastante, sobre todo en urgencias; preferiria recibirlas en la estacion. Muchas veces la dejo pasar cuando no encaja con mi valoracion del paciente. Suelo revisar por mi cuenta antes de actuar. Preferiria que sirviera de apoyo y decidir yo, no que me empuje."
+    },
+    {
+      "id": "doc-monitor",
+      "kind": "document",
+      "label": "Registro de un evento de despliegue",
+      "content": "En abril de 2020, entre 3 y 4 semanas despues de la primera hospitalizacion por COVID-19, en 24 hospitales el volumen de alertas/dia del modelo aumento un 43% mientras el censo hospitalario bajaba un 35%. Un centro paso a desactivar (pausar) las alertas del modelo tras reportes de personal de enfermeria sobre exceso de avisos."
+    }
+  ]
+}

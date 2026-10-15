@@ -1,0 +1,32 @@
+{
+  "_nota": "HELD-OUT no clínico (público). Dossier NEUTRALIZADO (hechos y experiencia de uso, sin etiquetar el problema) sintetizado de fuente independiente citada: Computer Weekly, «Bankruptcy, prosecution and disrupted livelihoods: Postmasters tell their story» (https://www.computerweekly.com/news/2240089230/Bankruptcy-prosecution-and-disrupted-livelihoods-Postmasters-tell-their-story), y testimonios públicos de la Post Office Horizon IT Inquiry (https://www.postofficehorizoninquiry.org.uk/evidence/). Verbatims de Jo Hamilton y Lee Castleton traducidos al español y reproducidos como experiencia de uso. Entrada ciega para validar el revisor.",
+  "system_name": "Sistema informático de contabilidad de sucursal para puntos de atención al público (tipo terminal de caja de oficina)",
+  "domain": "Administración / red comercial minorista (Reino Unido). Terminal informático instalado en cada sucursal que registra todas las operaciones del día (giros, sellos, pagos, ingresos y reintegros) y cuadra la caja contra el efectivo y las existencias físicas. El operador de la sucursal (un profesional autónomo que gestiona el punto) usa el sistema a diario para cerrar cuentas; lo que el sistema declara como saldo es la cifra contable oficial.",
+  "summary": "Al cierre de cada periodo el terminal calcula automáticamente cuánto efectivo y existencias debería haber en la sucursal y lo compara con lo que el operador cuenta físicamente. Cuando aparece una diferencia («descuadre»), el sistema la muestra como una cantidad que falta y obliga al operador a aceptar y asumir esa cifra para poder cerrar el balance y seguir operando. El operador no ve el detalle de las transacciones que han producido la diferencia ni puede recalcular el origen por su cuenta; los registros completos los guarda el proveedor del software de forma centralizada. Para incidencias existe una línea de soporte telefónica. Contractualmente, el operador responde con su propio patrimonio de los descuadres que el sistema le imputa.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha del sistema de cuadre de caja",
+      "content": "El terminal totaliza las operaciones del periodo y deriva el saldo teórico de efectivo y existencias de la sucursal. En el cierre presenta una única cifra de diferencia frente al recuento físico. Para completar el cierre, el operador debe pulsar que acepta esa diferencia; el sistema no ofrece una opción de marcar la cifra como disputada ni de cerrar sin asumirla. La pantalla muestra el importe que falta, pero no desglosa qué transacciones individuales lo originan ni indica margen de error o probabilidad de fallo del propio cálculo. Los registros transaccionales detallados y los logs del sistema residen en los servidores centrales del proveedor; el operador de la sucursal no dispone de acceso para auditarlos ni para reconstruir el cálculo localmente. La diferencia aceptada queda registrada como deuda del operador. El terminal puede, en algunas operaciones, registrar una entrada por duplicado o no completarla y aun así arrojar un saldo aparentemente cerrado."
+    },
+    {
+      "id": "prov-soporte",
+      "kind": "technician",
+      "label": "Línea de soporte / helpdesk del proveedor",
+      "content": "Atendemos las llamadas de las sucursales cuando el balance no cuadra. El procedimiento estándar es guiar al operador para que el sistema cierre el periodo, lo que normalmente pasa por aceptar la diferencia que muestra la pantalla para no dejar la cuenta abierta. No solemos entregar al operador el detalle transaccional ni los logs que tenemos en el centro de datos: esa información se gestiona internamente. Partimos de la base de que, si el sistema marca un descuadre, lo más probable es que el error esté en el manejo de la sucursal, así que orientamos en esa dirección. En algunas llamadas, los pasos que indicamos para resolver una diferencia han terminado aumentando el importe que el sistema reclamaba al operador. No disponemos de un canal para que el operador deje constancia formal de que no está de acuerdo con la cifra."
+    },
+    {
+      "id": "operador-1",
+      "kind": "end_user",
+      "label": "Operador de sucursal (uso diario)",
+      "content": "Cada semana el sistema me decía cuánto debería tener yo. Yo sabía que esa cantidad no era la correcta, pero no sabía qué hacer. La máquina afirmaba que faltaba dinero y, como el detalle no lo tengo yo, al final acababa fiándome de lo que decía la pantalla por encima de lo que me decían mis propias cuentas. Una vez llamé a la línea de ayuda por un descuadre de unas 2.000 libras; tres minutos después de seguir lo que me indicaban, el sistema marcaba que debía 4.000. No tenía manera de ver de dónde salía la cifra ni de demostrar que estaba mal, y aun así tuve que asumirla para poder cerrar y seguir abriendo la sucursal."
+    },
+    {
+      "id": "operador-2",
+      "kind": "end_user",
+      "label": "Operador de sucursal (otra sucursal)",
+      "content": "Durante doce semanas seguidas me aparecieron diferencias que no había forma de entender. Pedía explicaciones y nadie me daba el porqué; me limitaban a decirme que el sistema tenía razón y que el dinero faltaba. Yo llevaba años con mis libros cuadrados y de repente la pantalla decía lo contrario, sin que nadie pudiera enseñarme el cálculo. Llegué a dudar de mí mismo antes que del programa, porque era el programa el que tenía los datos y la última palabra. Nunca me ofrecieron una vía para contestar la cifra: o la aceptaba, o no podía cerrar."
+    }
+  ]
+}

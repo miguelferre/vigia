@@ -1,0 +1,41 @@
+Vigía
+Copyright (c) 2026 Miguel Ferreiro García
+Licencia: MIT (ver LICENSE).
+
+Este producto incluye software y datos de terceros. Aquí van los dos que se
+distribuyen dentro del propio código fuente. Las dependencias que se instalan
+con el paquete (numpy, pandas, scikit-learn, FastAPI y el resto) llevan cada una
+su licencia, y las recoge TERCEROS.txt, que genera el zip de Windows.
+
+1. interaction_review
+   Paquete de revisión de la interacción persona y sistema de IA (HAX-18 y PAIR).
+   Licencia: MIT. Copyright (c) 2026 Miguel Ferreiro García.
+   Va copiado en src/vigia/human/_vendor/interaction_review/ con su licencia
+   (LICENSE, en esa carpeta). Los cambios respecto al original están anotados
+   en PROCEDENCIA.md, en la misma carpeta.
+
+2. Eticas AI Risk Taxonomy (v3.0.0)
+   Copyright Eticas. Licencia: Creative Commons Attribution 4.0 International
+   (CC BY 4.0). Texto de la licencia en
+   src/vigia/human/_vendor/interaction_review/guidelines/eticas/LICENSE.
+   Los ficheros taxonomy.yaml y mappings.yaml se distribuyen sin modificar.
+   Fuente: https://github.com/Eticas-AI/ai-risk-taxonomy-public
+   Sitio: https://taxonomy.eticas.ai
+   Cita: Galdon Clavell, Accuosto y Gohar (2026), «The Eticas AI Risk Taxonomy:
+   Open Infrastructure for Operationalizing AI Audits», arXiv:2607.02201.
+   Vigía usa esta taxonomía para heredar el mapa regulatorio de cada hallazgo
+   de la revisión. La herencia es orientativa y no es una opinión jurídica.
+
+3. Dependencias del paquete de Windows
+   TERCEROS.txt, dentro del zip, lista la licencia de cada dependencia leída de
+   sus metadatos y la del Python embebido.
+
+4. Componentes de interfaz copiados
+   Esta lista nombra solo los que están en frontend/src.
+   - shadcn/ui. Licencia: MIT. Componentes base copiados en
+     frontend/src/components/ui/, con los tokens de color de Vigía.
+     Fuente: https://ui.shadcn.com (repositorio: https://github.com/shadcn-ui/ui).
+   - beUI. Licencia: MIT. Componente Theme Toggle y el Action Swap que el registro
+     instala con él, copiados en frontend/src/components/beui/. El Theme
+     Toggle se adaptó para usar el hook de tema de Vigía. Fuente: https://beui.dev (repositorio:
+     https://github.com/starc007/ui-components).

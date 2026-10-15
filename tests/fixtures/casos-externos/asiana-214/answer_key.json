@@ -1,0 +1,74 @@
+[
+  {
+    "id": "AS-01-modelo-mental-erroneo-del-automatismo",
+    "description": "El piloto opera con un modelo mental erróneo del autothrottle: cree que, mientras esté conectado, mantendrá siempre la velocidad seleccionada, cuando en el modo de retención de empuje no la regula. Esa creencia equivocada sobre lo que hace el sistema es la raíz del fallo de supervisión.",
+    "guideline_ids": ["PAIR-MM-1", "HAX-G1"],
+    "locus": "Modelo mental del piloto sobre qué garantiza el A/T conectado",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AS-02-confusion-de-modo",
+    "description": "Confusión de modo: el A/T pasa de regular la velocidad a un estado de retención de empuje como consecuencia de acciones previas sobre otros modos, y el piloto sigue creyendo que está en el modo que regula la velocidad. Actúa según el modo equivocado.",
+    "guideline_ids": ["HAX-G1", "HAX-G4"],
+    "locus": "Transición entre modos del A/T provocada indirectamente por el piloto",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AS-03-cambio-de-modo-sin-salience",
+    "description": "El cambio del A/T a no regular la velocidad solo se refleja como texto en la franja de anunciadores (FMA), sin aviso sonoro ni realce visual prominente: el cambio de estado crítico carece de saliencia y pasa desapercibido bajo carga de trabajo.",
+    "guideline_ids": ["HAX-G4", "HAX-G11"],
+    "locus": "Señalización del cambio de modo del A/T en cabina",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AS-04-sobreconfianza-automation-bias",
+    "description": "Sobreconfianza en la automatización: ambos pilotos dan por cubierta la velocidad con el A/T puesto y dejan de vigilarla de forma continua, delegando la supervisión crítica en el sistema. Automation bias que retira al humano del lazo justo cuando hace falta.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Reparto de la supervisión de la velocidad entre tripulación y A/T",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AS-05-expectativa-de-proteccion-inexistente",
+    "description": "El piloto espera una protección automática de velocidad mínima (recuperación de empuje al caer demasiado lenta) trasladada de otro tipo de aeronave, pero esa protección no opera en el modo activo. Modelo mental importado de otro sistema que sobreestima las capacidades del actual.",
+    "guideline_ids": ["PAIR-MM-2", "HAX-G2"],
+    "locus": "Expectativa de auto-rescate de velocidad por transferencia de otro avión",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "AS-06-formacion-insuficiente-de-modos",
+    "description": "La formación de tipo dedica tiempo limitado a la lógica de modos del A/T y a las diferencias entre fabricantes, y se confía a la experiencia posterior; el propio piloto reconoce no sentirse seguro y necesitar estudiarlo más. Onboarding insuficiente para formar el modelo mental correcto.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Programa de formación de tipo sobre la lógica de modos",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "AS-07-logica-de-modos-opaca-y-dispersa",
+    "description": "Qué modo regula la velocidad y cuál no solo está descrito en los manuales, repartido en varios apartados, sin una explicación accesible en el momento de uso de por qué el A/T deja de regular la velocidad. La razón del comportamiento no es consultable cuando importa.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Accesibilidad de la explicación del comportamiento del A/T por modo",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AS-08-sin-abstencion-ni-degradacion-segura",
+    "description": "El A/T permanece conectado pero inactivo en un régimen de velocidad peligrosamente bajo sin abstenerse, avisar ni recuperar empuje en ese modo: falla en silencio en lugar de degradar con elegancia o señalar que ya no está protegiendo la velocidad.",
+    "guideline_ids": ["HAX-G10", "PAIR-EF-1"],
+    "locus": "Comportamiento del A/T ante velocidad muy baja en el modo de retención",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "AS-09-sin-captura-de-malentendido",
+    "description": "No existe mecanismo que detecte ni registre que un piloto ha entendido mal qué modo regula la velocidad; el malentendido solo aflora si alguien lo verbaliza, y el sistema no recoge esa señal para corregir formación o diseño.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-1"],
+    "locus": "Ausencia de captura del modelo mental erróneo del operador",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  }
+]

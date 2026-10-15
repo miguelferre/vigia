@@ -1,0 +1,38 @@
+{
+  "_nota": "HELD-OUT no clinico (publico). Dossier NEUTRALIZADO (hechos y experiencia de uso, sin etiquetar el problema) sintetizado de fuentes independientes citadas: Lighthouse Reports 'The Algorithm Addiction' (2021); Amnesty International 'Xenophobic Machines' (2021); informe parlamentario neerlandes 'Ongekend onrecht' (2020); reportajes de The Conversationalist (2021) y Politico; verbatims de afectados traducidos al espanol. Verbatims de afectados y nota del lado funcionario reproducidos como experiencia de uso. Entrada ciega para validar el revisor.",
+  "system_name": "Sistema de clasificacion de riesgo para el control de los subsidios de guarderia (administracion tributaria)",
+  "domain": "Administracion publica (Paises Bajos). Modelo de risk-scoring usado por la agencia tributaria para seleccionar que solicitantes de la ayuda a la guarderia se revisan como posibles casos de fraude. Es apoyo a la decision: la apertura de una investigacion y la reclamacion del dinero las ejecuta personal de la administracion.",
+  "summary": "El sistema asigna a cada familia que recibe el subsidio de guarderia una puntuacion de riesgo a partir de un conjunto de indicadores (entre ellos la nacionalidad o doble nacionalidad, tener apellido extranjero, ser familia monoparental, el importe de la ayuda y pequenas irregularidades formales en los formularios). Las familias con puntuacion mas alta entran en una lista para revision. Cuando se abre una revision, la familia es clasificada como posible defraudadora, se le suspende y reclama la devolucion integra de la ayuda recibida, y queda incluida en un registro interno. El ciudadano recibe la notificacion de la deuda; no se le comunica que indicadores dispararon su puntuacion. El funcionario que tramita el caso ve la marca de riesgo, pero no el detalle de por que se asigno.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha del modelo de risk-scoring y sus indicadores",
+      "content": "El modelo produce, para cada beneficiario, una puntuacion de riesgo que ordena a las familias segun su probabilidad estimada de cometer fraude. Entre las variables que alimentan la puntuacion figuran la nacionalidad y la doble nacionalidad, indicios derivados del apellido, la condicion de familia monoparental, el importe del subsidio y pequenas inconsistencias formales en la solicitud (una firma omitida, un documento entregado tarde). La salida es una marca de riesgo (entrar o no en la lista de revision); no se acompana de una probabilidad individual, de un intervalo de error, ni de la lista de factores que pesaron en ese caso concreto. Las familias por encima del umbral pasan a revision. La logica de ponderacion y la propia existencia de esos indicadores no se publican ni se comunican a la persona afectada. Una vez marcada, basta una irregularidad menor para clasificar el caso como fraude y reclamar la totalidad de la ayuda, sin un tramo intermedio de regularizacion."
+    },
+    {
+      "id": "admin-tributaria",
+      "kind": "technician",
+      "label": "Administracion tributaria que opera el sistema",
+      "content": "El sistema existe para detectar y prevenir el uso indebido de los subsidios de guarderia y proteger el dinero publico. Selecciona los casos a revisar y los presenta al personal de control con una marca de riesgo. El funcionario que recibe el caso y abre la investigacion no tiene acceso a ningun detalle sobre que informacion se uso como base para asignar esa puntuacion de riesgo concreta: ve que la familia ha sido senalada, pero no por que. La devolucion exigida es por el importe integro de la ayuda; el procedimiento aplicado no contempla, en la practica, devolver una parte proporcional ni corregir un error formal sin clasificarlo como fraude. No hay un canal por el que el funcionario pueda consultar o cuestionar el motivo de la marca antes de actuar sobre ella."
+    },
+    {
+      "id": "afectada-1",
+      "kind": "end_user",
+      "label": "Madre afectada (subsidio reclamado)",
+      "content": "Te etiquetan y te tratan como un fraude, y no tienes dinero para luchar por tus derechos. Recibi una carta diciendo que tenia que devolver todo lo cobrado durante anos, de golpe. Nadie me explico que habia hecho mal ni que dato habia activado todo esto; solo que era sospechosa y que la deuda era enorme. Pedi ver el expediente y el motivo, pero no habia forma de acceder a por que me habian senalado. Cuando intentas defenderte, eres tu quien tiene que demostrar que no eres una defraudadora, no ellos quienes prueban que lo eres."
+    },
+    {
+      "id": "afectada-2",
+      "kind": "end_user",
+      "label": "Madre afectada (sin entender el motivo)",
+      "content": "No se me paso por la cabeza que tuviera algo que ver con su apellido. Cuando entiendes que entraste en la lista por cosas asi, te das cuenta de que es sencillamente racista. Cuando el sistema te marca y te senala como criminal, te mete en una especie de lista negra de la que no sabias nada. Y al final tambien pierdes la confianza en el propio gobierno: te acusan, no te dicen de que exactamente, y no puedes hacer nada para que te escuchen."
+    },
+    {
+      "id": "afectado-3",
+      "kind": "end_user",
+      "label": "Padre afectado (clasificado de golpe)",
+      "content": "Por una casilla mal puesta o un papel entregado tarde, pasas de recibir una ayuda a deber decenas de miles de euros, sin un paso intermedio. Te clasifican como defraudador entero, no como alguien que cometio un fallo menor que se pueda corregir. Llamas y escribes pidiendo que te expliquen el calculo, y la respuesta es que tienes que pagar; el por que no aparece por ningun lado. No habia manera real de apelar con mis pruebas y que alguien revisara el caso de verdad."
+    }
+  ]
+}

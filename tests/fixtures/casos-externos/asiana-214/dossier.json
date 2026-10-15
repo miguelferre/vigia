@@ -1,0 +1,32 @@
+{
+  "_nota": "HELD-OUT no clínico (público). Dossier NEUTRALIZADO (hechos y experiencia de uso, sin etiquetar el problema) sintetizado de fuente independiente citada: NTSB/AAR-14/01, «Descent Below Visual Glidepath and Impact With Seawall, Asiana Airlines Flight 214, Boeing 777-200ER» (San Francisco, 6 jul 2013); §1.17 (entrevistas a la tripulación) y §3 (conclusiones). Las declaraciones del piloto a los investigadores se reproducen traducidas como experiencia de uso. Entrada ciega para validar el revisor.",
+  "system_name": "Sistema de automatización de cabina de un avión comercial (autothrottle + director de vuelo / piloto automático del Boeing 777)",
+  "domain": "Aviación comercial. Conjunto de sistemas que regulan el empuje de los motores (autothrottle, A/T) y guían la trayectoria (director de vuelo y piloto automático, AFDS) durante la aproximación. Es una capa de apoyo con el piloto en el lazo: el piloto selecciona los modos, supervisa y conserva la autoridad final sobre mandos y empuje.",
+  "summary": "Durante una aproximación visual con buen tiempo, la tripulación gestiona la trayectoria y la velocidad combinando ajustes manuales y modos automáticos. El autothrottle puede regular el empuje para mantener una velocidad seleccionada, pero ese comportamiento depende del modo activo en cada momento: en ciertos modos el A/T retiene el empuje y deja de regular la velocidad por sí mismo, quedando a la espera sin acelerar aunque la velocidad caiga. El modo activo se indica en una franja del panel de vuelo (FMA), pero no hay un aviso sonoro ni una señal destacada cuando el A/T pasa de regular a no regular la velocidad. La aeronave bajó por debajo de la senda de planeo y la velocidad cayó muy por debajo de la de referencia sin que la tripulación lo corrigiera a tiempo. El A/T estaba conectado durante el descenso.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha de modos del autothrottle y del director de vuelo",
+      "content": "El autothrottle (A/T) regula el empuje según el modo activo. En unos modos mantiene activamente una velocidad seleccionada (la sube si la aeronave se queda lenta). En otros modos —por ejemplo, tras ciertas secuencias de descenso— el A/T queda en un estado de retención de empuje: conserva la palanca donde está y NO regula la velocidad, aunque permanezca conectado. El paso de un estado al otro puede producirse como consecuencia de acciones previas del piloto sobre otros modos (selección de un modo de descenso, ajuste de altitud objetivo), sin que el piloto lo solicite de forma explícita. El modo vigente se muestra en texto en la franja de anunciadores del panel de vuelo (FMA); el cambio no va acompañado de aviso sonoro ni de un realce visual prominente. Existe en este tipo de aeronave un valor mínimo de velocidad a partir del cual el A/T, en algunos modos, despertaría para recuperar empuje; ese auto-rescate no opera en todos los modos. La lógica completa de qué modo regula la velocidad y cuál no está descrita en los manuales, distribuida en varios apartados."
+    },
+    {
+      "id": "instructor-sistema",
+      "kind": "technician",
+      "label": "Instructor / responsable de la formación de tipo",
+      "content": "El comportamiento del A/T es coherente con su diseño: en el modo de retención de empuje no debe regular la velocidad, y así está documentado. El cambio de modo se refleja en la franja de anunciadores; esperamos que la tripulación lea esa franja y la verifique, porque es la fuente de verdad de qué está haciendo la automatización. En la transición a este tipo de avión, el tiempo dedicado a la lógica de modos del A/T y a las diferencias frente a otros fabricantes es limitado y se cubre sobre todo en aula y manuales; gran parte del aprendizaje fino ocurre después, con la experiencia en línea. No disponemos de un mecanismo que registre si un piloto ha entendido mal qué modo regula la velocidad; eso solo aflora si alguien lo verbaliza."
+    },
+    {
+      "id": "piloto-1",
+      "kind": "end_user",
+      "label": "Piloto a los mandos (entrevista a investigadores)",
+      "content": "Yo daba por hecho que, con el autothrottle conectado, siempre mantendría la velocidad que yo había seleccionado; pasara lo que pasara, mientras estuviera puesto, no me dejaría caer por debajo. Contaba además con que el avión tuviera una protección automática que recuperase empuje si la velocidad bajaba demasiado, parecido a lo que había en otros aviones que conozco. No me fijé en que el modo había cambiado y que en ese estado ya no estaba regulando la velocidad. La franja de modos estaba ahí, pero con la carga de la aproximación no la leí de forma que me diera cuenta. La aproximación visual me resultó muy estresante; estaba muy preocupado. Ya antes no me sentía del todo seguro de cómo funcionaba esta parte de la automatización: sabía que necesitaba estudiarlo más."
+    },
+    {
+      "id": "piloto-2",
+      "kind": "end_user",
+      "label": "Piloto supervisor en cabina (entrevista a investigadores)",
+      "content": "Confiábamos en que la automatización mantuviera la velocidad mientras nos concentrábamos en la trayectoria y en encajar la aproximación visual. Damos por sentado que, con el A/T puesto, la velocidad está cubierta, y no la vigilamos de forma continua. No vi ningún aviso que me hiciera mirar la velocidad en ese tramo; cuando reaccionamos, ya había caído mucho por debajo de la de referencia. El cambio de modo no salta a la vista: si no lo buscas en la franja, es fácil que pase desapercibido."
+    }
+  ]
+}

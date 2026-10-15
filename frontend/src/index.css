@@ -1,0 +1,68 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Puente de tokens shadcn -> variables de tema definidas en themes/tokens.css.
+   theme.tsx aplica data-theme y .dark en <html>; aqui solo se mapean los
+   nombres que usa shadcn/ui a los nombres de nuestros tokens de tema. */
+@theme inline {
+  --font-display: var(--font-display-family);
+  --text-md: 13px;
+  --text-md--line-height: 1.4;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-chip-active: var(--chip-active);
+  --color-chip-active-foreground: var(--chip-active-foreground);
+  --color-link: var(--link);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  /* Alias de los tokens que shadcn da por hechos y que tokens.css no nombra
+     aparte: todos apuntan a un token existente, nunca a un color literal. */
+  --color-popover: var(--card);
+  --color-popover-foreground: var(--card-foreground);
+  --color-input: var(--border);
+  --color-destructive: var(--state-alert);
+  --color-destructive-foreground: var(--primary-foreground);
+  --color-state-ok: var(--state-ok);
+  --color-state-warn: var(--state-warn);
+  --color-state-alert: var(--state-alert);
+  --color-state-unstable: var(--state-unstable);
+  --color-state-nodata: var(--state-nodata);
+  --color-tertiary: var(--foreground-tertiary);
+  --color-risk-medium: var(--risk-medium);
+  --shadow-card: var(--elevation-card);
+  --shadow-card-hover: var(--elevation-card-hover);
+  --shadow-pop: var(--elevation-pop);
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* trazo 1,5 global en vez de las 2 por defecto de Lucide.
+   Los iconos de lucide-react llevan siempre la clase "lucide" (más
+   "lucide-<nombre>"), así que una sola regla CSS basta: gana a los atributos
+   `stroke-width` que Lucide pone por defecto en el SVG, sin tocar cada uso. */
+.lucide {
+  stroke-width: 1.5;
+}

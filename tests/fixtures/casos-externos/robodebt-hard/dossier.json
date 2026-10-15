@@ -1,0 +1,44 @@
+{
+  "_nota": "Material de la Royal Commission into the Robodebt Scheme (Australia, 2022-2023) y prensa asociada. Dossier CRUDO: hechos del sistema y testimonios literales sin etiquetar ni interpretar.",
+  "system_name": "Esquema automatizado de recuperación de deudas de prestaciones sociales (Robodebt, Australia)",
+  "domain": "Administración de prestaciones sociales (Australia). Sistema automatizado de detección y reclamación de supuestos sobrepagos de prestaciones del Centrelink, operado por el Departamento de Servicios Humanos entre 2015 y 2019 aproximadamente.",
+  "summary": "El esquema calculaba automáticamente deudas de sobrepago cruzando los ingresos anuales declarados ante la Oficina Tributaria australiana (ATO) con los ingresos declarados al Centrelink durante el periodo en que la persona recibía la prestación. El método aplicado era el promediado de ingresos ('income averaging'): dividía el ingreso anual entre las quincenas del año para obtener un ingreso quincenal estimado, sin verificar si el calendario real de percepción de ingresos coincidía con el periodo de cobro de la prestación. A partir de ese cálculo, el sistema emitía automáticamente un aviso de deuda sin que ningún funcionario revisara previamente si la deuda existía de manera efectiva. Una vez emitido el aviso, el sistema podía embargar sueldos y devoluciones de impuestos. Durante parte del periodo de operación, los avisos se enviaban exclusivamente a la cuenta online del destinatario y no incluían número de teléfono de contacto. Para impugnar o refutar una deuda, el destinatario debía aportar nóminas y registros salariales de hasta cinco o seis años atrás.",
+  "sources": [
+    {
+      "id": "doc-ficha-sistema",
+      "kind": "document",
+      "label": "Ficha del sistema: funcionamiento técnico y operativo",
+      "content": "El sistema cruzaba los datos de ingresos anuales de la ATO con los periodos de percepción de prestaciones registrados en Centrelink. El método de cálculo era el 'income averaging': el ingreso anual declarado ante la ATO se dividía entre el número de quincenas del año para obtener un ingreso quincenal estimado, que se comparaba con los ingresos declarados al Centrelink en cada quincena. Si el ingreso estimado superaba el umbral declarado, el sistema generaba automáticamente un aviso de deuda por la diferencia. Este proceso no incluía ninguna revisión por parte de un funcionario antes de emitir el aviso. El aviso de deuda se enviaba a la cuenta online ('myGov') del destinatario. Durante parte del periodo de vigencia del esquema, el aviso no contenía número de teléfono al que dirigirse. La carga de demostrar que la deuda era incorrecta recaía sobre el destinatario, quien debía presentar nóminas y registros de ingresos de hasta cinco o seis años atrás. En caso de no responder o no poder aportar la documentación requerida, el sistema procedía al embargo de sueldos o de devoluciones de impuestos. El esquema operó aproximadamente entre 2015 y 2019 y generó en torno a 470.000 avisos de deuda."
+    },
+    {
+      "id": "prov-tecnico-centrelink",
+      "kind": "technician",
+      "label": "Departamento de Servicios Humanos / Centrelink (agencia operadora)",
+      "content": "El esquema se diseñó para aumentar la eficiencia en la detección de sobrepagos de prestaciones sociales mediante el cruce automatizado de datos con la ATO. La decisión de no incluir un número de teléfono de contacto en los avisos enviados a través de myGov fue deliberada, con la intención de que los destinatarios respondieran a través del canal online. La Royal Commission halló que hubo una 'decisión consciente' de omitir ese número de teléfono 'con la intención de forzar a los destinatarios a responder por internet'. El esquema fue finalmente declarado ilegal y el gobierno australiano acordó reembolsar aproximadamente 720 millones de dólares a las personas afectadas."
+    },
+    {
+      "id": "tecnico-funcionaria-colleen",
+      "kind": "technician",
+      "label": "Colleen Taylor, funcionaria de Centrelink (más de 30 años de servicio)",
+      "content": "«También sabíamos que muchos clientes asumirían que Centrelink ya tenía toda la información y que, por tanto, debía de ser correcta.» / «Como unidad de cumplimiento, no deberíamos ser nosotros los que robáramos a nuestros clientes.»"
+    },
+    {
+      "id": "end-user-masterton",
+      "kind": "end_user",
+      "label": "Madeleine Masterton, enfermera, destinataria de aviso de deuda",
+      "content": "«Parecía un sistema muy opaco que no estaba dispuesto a dar información a la gente a la que le habían adjudicado estas deudas.» / «No sabía de dónde había salido esa deuda de 4.000 dólares; yo creía haber declarado mis ingresos correctamente, en las fechas en que los recibí.»"
+    },
+    {
+      "id": "end-user-amato",
+      "kind": "end_user",
+      "label": "Deanna Amato, destinataria de aviso de deuda",
+      "content": "Fue penalizada por no responder a cartas enviadas a una dirección a la que nunca tuvo acceso y que nunca llegó a ver. Como consecuencia, le embargaron la devolución de impuestos."
+    },
+    {
+      "id": "doc-informe-holmes",
+      "kind": "document",
+      "label": "Informe de la Royal Commission: comisionada Catherine Holmes",
+      "content": "La comisionada Catherine Holmes calificó el esquema de «un mecanismo tosco y cruel, ni justo ni legal», que «hizo que muchas personas se sintieran como criminales». El informe constató que hubo una «decisión consciente» de no incluir un número de teléfono en los avisos, «con la intención de forzar a los destinatarios a responder por internet»."
+    }
+  ]
+}

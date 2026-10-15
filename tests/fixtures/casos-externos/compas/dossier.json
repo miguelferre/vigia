@@ -1,0 +1,38 @@
+{
+  "_nota": "HELD-OUT no clinico (publico). Dossier NEUTRALIZADO (hechos/observaciones, sin etiquetar el problema) sintetizado de fuentes independientes citadas: ProPublica 'Machine Bias' y 'How We Analyzed the COMPAS Recidivism Algorithm'; Dressel & Farid 2018 (Science Advances); State v. Loomis 2016 WI 68; replica de Northpointe (2016). Entrada ciega para validar el revisor.",
+  "system_name": "Sistema de puntuacion de riesgo de reincidencia para apoyo a decisiones judiciales (tipo COMPAS)",
+  "domain": "Justicia penal (EE. UU.). Herramienta actuarial propietaria que estima el riesgo de reincidencia y lo presenta al juez en informes de prefianza y sentencia. Es apoyo: la decision es del juez.",
+  "summary": "A partir de un cuestionario de 137 items (historial penal, empleo, vivienda, entorno social; la raza no se introduce explicitamente) el sistema devuelve un decil del 1 al 10 para reincidencia general y violenta, etiquetado Bajo (1-4), Medio (5-7) o Alto (8-10). Ese decil y su etiqueta se imprimen en el informe presentencial que el juez lee antes de decidir fianza o condena. El juez ve el numero y la etiqueta; el modelo es secreto comercial.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha del score + analisis de su metodologia",
+      "content": "La salida que ve el juez es un decil ordinal del 1 al 10 (10 = riesgo mas alto) mas una etiqueta Bajo/Medio/Alto. El decil se obtiene comparando al evaluado con un grupo normativo nacional. No se acompana de una probabilidad individual de reincidir ni de un intervalo de error para ese caso. En validaciones independientes, la concordancia (AUC) ronda 0,63-0,66; un estudio mostro que personas legas reclutadas por internet aciertan al 62% frente al 65% del software, y que bastan dos variables para igualar su exactitud. El informe entrega el decil sin indicar que factores pesaron en ese caso concreto. El metodo de ponderacion es propietario y no se divulga."
+    },
+    {
+      "id": "prov-tecnico",
+      "kind": "technician",
+      "label": "Proveedor del sistema",
+      "content": "Nuestras escalas cumplen paridad predictiva y calibracion: una misma puntuacion significa aproximadamente la misma tasa de reincidencia con independencia de la raza. La herramienta ordena a las personas por riesgo relativo dentro de una poblacion; no emite un veredicto sobre el individuo. La metodologia exacta de ponderacion es propiedad intelectual de la empresa y no se publica. El instrumento debe re-normarse y monitorizarse de forma continua para la poblacion donde se use."
+    },
+    {
+      "id": "impl-judicial",
+      "kind": "technician",
+      "label": "Implementador en el sistema judicial",
+      "content": "Recomendamos usar la puntuacion solo como un factor mas, nunca como elemento determinante de si se encarcela o de la duracion de la condena. Todo informe que incluya el score lleva una advertencia escrita: que el metodo es propietario y no se ha divulgado como pondera, que compara con una muestra nacional no validada localmente, y que algunos estudios sugieren que clasifica desproporcionadamente a las minorias como de mayor riesgo. No existe un programa reglado de formacion de los jueces sobre como interpretar el decil. Tampoco hay un mecanismo para registrar si el juez discrepa del score ni el desenlace real del caso."
+    },
+    {
+      "id": "juez",
+      "kind": "end_user",
+      "label": "Juez que ve la puntuacion",
+      "content": "Lo que tengo delante es un numero y una etiqueta. No recibo un intervalo de confianza, ni una probabilidad para este acusado, ni una explicacion de por que ha puntuado asi. Nadie me formo en como leer el decil ni en sus tasas de error. En un caso anule un acuerdo y subi la pena: el score era 'practicamente lo peor que podia ser'; reconoci que sin esa puntuacion probablemente habria impuesto bastante menos. No tengo forma de ver el calculo porque el modelo es secreto, asi que tampoco puedo discutirlo en sala."
+    },
+    {
+      "id": "evaluado",
+      "kind": "end_user",
+      "label": "Persona evaluada por el sistema",
+      "content": "Me puntuaron riesgo alto (un 8) por un delito menor, mientras a otra persona con antecedentes mas graves le dieron un 3; yo no reincidi y esa persona si. No pude ver ni rebatir los datos que produjeron mi puntuacion porque el algoritmo es secreto, y el juez la uso para subir mi fianza. Datos independientes muestran que, entre quienes no reincidieron, las personas negras fueron etiquetadas de alto riesgo casi al doble de tasa que las blancas, y al reves para los falsos negativos. Esa informacion por subgrupo no aparece junto a mi puntuacion."
+    }
+  ]
+}

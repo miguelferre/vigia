@@ -1,0 +1,38 @@
+{
+  "_nota": "HELD-OUT no clinico (publico). Dossier NEUTRALIZADO (hechos/observaciones, sin etiquetar el problema) sintetizado de fuentes independientes: Oversight Board de Meta ('Breast Cancer Awareness Content'); C. Newton 'The Trauma Floor' (The Verge) y cobertura NPR/Vice; Lai et al. CHI 2022; cobertura de prensa sobre apelaciones. Entrada ciega para validar el revisor.",
+  "system_name": "Plataforma de moderacion de contenido asistida por IA con revision humana",
+  "domain": "Sistema sociotecnico que filtra contenido de usuarios combinando clasificadores automaticos, moderadores humanos subcontratados y un flujo de apelacion para el usuario afectado.",
+  "summary": "Clasificadores de aprendizaje automatico escanean las publicaciones y, segun un umbral de confianza, retiran contenido automaticamente o lo derivan a una cola de revision humana. Moderadores (contratistas) revisan los items en cola contra los Estandares de la Comunidad, con el tiempo medido y un objetivo de 'exactitud'. El usuario sancionado recibe una notificacion y, en su caso, una opcion de apelar.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Documentacion del sistema",
+      "content": "Aplicamos los Estandares de la Comunidad combinando tecnologia automatizada y revision humana. Segun el nivel de confianza, la tecnologia retira contenido de forma proactiva o lo prioriza en una cola para revision. Cuando se retira contenido se notifica a la persona. Historicamente la notificacion no siempre indicaba la regla concreta infringida ni si la decision la tomo una persona o un sistema automatico, ni se ofrecia siempre una via de apelacion efectiva."
+    },
+    {
+      "id": "supervisor-independiente",
+      "kind": "document",
+      "label": "Organo supervisor independiente (caso documentado)",
+      "content": "Se reverto la retirada de una publicacion que mostraba sintomas de cancer de mama con texto en otro idioma que explicaba su proposito sanitario: un clasificador automatico aplico la norma de desnudos sin entender ese contexto, algo que un revisor humano competente habria discernido. Como remedio, miles de piezas que antes se retiraban automaticamente pasaron a derivarse a revision humana. Se recomendo informar al usuario de la regla concreta infringida, la sancion y las opciones de apelacion, y revelar el papel de la IA en la decision."
+    },
+    {
+      "id": "moderador",
+      "kind": "technician",
+      "label": "Moderador contratista",
+      "content": "Mi pantalla es una cola interminable de items ya marcados; decido 'ignorar' o 'eliminar' contra un manual de politicas que cambia casi a diario y que a veces se contradice. El tiempo esta cronometrado y se espera una 'tasa de exactitud' del 95-98% revisando mas de 1.000 publicaciones por semana; si bajo de ese umbral peligra mi puesto. Esa exactitud se mide contra el criterio de auditores internos sobre una muestra, no contra un resultado externo. Muchas veces el item llega sin el hilo, sin el idioma, sin saber si era una broma o una amenaza, y aun asi resuelvo en segundos."
+    },
+    {
+      "id": "diseno-herramienta",
+      "kind": "technician",
+      "label": "Investigacion sobre la herramienta del moderador",
+      "content": "Los modelos fallan especialmente fuera de distribucion y no deben confiarse ciegamente. El moderador necesita control para decidir cuando delegar en el modelo y cuando revisar el mismo; mostrar la etiqueta predicha, su confianza y explicaciones ayuda a calibrar cuanto fiarse. Sin ese andamiaje, el operador o sobreconfia en la señal del modelo o la ignora."
+    },
+    {
+      "id": "usuario-sancionado",
+      "kind": "end_user",
+      "label": "Usuario final sancionado",
+      "content": "Perdi mi cuenta de un dia para otro y la notificacion no citaba ninguna publicacion concreta ni la regla exacta. Cuando intente apelar, el mensaje fue: 'No puedes solicitar otra revision de esta decision'. En casos parecidos, la negativa a la apelacion llega en menos de un minuto con un texto identico para todos, lo que hace dudar de que un humano la haya leido. No se que regla violé ni si me juzgo una persona o un algoritmo."
+    }
+  ]
+}

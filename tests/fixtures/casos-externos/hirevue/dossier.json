@@ -1,0 +1,26 @@
+{
+  "_nota": "HELD-OUT no clinico (publico). Dossier NEUTRALIZADO (hechos, sin diagnostico) construido desde fuentes citadas en data/external/casos-externos.md (caso E4 HireVue). Entrada ciega para la prueba de generalizacion A1.",
+  "system_name": "HireVue — evaluacion de preempleo por IA (entrevista en video)",
+  "domain": "Recursos humanos / contratacion. Cribado de candidatos a empleo por cuenta de empresas empleadoras (cientos de clientes corporativos). Decide a quien priorizar para fases siguientes.",
+  "summary": "El candidato graba una entrevista unidireccional por webcam o movil respondiendo a preguntas predefinidas. El sistema analiza eleccion de palabras, entonacion de voz y (hasta 2021) expresiones faciales, y produce una 'employability score' que ordena al candidato frente a los demas. El reclutador de la empresa recibe a los candidatos ya ordenados por esa puntuacion. Es apoyo a la decision de contratacion; la empresa decide. La composicion de la puntuacion (aprox. 10-30% expresiones faciales, resto lenguaje y voz) no se expone al candidato.",
+  "sources": [
+    {
+      "id": "doc-producto",
+      "kind": "document",
+      "label": "Descripcion del producto / ficha",
+      "content": "Evaluacion automatizada de preempleo. Entrada: video de una entrevista unidireccional del candidato. Salida: una 'employability score' numerica que rankea al candidato. El empleador recibe a los candidatos ordenados por la puntuacion y su flujo previsto es filtrar por el ranking. El sistema no publica como se calcula la puntuacion (secreto comercial); la empresa no expuso el sistema a una auditoria externa independiente (en 2021 retiro el componente de analisis facial y encargo una auditoria de alcance limitado)."
+    },
+    {
+      "id": "user-candidato",
+      "kind": "end_user",
+      "label": "Candidato (usuario afectado)",
+      "content": "Grabo la entrevista por la webcam respondiendo a las preguntas. Despues recibo si paso a la siguiente fase o un rechazo. No veo mi puntuacion ni me dicen que conductas o palabras se valoraron, ni cuanto pesa la cara o la voz. No hay un sitio donde preguntar por que, corregir algo, apelar la decision o pedir no ser evaluado por la maquina. Antes de grabar, la guia me dice que 'los mismos consejos que te ayudan en una entrevista normal te ayudaran aqui'. No se como me valoro el sistema ni como podria mejorar."
+    },
+    {
+      "id": "tech-reclutador",
+      "kind": "technician",
+      "label": "Reclutador / responsable de seleccion",
+      "content": "Recibo a los candidatos ordenados con su puntuacion de empleabilidad. El flujo de trabajo es mirar quien quedo arriba en el ranking y filtrar al resto. No dispongo del detalle de como se compone la puntuacion de cada candidato; en parte ni el proveedor sabe explicar la base de una evaluacion concreta. No hay un paso que me obligue a revisar el caso al margen del ranking."
+    }
+  ]
+}

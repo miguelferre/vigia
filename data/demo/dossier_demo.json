@@ -1,0 +1,25 @@
+{
+  "system_name": "Asistente de triaje de tickets (DEMO sintetica)",
+  "domain": "soporte interno de TI (caso de juguete, NO clinico, NO sensible)",
+  "summary": "Un modelo sugiere la prioridad de cada ticket de soporte. El agente humano puede aceptar o cambiar la prioridad sugerida.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha tecnica del modelo",
+      "content": "El modelo clasifica tickets en prioridad alta/media/baja. Precision global 0.82. No se reporta rendimiento por categoria de ticket."
+    },
+    {
+      "id": "tech-1",
+      "kind": "technician",
+      "label": "Responsable tecnico",
+      "content": "Cuando el agente cambia la prioridad sugerida, el sistema registra el cambio y asumimos que eso sirve para reentrenar."
+    },
+    {
+      "id": "user-1",
+      "kind": "end_user",
+      "label": "Agente de soporte",
+      "content": "La sugerencia aparece ya rellena y casi siempre la dejo como esta. No se muy bien por que decide alta o baja, ni si cambiarla sirve de algo."
+    }
+  ]
+}

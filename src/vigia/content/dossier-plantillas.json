@@ -1,0 +1,434 @@
+{
+  "document_inventory": {
+    "preguntas": [
+      {
+        "id": "di-0-1",
+        "original": "Screenshots of what the user sees",
+        "seccion": "Documentos útiles",
+        "texto": "Capturas de lo que ve la persona (la propuesta, las alertas, el paso de anular)"
+      },
+      {
+        "id": "di-0-2",
+        "original": "Technical spec / model card",
+        "seccion": "Documentos útiles",
+        "texto": "Ficha técnica (qué hace el modelo, rendimiento, límites)"
+      },
+      {
+        "id": "di-0-3",
+        "original": "Onboarding material or user manual",
+        "seccion": "Documentos útiles",
+        "texto": "Material de incorporación o manual de uso"
+      },
+      {
+        "id": "di-0-4",
+        "original": "Design document / functional spec",
+        "seccion": "Documentos útiles",
+        "texto": "Documento de diseño o especificación funcional"
+      },
+      {
+        "id": "di-0-5",
+        "original": "Usage protocol",
+        "seccion": "Documentos útiles",
+        "texto": "Protocolo de uso (cómo encaja el sistema en el flujo de trabajo real)"
+      },
+      {
+        "id": "di-0-6",
+        "original": "Validation / performance report",
+        "seccion": "Documentos útiles",
+        "texto": "Informe de validación o rendimiento"
+      },
+      {
+        "id": "di-0-7",
+        "original": "Summary of usage logs",
+        "seccion": "Documentos útiles",
+        "texto": "Resumen de los registros de uso"
+      },
+      {
+        "id": "di-0-8",
+        "original": "Other",
+        "seccion": "Documentos útiles",
+        "texto": "Otro"
+      }
+    ],
+    "quien": "Cualquiera con acceso a la documentación del sistema.",
+    "titulo": "Inventario de documentos"
+  },
+  "system_card": {
+    "preguntas": [
+      {
+        "id": "sc-0-1",
+        "original": "System name:",
+        "seccion": "0. Identificación",
+        "texto": "Nombre del sistema"
+      },
+      {
+        "id": "sc-0-2",
+        "original": "Domain / what it is used for:",
+        "seccion": "0. Identificación",
+        "texto": "Dominio o para qué se usa"
+      },
+      {
+        "id": "sc-0-3",
+        "original": "Status:",
+        "seccion": "0. Identificación",
+        "texto": "Estado (idea, piloto, producción, retirado)"
+      },
+      {
+        "id": "sc-0-4",
+        "original": "Who is it aimed at?",
+        "seccion": "0. Identificación",
+        "texto": "¿A quién va dirigido? (qué perfil lo usa para decidir)"
+      },
+      {
+        "id": "sc-1-1",
+        "original": "What task does the model solve?",
+        "seccion": "1. Qué hace y qué NO hace",
+        "texto": "¿Qué tarea resuelve el modelo?"
+      },
+      {
+        "id": "sc-1-2",
+        "original": "What exactly does it produce?",
+        "seccion": "1. Qué hace y qué NO hace",
+        "texto": "¿Qué produce exactamente? (una puntuación, una categoría, un texto, una recomendación...)"
+      },
+      {
+        "id": "sc-1-3",
+        "original": "Does the system decide or suggest?",
+        "seccion": "1. Qué hace y qué NO hace",
+        "texto": "¿El sistema decide o sugiere? ¿Puede la persona elegir no seguirlo?"
+      },
+      {
+        "id": "sc-1-4",
+        "original": "What does it NOT do, even if someone might expect it to?",
+        "seccion": "1. Qué hace y qué NO hace",
+        "texto": "¿Qué NO hace, aunque alguien pueda esperar que sí?"
+      },
+      {
+        "id": "sc-2-1",
+        "original": "How well does it work?",
+        "seccion": "2. Rendimiento y límites",
+        "texto": "¿Qué tal funciona? (las métricas que tengas: precisión, etc.)"
+      },
+      {
+        "id": "sc-2-2",
+        "original": "Where does it fail most or is least reliable?",
+        "seccion": "2. Rendimiento y límites",
+        "texto": "¿Dónde falla más o es menos fiable? (tipos de caso, poblaciones, situaciones)"
+      },
+      {
+        "id": "sc-2-3",
+        "original": "Is performance measured by subgroup?",
+        "seccion": "2. Rendimiento y límites",
+        "texto": "¿Se mide el rendimiento por subgrupo? (por tipo de caso, edad, sexo, idioma...)"
+      },
+      {
+        "id": "sc-3-1",
+        "original": "Where and how does the result appear?",
+        "seccion": "3. Cómo se presenta el resultado a la persona",
+        "texto": "¿Dónde y cómo aparece el resultado? (pantalla, campo prerrellenado, alerta, correo...)"
+      },
+      {
+        "id": "sc-3-2",
+        "original": "What exactly does the person see?",
+        "seccion": "3. Cómo se presenta el resultado a la persona",
+        "texto": "¿Qué ve exactamente la persona? Descríbelo como a un compañero."
+      },
+      {
+        "id": "sc-3-3",
+        "original": "Does any context appear alongside the result",
+        "seccion": "3. Cómo se presenta el resultado a la persona",
+        "texto": "¿Aparece contexto junto al resultado (factores, datos del caso) o solo el resultado solo?"
+      },
+      {
+        "id": "sc-4-1",
+        "original": "Is it shown when the system is unsure?",
+        "seccion": "4. Confianza e incertidumbre",
+        "texto": "¿Se muestra cuándo el sistema no está seguro? ¿Cómo? (un %, un color, un texto...)"
+      },
+      {
+        "id": "sc-4-2",
+        "original": "Are all outputs presented as equally confident",
+        "seccion": "4. Confianza e incertidumbre",
+        "texto": "¿Se presentan todos los resultados con la misma confianza, o se aparta lo dudoso?"
+      },
+      {
+        "id": "sc-5-1",
+        "original": "Can the person know why the system proposes what it proposes?",
+        "seccion": "5. El «por qué»",
+        "texto": "¿Puede la persona saber por qué el sistema propone lo que propone? ¿Cómo lo ve?"
+      },
+      {
+        "id": "sc-6-1",
+        "original": "Can the person change, overrule, or ignore the proposal?",
+        "seccion": "6. Cuando la persona no está de acuerdo (anular o corregir)",
+        "texto": "¿Puede la persona cambiar, anular o ignorar la propuesta? ¿Qué tan fácil es?"
+      },
+      {
+        "id": "sc-6-2",
+        "original": "When they change it, is that change recorded anywhere?",
+        "seccion": "6. Cuando la persona no está de acuerdo (anular o corregir)",
+        "texto": "Cuando la cambian, ¿queda registrado en algún sitio?"
+      },
+      {
+        "id": "sc-6-3",
+        "original": "Is the reason for the change recorded?",
+        "seccion": "6. Cuando la persona no está de acuerdo (anular o corregir)",
+        "texto": "¿Se registra el motivo del cambio? ¿Libre o estructurado (categorías)?"
+      },
+      {
+        "id": "sc-6-4",
+        "original": "What is that record used for?",
+        "seccion": "6. Cuando la persona no está de acuerdo (anular o corregir)",
+        "texto": "¿Para qué se usa ese registro? (supervisión, reentreno, nada...) ¿Lo sabe la persona?"
+      },
+      {
+        "id": "sc-7-1",
+        "original": "Can they easily ignore or close the suggestion,",
+        "seccion": "7. Descarte, momento y alertas",
+        "texto": "¿Pueden ignorar o cerrar la sugerencia con facilidad, o reaparece e insiste?"
+      },
+      {
+        "id": "sc-7-2",
+        "original": "Does the system interrupt?",
+        "seccion": "7. Descarte, momento y alertas",
+        "texto": "¿El sistema interrumpe? ¿En qué punto del flujo de trabajo aparece?"
+      },
+      {
+        "id": "sc-7-3",
+        "original": "How many alerts/warnings does it generate?",
+        "seccion": "7. Descarte, momento y alertas",
+        "texto": "¿Cuántas alertas o avisos genera? ¿Hay riesgo de saturación (fatiga de alertas)?"
+      },
+      {
+        "id": "sc-8-1",
+        "original": "How does the person learn to use the system and understand what it does?",
+        "seccion": "8. Primer contacto (incorporación)",
+        "texto": "¿Cómo aprende la persona a usar el sistema y a entender qué hace? (formación, texto introductorio, nada...)"
+      },
+      {
+        "id": "sc-8-2",
+        "original": "Are the limitations explained up front?",
+        "seccion": "8. Primer contacto (incorporación)",
+        "texto": "¿Se explican las limitaciones desde el principio?"
+      },
+      {
+        "id": "sc-9-1",
+        "original": "What does the system do if it lacks enough data or is unsure?",
+        "seccion": "9. Cuando faltan datos o hay fallo",
+        "texto": "¿Qué hace el sistema si no tiene datos suficientes o no está seguro? (¿se abstiene, avisa, propone algo igualmente?)"
+      },
+      {
+        "id": "sc-9-2",
+        "original": "If it fails or cannot act, what does the person see?",
+        "seccion": "9. Cuando faltan datos o hay fallo",
+        "texto": "Si falla o no puede actuar, ¿qué ve la persona? (mensaje claro, error técnico, nada)"
+      },
+      {
+        "id": "sc-10-1",
+        "original": "Who watches that the system keeps working well once deployed?",
+        "seccion": "10. Vigilancia y subgrupos",
+        "texto": "¿Quién vigila que el sistema siga funcionando bien tras el despliegue?"
+      },
+      {
+        "id": "sc-10-2",
+        "original": "Is that oversight automatic or manual?",
+        "seccion": "10. Vigilancia y subgrupos",
+        "texto": "¿Esa vigilancia es automática o manual? ¿Con qué frecuencia?"
+      },
+      {
+        "id": "sc-10-3",
+        "original": "Is it watched that it does not harm some subgroup",
+        "seccion": "10. Vigilancia y subgrupos",
+        "texto": "¿Se vigila que no perjudique a algún subgrupo más que a otros?"
+      },
+      {
+        "id": "sc-11-1",
+        "original": "When the system changes behavior (an update), are users notified?",
+        "seccion": "11. Cambios y controles",
+        "texto": "Cuando el sistema cambia de comportamiento (una actualización), ¿se avisa a quien lo usa?"
+      },
+      {
+        "id": "sc-11-2",
+        "original": "Can the person configure anything",
+        "seccion": "11. Cambios y controles",
+        "texto": "¿Puede la persona configurar algo? (umbrales, qué alertas recibe, activar o desactivar)"
+      },
+      {
+        "id": "sc-12-1",
+        "original": "Is there any way for the person to give their opinion on a proposal?",
+        "seccion": "12. Retroalimentación",
+        "texto": "¿Hay alguna forma de que la persona dé su opinión sobre una propuesta? ¿Con qué detalle?"
+      },
+      {
+        "id": "sc-13-1",
+        "original": "What you already suspect (optional, keep it apart from the rest)",
+        "seccion": "Lo que ya sospechas (opcional)",
+        "texto": "Lo que ya sospechas (opcional): si intuyes qué falla en la interacción, escríbelo aquí, aparte de la descripción"
+      }
+    ],
+    "quien": "Responsable técnico, científico de datos o dueño del producto/despliegue.",
+    "titulo": "Ficha técnica del sistema"
+  },
+  "usage_experience": {
+    "preguntas": [
+      {
+        "id": "ue-0-1",
+        "original": "Do you know in which situations it makes the most mistakes?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "¿Sabes en qué situaciones se equivoca más? (1 = no tengo ni idea, 5 = lo sé bien)"
+      },
+      {
+        "id": "ue-0-2",
+        "original": "When you correct or change its proposal, is it recorded and does it serve some purpose?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "Cuando corriges o cambias su propuesta, ¿queda registrado y sirve para algo? (1 = se pierde, 5 = sé que se usa)"
+      },
+      {
+        "id": "ue-0-3",
+        "original": "Does it reach you at a good moment?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "¿Te llega en un buen momento? (1 = siempre interrumpe, 5 = llega cuando debe)"
+      },
+      {
+        "id": "ue-0-4",
+        "original": "Of the alerts it shows you, how many do you ignore?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "De las alertas que te muestra, ¿cuántas ignoras? (ninguna, algunas, casi todas)"
+      },
+      {
+        "id": "ue-0-5",
+        "original": "Do you use the tool differently than you did 6 months ago?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "¿Usas la herramienta de forma distinta a hace 6 meses? ¿Qué ha cambiado?"
+      },
+      {
+        "id": "ue-0-6",
+        "original": "Do you trust it more now than at the start?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "¿Confías más en ella ahora que al principio? ¿Por qué?"
+      },
+      {
+        "id": "ue-0-7",
+        "original": "If you did not have the tool tomorrow, would your own judgment be as sharp as before you started using it?",
+        "seccion": "0. Chequeo rápido (2 minutos)",
+        "texto": "Si mañana no tuvieras la herramienta, ¿tu propio criterio estaría tan afinado como antes de empezar a usarla?"
+      },
+      {
+        "id": "ue-1-1",
+        "original": "What is your role and what do you use the tool for?",
+        "seccion": "1. Tú y la herramienta",
+        "texto": "¿Cuál es tu papel y para qué usas la herramienta?"
+      },
+      {
+        "id": "ue-1-2",
+        "original": "How often do you use it?",
+        "seccion": "1. Tú y la herramienta",
+        "texto": "¿Con qué frecuencia la usas? (a diario, de vez en cuando...)"
+      },
+      {
+        "id": "ue-2-1",
+        "original": "When you started, was it clear what it did and did not do?",
+        "seccion": "2. La primera vez",
+        "texto": "Cuando empezaste, ¿estaba claro qué hacía y qué no hacía? ¿Alguien te lo explicó?"
+      },
+      {
+        "id": "ue-3-1",
+        "original": "In your own words, what does the system do?",
+        "seccion": "3. Qué crees que hace",
+        "texto": "Con tus propias palabras, ¿qué hace el sistema?"
+      },
+      {
+        "id": "ue-3-2",
+        "original": "Does it decide for you or just suggest?",
+        "seccion": "3. Qué crees que hace",
+        "texto": "¿Decide por ti o solo sugiere? ¿Quién tiene la última palabra?"
+      },
+      {
+        "id": "ue-4-1",
+        "original": "What do you see exactly?",
+        "seccion": "4. Cuando aparece el resultado",
+        "texto": "¿Qué ves exactamente? Descríbelo como a un compañero."
+      },
+      {
+        "id": "ue-4-2",
+        "original": "Do you understand it at a glance",
+        "seccion": "4. Cuando aparece el resultado",
+        "texto": "¿Lo entiendes de un vistazo o tienes que interpretarlo?"
+      },
+      {
+        "id": "ue-5-1",
+        "original": "Do you know why the system proposes what it proposes?",
+        "seccion": "5. El «por qué»",
+        "texto": "¿Sabes por qué el sistema propone lo que propone? ¿Te lo explica?"
+      },
+      {
+        "id": "ue-6-1",
+        "original": "Do you usually accept what it proposes or review it carefully?",
+        "seccion": "6. ¿Confías en ella?",
+        "texto": "¿Sueles aceptar lo que propone o lo revisas con detalle?"
+      },
+      {
+        "id": "ue-6-2",
+        "original": "Are there times you accept it even when you are not fully sure, out of speed or habit?",
+        "seccion": "6. ¿Confías en ella?",
+        "texto": "¿Hay veces que lo aceptas sin estar del todo seguro, por rapidez o costumbre?"
+      },
+      {
+        "id": "ue-7-1",
+        "original": "When you do not agree with the proposal, what do you do?",
+        "seccion": "7. Cuando NO estás de acuerdo",
+        "texto": "Cuando no estás de acuerdo con la propuesta, ¿qué haces?"
+      },
+      {
+        "id": "ue-7-2",
+        "original": "Can you change it? Is it easy or cumbersome?",
+        "seccion": "7. Cuando NO estás de acuerdo",
+        "texto": "¿Puedes cambiarla? ¿Es fácil o engorroso?"
+      },
+      {
+        "id": "ue-7-3",
+        "original": "Are you asked for the reason for the change?",
+        "seccion": "7. Cuando NO estás de acuerdo",
+        "texto": "¿Te piden el motivo del cambio?"
+      },
+      {
+        "id": "ue-7-4",
+        "original": "Do you feel that change is used for something,",
+        "seccion": "7. Cuando NO estás de acuerdo",
+        "texto": "¿Sientes que ese cambio se usa para algo, o se pierde?"
+      },
+      {
+        "id": "ue-8-1",
+        "original": "Does the tool interrupt you at a bad moment?",
+        "seccion": "8. Interrupciones y alertas",
+        "texto": "¿La herramienta te interrumpe en mal momento?"
+      },
+      {
+        "id": "ue-8-2",
+        "original": "Do you get too many alerts?",
+        "seccion": "8. Interrupciones y alertas",
+        "texto": "¿Recibes demasiadas alertas? ¿Has acabado ignorándolas?"
+      },
+      {
+        "id": "ue-9-1",
+        "original": "Have you noticed it change behavior from one day to the next without anyone telling you?",
+        "seccion": "9. Cambios",
+        "texto": "¿Has notado que cambia de comportamiento de un día para otro sin que nadie te avise?"
+      },
+      {
+        "id": "ue-10-1",
+        "original": "If you could change one thing about how it presents or asks you for things, what would it be?",
+        "seccion": "10. Qué te molesta más o qué cambiarías",
+        "texto": "Si pudieras cambiar una cosa de cómo presenta o te pide las cosas, ¿cuál sería?"
+      },
+      {
+        "id": "ue-11-1",
+        "original": "What you already suspect (optional)",
+        "seccion": "Lo que ya sospechas (opcional)",
+        "texto": "Lo que ya sospechas (opcional): si crees que algo está mal pensado en cómo se te presenta, dilo aquí"
+      }
+    ],
+    "quien": "La persona que usa la herramienta a diario para decidir o trabajar.",
+    "titulo": "Experiencia de uso"
+  }
+}

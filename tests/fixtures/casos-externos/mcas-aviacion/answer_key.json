@@ -1,0 +1,65 @@
+[
+  {
+    "id": "AV-01-sistema-oculto",
+    "description": "Los pilotos no sabian que el MCAS existia (se retiro del manual): sin modelo mental del agente automatico no pueden atribuir el comportamiento anomalo ni elegir el procedimiento.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Documentacion/onboarding de la tripulacion (MCAS omitido)",
+    "severity": "high"
+  },
+  {
+    "id": "AV-02-sin-feedback-de-estado",
+    "description": "No habia aviso dedicado de que el MCAS estuviera actuando: automatizacion silenciosa sobre un control critico, sin mostrar su estado ni sus acciones.",
+    "guideline_ids": ["HAX-G4", "HAX-G11"],
+    "locus": "Cabina: ausencia de indicacion de actividad del MCAS",
+    "severity": "high"
+  },
+  {
+    "id": "AV-03-avalancha-alertas",
+    "description": "Un unico fallo de sensor disparo a la vez bastonera, IAS/ALT DISAGREE y trim no comandado, sin priorizar; la saturacion de avisos retraso/desordeno la respuesta.",
+    "guideline_ids": ["HAX-G3", "HAX-G4"],
+    "locus": "Gestion y priorizacion de alertas simultaneas",
+    "severity": "high"
+  },
+  {
+    "id": "AV-04-alerta-diagnostica-inoperativa",
+    "description": "El alerta AOA DISAGREE (la pista directa de la causa) estuvo inoperativo en >80% de la flota por ligarse a una opcion de pago; el piloto se quedo sin la informacion diagnostica clave.",
+    "guideline_ids": ["HAX-G4", "HAX-G2"],
+    "locus": "Disponibilidad del alerta AOA DISAGREE",
+    "severity": "high"
+  },
+  {
+    "id": "AV-05-override-dificil",
+    "description": "Anular era dificil: el MCAS reordenaba trim cada 5 s y, tras el corte, la rueda de trim manual quedaba casi inmovilizable por la carga aerodinamica.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-2"],
+    "locus": "Mecanismo de anulacion (repeticion + rueda manual)",
+    "severity": "high"
+  },
+  {
+    "id": "AV-06-suposicion-reaccion-irreal",
+    "description": "El diseno asumio que el piloto reaccionaria en ~4 s, cuando las propias pruebas mostraron >10 s: confianza mal calibrada en el operador, sin tolerar el error humano previsible.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-3"],
+    "locus": "Suposiciones de respuesta del piloto en la evaluacion de riesgos",
+    "severity": "medium"
+  },
+  {
+    "id": "AV-07-sensor-unico-sin-abstencion",
+    "description": "El MCAS actuaba con autoridad plena sobre un unico sensor de AoA, sin detectar discrepancia ni abstenerse ante entradas inverosimiles: no gestiona su incertidumbre.",
+    "guideline_ids": ["HAX-G10", "PAIR-EF-1"],
+    "locus": "Dependencia de un unico sensor sin reconciliacion",
+    "severity": "high"
+  },
+  {
+    "id": "AV-08-entrenamiento-minimo",
+    "description": "El entrenamiento de diferencias se fijo como objetivo en nivel minimo (sin simulador, ~2 h) y no cubria el MCAS: onboarding subordinado a un objetivo comercial.",
+    "guideline_ids": ["PAIR-MM-1", "HAX-G1"],
+    "locus": "Programa de formacion de diferencias al MAX",
+    "severity": "medium"
+  },
+  {
+    "id": "AV-09-procedimiento-heredado-roto",
+    "description": "El reflejo de anulacion del modelo anterior (tirar de la columna) dejo de funcionar en el MAX y no se aviso: una actualizacion rompio el modelo mental sin notificarlo.",
+    "guideline_ids": ["HAX-G14", "HAX-G18"],
+    "locus": "Cambio de comportamiento NG->MAX no notificado",
+    "severity": "high"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "CN-01-confianza-atada-a-precision-no-comunicada",
+    "description": "La confianza del clínico se calibra solo por la exactitud que percibe con el uso, porque el sistema no comunica su rendimiento (acierto, tasas de error) en el punto de uso: sin ese dato, la confianza no está bien calibrada y oscila entre sobre e infra-confianza.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Presentación del nivel de riesgo sin datos de rendimiento del modelo",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "CN-02-discordancia-score-juicio-sin-explicacion",
+    "description": "Cuando el nivel del sistema discrepa del juicio clínico a pie de cama («¿nos lo creemos o no?»), el clínico no puede reconciliarlo porque no se le explica por qué se ha asignado ese nivel a ESTE paciente.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Contenido de la salida (nivel sin explicación local por paciente)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "CN-03-sin-actionability",
+    "description": "El sistema entrega solo el nivel de riesgo y deja toda la interpretación y la decisión de qué hacer al clínico; no asocia ninguna acción recomendada a cada nivel («si el riesgo pasa de tanto, haz esto»), lo que reduce su utilidad y empuja a ignorarlo.",
+    "guideline_ids": ["HAX-G4", "PAIR-EF-2"],
+    "locus": "Ausencia de recomendación accionable asociada al nivel de riesgo",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "CN-04-lazo-input-opaco-para-enfermeria",
+    "description": "La enfermera alimenta el modelo con su documentación pero no sabe de qué se alimenta ni cómo lo que documenta cambia el nivel («no sé si estoy haciendo bien el algoritmo»); el lazo input→output es opaco, así que no puede documentar de forma informada.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Relación entre la documentación de enfermería y el cálculo del score (modelo mental del input)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "CN-05-sin-incertidumbre-por-paciente",
+    "description": "El indicador de color se muestra como un nivel categórico sin probabilidad individual ni intervalo de confianza para ese paciente: falsa precisión que impide calibrar cuánto fiarse de cada caso concreto.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Formato del indicador de riesgo (categórico, sin incertidumbre individual)",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "CN-06-modelo-opaco-sin-explicabilidad",
+    "description": "El modelo de aprendizaje automático es un desarrollo opaco cuya lógica no se divulga al usuario: ni enfermería ni médicos pueden inspeccionar qué variables determinan el nivel, lo que bloquea la confianza calibrada y la contestación.",
+    "guideline_ids": ["HAX-G11", "PAIR-MM-2"],
+    "locus": "Naturaleza opaca del cálculo del modelo",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "CN-07-sin-onboarding-interpretacion",
+    "description": "No hay formación reglada para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretar el nivel; cada profesional improvisa su modelo mental con el uso («se aprende sobre la marcha»).",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Onboarding/formación del usuario sobre el sistema predictivo",
+    "severity": "medium",
+    "revealed_by": "both"
+  },
+  {
+    "id": "CN-08-sin-captura-acuerdo-ni-desenlace",
+    "description": "El sistema no registra cuándo el clínico está de acuerdo o en desacuerdo con el nivel mostrado ni el desenlace real frente a la predicción: la discrepancia no se captura, no alimenta la supervisión y el modelo no aprende de sus errores.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-1"],
+    "locus": "Ausencia de captura del acuerdo/desacuerdo y del desenlace",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "CN-09-riesgo-infraconfianza-abandono",
+    "description": "Al depender la confianza de la exactitud percibida y faltar explicación, un par de discordancias bastan para que el clínico deje de mirar la herramienta («si me fallara un par de veces dejaría de mirarla») o la revise solo por encima: el diseño no sostiene una supervisión crítica estable y arriesga el abandono.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Encaje del indicador en el flujo de trabajo y sostenibilidad de la atención",
+    "severity": "medium",
+    "revealed_by": "both"
+  }
+]

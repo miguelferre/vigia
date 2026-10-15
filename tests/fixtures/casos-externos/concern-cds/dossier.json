@@ -1,0 +1,38 @@
+{
+  "_nota": "HELD-OUT clínico (público). Dossier NEUTRALIZADO (hechos y experiencia de uso, sin etiquetar el problema) sintetizado de fuente independiente citada: Schwartz JM. et al., «Factors Influencing Clinician Trust in Predictive Clinical Decision Support Systems for In-Hospital Deterioration: Qualitative Descriptive Study», JMIR Hum Factors 2022;9(2):e33960. DOI 10.2196/33960 (N=17 clínicos: enfermeras y médicos, sistema CONCERN de predicción de deterioro hospitalario). Verbatims de participantes traducidos y reproducidos como experiencia de uso. Entrada ciega para validar el revisor.",
+  "system_name": "Sistema predictivo de deterioro hospitalario basado en aprendizaje automático (tipo CONCERN)",
+  "domain": "Sanidad hospitalaria. Sistema de apoyo a la decisión clínica (CDS) que calcula de forma continua un riesgo de deterioro de cada paciente ingresado a partir de la documentación de enfermería, y lo muestra a enfermeras y médicos en el historial electrónico. Es una capa de apoyo: la actuación clínica la deciden el personal de enfermería y los médicos.",
+  "summary": "El modelo de aprendizaje automático lee patrones en la documentación que las enfermeras introducen en el historial (frecuencia de constantes, observaciones, signos de preocupación) y devuelve para cada paciente un nivel de riesgo de deterioro (bajo, medio o alto), representado con un código de color en la lista de pacientes. El riesgo se recalcula a medida que se documenta. El personal ve el indicador de color y debe decidir en su contexto qué hacer con él. El modelo es un desarrollo opaco: no muestra qué datos del paciente concreto han movido el nivel, ni una probabilidad numérica, ni una acción recomendada. Conviven el juicio clínico del profesional y la señal del sistema.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Ficha técnica del sistema predictivo",
+      "content": "El sistema clasifica a cada paciente en un nivel de riesgo de deterioro (bajo/medio/alto) mediante un modelo de aprendizaje automático entrenado sobre datos históricos de documentación de enfermería. La salida que ve el clínico es un indicador de color asociado al paciente en la lista de trabajo, que se actualiza conforme se documenta. No se acompaña de una probabilidad numérica para ese paciente, de un intervalo de confianza, ni de una explicación de qué variables han elevado o bajado el nivel en ese caso. No se muestra el rendimiento del modelo (sensibilidad, especificidad ni tasas de error) en el punto de uso. El sistema no recomienda ninguna acción concreta asociada a cada nivel: solo señala el riesgo. El nivel depende de cómo y con qué frecuencia se documenta, pero el modelo y su lógica de cálculo no se divulgan al usuario."
+    },
+    {
+      "id": "impl-clinico",
+      "kind": "technician",
+      "label": "Responsable de implantación clínica del CDS",
+      "content": "El objetivo del sistema es anticipar el deterioro y dar visibilidad temprana al equipo. Es una ayuda, no sustituye el juicio clínico: la decisión sigue siendo del profesional. La validación del modelo (su exactitud, cómo se comporta por tipo de unidad o de paciente) figura en la documentación del proyecto, pero no la mostramos en la pantalla de trabajo para no recargarla. No existe un programa formal de formación para que el personal nuevo entienda de qué se alimenta el score ni cómo interpretarlo; se aprende con el uso. El sistema no propone acciones por nivel de riesgo porque la actuación depende del contexto clínico. No registramos cuándo un clínico está de acuerdo o en desacuerdo con el nivel mostrado, ni el desenlace real del paciente frente a la predicción."
+    },
+    {
+      "id": "medico-1",
+      "kind": "end_user",
+      "label": "Médico de planta (uso diario)",
+      "content": "Cuanto más exacto compruebo que es, más confianza tengo en la herramienta; si me fallara un par de veces dejaría de mirarla. El problema es que no tengo forma de saber lo buena que es en el momento: veo un color, pero no sé con qué frecuencia acierta. Y muchas veces el sistema marca a un paciente en alto cuando yo, al verlo, no estoy preocupado, o al revés; entonces te quedas con la duda de si esto hay que creérselo o no. No me dice por qué ha puesto ese nivel a ESTE paciente, así que no puedo contrastarlo con lo que yo veo a pie de cama."
+    },
+    {
+      "id": "medico-2",
+      "kind": "end_user",
+      "label": "Médico de otra unidad",
+      "content": "Lo que de verdad me serviría es que me dijera algo del tipo: si el riesgo pasa de tal nivel, entonces conviene hacer esta actuación. Pero solo me da el color. Me deja la señal y el resto del trabajo me lo deja a mí: tengo que interpretar yo qué significa y qué se supone que debo hacer. Como no viene con ninguna recomendación ni con el motivo, a menudo lo miro por encima y sigo con mi criterio de siempre."
+    },
+    {
+      "id": "enfermera-1",
+      "kind": "end_user",
+      "label": "Enfermera (documentación)",
+      "content": "Yo soy la que mete los datos en el historial, pero no tengo claro si los estoy metiendo de la forma que el algoritmo espera. A veces pienso: no sé si estoy haciendo bien el algoritmo, igual lo que documento no le llega como debería. Nadie me ha explicado de qué se alimenta exactamente ni cómo lo que escribo cambia el nivel del paciente. Si supiera qué mira para subir el riesgo, documentaría con más cuidado esas cosas; así, a ciegas, hago mi registro normal y ya está."
+    }
+  ]
+}

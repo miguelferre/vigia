@@ -1,0 +1,44 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Secretos y datos reales: nunca en el repo
+.env
+.env.*
+*.db
+*.sqlite
+vigia-datos/
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+src/vigia/static/
+
+# Build y distribución
+build/out/
+build/embed/
+build/wheels/
+dist/
+
+# Editores y sistema
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini
+~$*
+
+# Trabajo intermedio
+_wip/
+
+# Estado de una instalación local: nunca en el repo
+vigia.lock
+vigia.log
+backups/
+*.bak
+uploads/
+artifacts/

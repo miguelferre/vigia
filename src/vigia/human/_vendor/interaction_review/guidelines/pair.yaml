@@ -1,0 +1,123 @@
+# PAIR — Google People + AI Guidebook.
+# El guidebook es narrativo y por capitulos; aqui se descompone en items atomicos
+# y enlazables (un id por patron) para poder atar hallazgos concretos.
+# Grupos = capitulos del guidebook.
+corpus: PAIR
+guidelines:
+  # --- User Needs + Defining Success ---
+  - id: PAIR-UN-1
+    group: User Needs + Defining Success
+    title: "La IA debe resolver una necesidad real del usuario"
+    description: "Usar IA solo cuando aporta valor real frente a una solución no-IA; centrarse en la necesidad, no en la tecnología."
+    good_example: "El cribado se justifica por reducir la variabilidad en la priorización de derivaciones."
+    bad_example: "Se añade IA sin evidencia de que mejore la decisión respecto al proceso previo."
+    anti_patterns:
+      - "IA como fin en sí misma, sin necesidad de usuario clara."
+
+  - id: PAIR-UN-2
+    group: User Needs + Defining Success
+    title: "Definir el reward y el coste de los errores por tipo"
+    description: "Decidir conscientemente el equilibrio entre falsos positivos y falsos negativos según su coste para las personas."
+    good_example: "Se prioriza no perder casos urgentes aun a costa de más revisiones (coste FN alto explicito)."
+    bad_example: "No se define qué error es peor; el umbral se fija sin considerar el impacto humano."
+    anti_patterns:
+      - "Equilibrio FP/FN no explicitado en el diseño de la interacción."
+
+  # --- Mental Models ---
+  - id: PAIR-MM-1
+    group: Mental Models
+    title: "Fijar expectativas correctas desde el onboarding"
+    description: "Ayudar al usuario a formar un modelo mental correcto de qué hace y qué no hace el sistema."
+    good_example: "El onboarding explica que la herramienta sugiere prioridad y que el clínico decide."
+    bad_example: "El usuario asume que el sistema decide la derivación porque nadie aclara lo contrario."
+    anti_patterns:
+      - "Onboarding ausente o que no calibra expectativas."
+      - "Modelo mental erróneo inducido por el diseño."
+
+  - id: PAIR-MM-2
+    group: Mental Models
+    title: "Comunicar capacidades y límites de forma honesta"
+    description: "Ser transparente sobre lo que el sistema puede y no puede hacer para evitar sobre/infra-confianza."
+    good_example: "Se indica explícitamente en que poblaciones el sistema es menos fiable."
+    bad_example: "Se sugiere fiabilidad uniforme cuando no la hay."
+    anti_patterns:
+      - "Sobreventa de capacidades."
+
+  # --- Explainability + Trust ---
+  - id: PAIR-ET-1
+    group: Explainability + Trust
+    title: "Explicar las salidas para construir confianza calibrada"
+    description: "Ofrecer explicaciones útiles que ayuden a decidir cuándo confiar y cuándo no."
+    good_example: "Se muestran los factores que más influyen en la prioridad y su dirección."
+    bad_example: "La puntuación se da sin ninguna explicación accionable."
+    anti_patterns:
+      - "Explicaciones ausentes o no accionables."
+
+  - id: PAIR-ET-2
+    group: Explainability + Trust
+    title: "Comunicar la incertidumbre / confianza del modelo"
+    description: "Mostrar la confianza de forma que el usuario pueda calibrar su propia decisión."
+    good_example: "La sugerencia incluye un nivel de confianza y qué hacer cuando es baja."
+    bad_example: "Todas las salidas se muestran igual de seguras, sin señal de incertidumbre."
+    anti_patterns:
+      - "Incertidumbre no comunicada."
+      - "Confianza presentada de forma que induce automation bias."
+
+  - id: PAIR-ET-3
+    group: Explainability + Trust
+    title: "Evitar la sobre-confianza / automation bias"
+    description: "Diseñar para que el usuario mantenga supervisión crítica y no acepte la IA por inercia."
+    good_example: "El flujo pide al clínico confirmar activamente y registrar su criterio."
+    bad_example: "Aceptar la sugerencia es el camino de mínima fricción por defecto."
+    anti_patterns:
+      - "Diseño que empuja a aceptar la IA sin revisión (automation bias)."
+
+  # --- Feedback + Control ---
+  - id: PAIR-FC-1
+    group: Feedback + Control
+    title: "Permitir feedback del usuario y que tenga efecto visible"
+    description: "Dar canales para corregir/valorar la salida y comunicar cómo influye en el sistema."
+    good_example: "El motivo del override se captura y se usa en la supervisión; se le dice al usuario."
+    bad_example: "El feedback no existe o desaparece sin efecto conocido."
+    anti_patterns:
+      - "Feedback sin captura o sin efecto visible."
+
+  - id: PAIR-FC-2
+    group: Feedback + Control
+    title: "Dar control: anular, ajustar y configurar"
+    description: "Permitir al usuario mantener el control (override, ajustes, límites) sobre el sistema."
+    good_example: "El clínico puede anular la prioridad y el sistema lo respeta y lo registra."
+    bad_example: "No hay forma real de anular o el override no se respeta/registra."
+    anti_patterns:
+      - "Override ausente, ignorado o no registrado."
+      - "Falta de controles de configuración."
+
+  # --- Errors + Graceful Failure ---
+  - id: PAIR-EF-1
+    group: Errors + Graceful Failure
+    title: "Diseñar para el fallo y degradar con elegancia"
+    description: "Anticipar errores del modelo y del contexto; ofrecer caminos de recuperación claros."
+    good_example: "Ante datos insuficientes el sistema lo indica y propone una vía manual."
+    bad_example: "El sistema falla en silencio o entrega una salida confiada pero errónea."
+    anti_patterns:
+      - "Fallo silencioso o sin vía de recuperación."
+
+  - id: PAIR-EF-2
+    group: Errors + Graceful Failure
+    title: "Comunicar los errores en términos del usuario"
+    description: "Cuando el sistema se equivoca o no puede actuar, explicarlo de forma útil y accionable."
+    good_example: "Mensaje claro: 'faltan datos X; no se calcula prioridad; revise manualmente'."
+    bad_example: "Error técnico opaco que el usuario no sabe interpretar."
+    anti_patterns:
+      - "Mensajes de error opacos o técnicos."
+
+  # --- Data + Evaluation ---
+  - id: PAIR-DE-1
+    group: Data + Evaluation
+    title: "Evaluar el rendimiento por subgrupos relevantes"
+    description: "Medir y vigilar el comportamiento del sistema en subgrupos para detectar disparidades."
+    good_example: "Se monitoriza rendimiento por edad/sexo y se actúa si hay disparidad."
+    bad_example: "La supervisión de subgrupos es manual, esporádica o inexistente."
+    anti_patterns:
+      - "Supervisión de subgrupos manual o ausente."
+      - "Disparidad de subgrupo no monitorizada en producción."

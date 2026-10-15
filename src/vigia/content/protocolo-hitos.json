@@ -1,0 +1,54 @@
+[
+  {
+    "descripcion": "El monitor correspondiente abre la alerta al cruzar el umbral configurado.",
+    "entregables": [
+      "Alerta registrada en el diario",
+      "Cálculo instanciado, con numerador y denominador",
+      "Grupo supervisado y grupo de referencia identificados"
+    ],
+    "key": "deteccion",
+    "orden": 1,
+    "titulo": "Detección"
+  },
+  {
+    "descripcion": "Quien atiende la alerta confirma la severidad y la pone en observación con motivo («Hacer el triaje»).",
+    "entregables": [
+      "Severidad confirmada",
+      "Puesta en observación con motivo"
+    ],
+    "key": "triaje",
+    "orden": 2,
+    "titulo": "Triaje"
+  },
+  {
+    "descripcion": "Se comprueba si la diferencia viene de los datos del lote o del comportamiento del modelo y se registran los hallazgos («Registrar la investigación»).",
+    "entregables": [
+      "Comparación con la línea base",
+      "Revisión del orden de filas, si el lote está marcado como manipulado",
+      "Consulta con la persona responsable",
+      "Hallazgos registrados con motivo"
+    ],
+    "key": "investigacion",
+    "orden": 3,
+    "titulo": "Investigación"
+  },
+  {
+    "descripcion": "Se eligen las acciones del catálogo (contener, escalar, pedir reentrenamiento, seguir vigilando…) y se registran con motivo («Registrar la decisión»); la alerta pasa a seguimiento.",
+    "entregables": [
+      "Al menos una acción del catálogo, con motivo",
+      "Actor registrado en el diario"
+    ],
+    "key": "decision",
+    "orden": 4,
+    "titulo": "Decisión"
+  },
+  {
+    "descripcion": "Se verifica en los lotes siguientes que la métrica vuelve a estar dentro del umbral.",
+    "entregables": [
+      "Evaluación de los dos lotes siguientes"
+    ],
+    "key": "seguimiento",
+    "orden": 5,
+    "titulo": "Seguimiento"
+  }
+]

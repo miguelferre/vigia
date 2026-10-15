@@ -1,0 +1,51 @@
+[
+  {
+    "id": "ES-01-fatiga-alerta",
+    "description": "Volumen alto de alertas (score 6+ en el 18% de hospitalizaciones), no silenciables ni configurables por el clinico -> fatiga de alerta.",
+    "guideline_ids": ["HAX-G8", "HAX-G3"],
+    "locus": "Frecuencia/volumen de los avisos del modelo",
+    "severity": "high"
+  },
+  {
+    "id": "ES-02-no-explica-por-que",
+    "description": "La alerta no explica por que se ha disparado ni que factores la motivan; el clinico no puede referirlos.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Contenido de la alerta (sin explicacion)",
+    "severity": "high"
+  },
+  {
+    "id": "ES-03-ui-sobrecargada-sin-tendencia",
+    "description": "UI sobrecargada, sin datos de tendencia del paciente, y la alerta no se puede reabrir una vez cerrada -> informacion contextual insuficiente para decidir.",
+    "guideline_ids": ["HAX-G4"],
+    "locus": "Pantalla de la alerta",
+    "severity": "medium"
+  },
+  {
+    "id": "ES-04-acciones-limitadas-puenteo",
+    "description": "El conjunto de acciones es demasiado limitado y el clinico a menudo puentea la alerta cuando choca con su valoracion (override de hecho, no soportado).",
+    "guideline_ids": ["HAX-G9", "HAX-G8"],
+    "locus": "Acciones disponibles ante la alerta",
+    "severity": "medium"
+  },
+  {
+    "id": "ES-05-vpp-bajo-incertidumbre-no-comunicada",
+    "description": "VPP del 12% (1 de cada 8) no comunicado: la alerta se presenta igual sin senalar su baja fiabilidad, dificultando calibrar la confianza.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Presentacion de la alerta sin indicador de fiabilidad",
+    "severity": "high"
+  },
+  {
+    "id": "ES-06-temporizacion-canal-sin-control",
+    "description": "Temporizacion/canal disruptivos (alertas en el movil o en la habitacion, en urgencias) sin que el clinico pueda configurar donde/cuando recibirlas.",
+    "guideline_ids": ["HAX-G3", "HAX-G17"],
+    "locus": "Canal y momento de entrega de la alerta",
+    "severity": "medium"
+  },
+  {
+    "id": "ES-07-onboarding-confianza-miscalibrada",
+    "description": "Confianza miscalibrada segun experiencia (novatos vs expertos la viven distinto) y diseno que empuja a actuar en vez de servir de apoyo (riesgo de sobre/infra-confianza).",
+    "guideline_ids": ["HAX-G1", "PAIR-ET-3"],
+    "locus": "Encaje del modelo en el flujo y formacion del clinico",
+    "severity": "medium"
+  }
+]

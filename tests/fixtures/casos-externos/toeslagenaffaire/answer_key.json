@@ -1,0 +1,82 @@
+[
+  {
+    "id": "TO-01-sin-explicacion-del-porque-al-ciudadano",
+    "description": "El ciudadano recibe la marca de riesgo y la reclamacion de la deuda sin que se le comunique que indicadores dispararon su puntuacion: la decision es una caja negra para la persona afectada, que no puede saber por que fue senalada.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Notificacion a la familia (marca sin explicacion del porque)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "TO-02-opacidad-tambien-para-el-operador",
+    "description": "El funcionario que tramita el caso ve la marca de riesgo pero no tiene acceso a ningun detalle sobre que informacion se uso para asignarla: el operador no puede entender ni cuestionar el motivo antes de actuar, asi que ejecuta una decision que tampoco comprende.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-3"],
+    "locus": "Vista del caso para el funcionario (marca opaca, sin el por que)",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "TO-03-imposibilidad-de-apelar-y-defenderse",
+    "description": "No hay un canal real para impugnar la marca con pruebas y que alguien revise el caso de verdad; la persona afectada no puede corregir, anular ni contestar la decision automatica que la clasifica como defraudadora.",
+    "guideline_ids": ["PAIR-FC-2", "HAX-G9"],
+    "locus": "Ausencia de via de apelacion/correccion efectiva",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "TO-04-inversion-de-la-carga-de-la-prueba",
+    "description": "Al marcar a la familia como sospechosa, es ella quien debe demostrar que no defrauda en lugar de la administracion demostrar que si: el diseno presume culpabilidad y traslada la carga de la prueba a la persona mas debil de la relacion.",
+    "guideline_ids": ["PAIR-UN-2", "PAIR-EF-1"],
+    "locus": "Reparto de la carga de la prueba en el procedimiento",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "TO-05-indicadores-sensibles-no-transparentes",
+    "description": "La puntuacion usa variables sensibles (nacionalidad, doble nacionalidad, apellido extranjero, familia monoparental) sin transparencia ni justificacion comunicada; el uso de proxies protegidos no se publica ni se audita frente al ciudadano.",
+    "guideline_ids": ["HAX-G6", "PAIR-DE-1"],
+    "locus": "Variables del modelo (indicadores sensibles ocultos)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "TO-06-marca-sin-incertidumbre-ni-rendimiento",
+    "description": "La salida es una marca binaria de riesgo sin probabilidad individual, sin intervalo de error y sin comunicar el rendimiento del modelo: se presenta con autoridad de hecho objetivo y no permite calibrar cuanto fiarse de ella.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Formato de la salida (marca sin incertidumbre ni rendimiento)",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "TO-07-modelo-opaco-no-publicado",
+    "description": "La logica de ponderacion y la propia existencia de los indicadores no se publican; ni el afectado ni quien tramita pueden inspeccionar como se calcula la puntuacion, lo que impide impugnar el metodo.",
+    "guideline_ids": ["HAX-G11", "PAIR-MM-2"],
+    "locus": "Naturaleza opaca del calculo (logica no publicada)",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "TO-08-todo-o-nada-sin-degradacion",
+    "description": "Una irregularidad formal menor (una firma omitida, un documento tarde) basta para clasificar el caso como fraude integro y reclamar toda la ayuda, sin tramo intermedio de regularizacion: el sistema no degrada con elegancia ante un error pequeno.",
+    "guideline_ids": ["PAIR-EF-1", "HAX-G10"],
+    "locus": "Logica todo-o-nada ante irregularidades menores",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "TO-09-automation-bias-del-funcionario",
+    "description": "El funcionario actua sobre la marca de riesgo sin poder revisarla criticamente (no ve el motivo ni puede consultarlo antes de abrir la investigacion): el diseno empuja a ejecutar la decision de la maquina por inercia, sin supervision humana efectiva.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G9"],
+    "locus": "Encaje de la marca en la actuacion del funcionario",
+    "severity": "high",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "TO-10-perdida-de-confianza-por-trato-opaco",
+    "description": "El trato (acusacion sin explicar de que, sin posibilidad de ser escuchado) erosiona la confianza de la persona en la institucion; el sistema no ajusta su comunicacion a las normas sociales esperables en una relacion ciudadano-administracion.",
+    "guideline_ids": ["HAX-G5", "PAIR-MM-1"],
+    "locus": "Comunicacion y trato al ciudadano en el procedimiento",
+    "severity": "medium",
+    "revealed_by": "user_only"
+  }
+]

@@ -1,0 +1,223 @@
+# Mapeo orientativo de las guidelines HAX-18 / PAIR a marco normativo.
+#
+# PARA QUE: convierte un hallazgo "academico" (incumple HAX-G2) en lenguaje que el
+# comprador de gobernanza/calidad reconoce y puede meter en su expediente de
+# conformidad: "esto toca el Art. 13 del AI Act y la subcategoria MEASURE 2.9 del
+# NIST AI RMF". El informe deja de ser una critica de diseno y pasa a situarse en
+# el marco regulatorio.
+#
+# AVISO (no es dictamen legal). Este mapeo es una AYUDA de situacion, no una
+# opinion juridica. La aplicabilidad real del AI Act depende de si el sistema es de
+# alto riesgo (Anexo III), del rol (proveedor/responsable del despliegue) y del
+# caso concreto. Antes de usarlo como evidencia de conformidad formal, revisar con
+# asesoria juridica. Los articulos citados son del texto publicado del Reglamento.
+
+frameworks:
+  eu_ai_act:
+    name: "Reglamento (UE) 2024/1689 (EU AI Act)"
+    note: >-
+      Artículos centrales para la capa de interacción: Art. 13 (transparencia e
+      información al responsable del despliegue), Art. 14 (supervisión humana; el
+      14(4)(b) nombra el automation bias de forma explícita), Art. 15 (precisión y
+      robustez), Art. 26 (obligaciones del responsable del despliegue), Art. 50
+      (transparencia frente a la persona), Art. 86 (derecho a explicación de
+      decisiones individuales), Art. 9/10/72 (gestión de riesgo, datos, vigilancia).
+  nist_ai_rmf:
+    name: "NIST AI Risk Management Framework 1.0 (2023)"
+    note: >-
+      Funciones GOVERN / MAP / MEASURE / MANAGE y características de IA confiable
+      (Accountable & Transparent, Explainable & Interpretable, Valid & Reliable,
+      Safe, Fair - with harmful bias managed).
+  interaction_risk:
+    name: "Capa de riesgo de interacción humano-IA (ext. Eticas AI Risk Taxonomy, CC-BY 4.0)"
+    note: >-
+      Situa cada hallazgo en un concepto de RIESGO de la capa de interacción
+      (automation bias, infra-confianza, calibración de confianza, override,
+      capacidad de supervisión, pérdida de agencia) en vez de solo en artículos.
+      Es una extensión propia de la Eticas AI Risk Taxonomy anclada al Art. 14; ver
+      docs/reference/eticas_extensión.yaml.
+  eticas:
+    name: "Eticas AI Risk Taxonomy v3.0.0 (CC-BY 4.0) - hub a ~18 marcos"
+    note: >-
+      NIVEL 2: anclar una guideline a un concepto de riesgo de la Eticas AI Risk
+      Taxonomy hace que el hallazgo herede por transitividad los ~18 marcos que ese
+      concepto ya mapea (ISO/IEC 42001, MIT AI Risk Repository, OWASP Agentic, DPV,
+      IBM Atlas, OECD, IEEE, CoE, TC260...). Datos vendored en guidelines/eticas/
+      (ver ATTRIBUTION). Solo se anclan guidelines con match fuerte a conceptos
+      maduros de Eticas; la capa de interacción propia (automation bias, agencia) no
+      tiene concepto en Eticas y se queda en la vista interaction_risk.
+
+# Por cada guideline: articulos del AI Act, subcategorias/caracteristicas NIST, el
+# concepto de riesgo de interaccion (si aplica), el/los concepto(s) de la taxonomia
+# Eticas al que ancla (nivel 2, si el match es fuerte) y una nota. Un hallazgo hereda
+# los refs de todas las guidelines que cita.
+map:
+  # --- HAX-18 ---
+  HAX-G1:
+    eu_ai_act: ["Art. 13(3)(b)(iv)", "Art. 50(1)"]
+    nist_ai_rmf: ["MAP 1.1", "Accountable & Transparent"]
+    interaction_risk: ["Oversight effectiveness & capacity"]
+    eticas: ["transparency-communication"]
+    nota: "Dejar claro qué hace el sistema = informar de capacidades/límites y de que se interactúa con IA."
+  HAX-G2:
+    eu_ai_act: ["Art. 13(3)(b)(ii)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "MEASURE 2.13", "Valid & Reliable"]
+    interaction_risk: ["Automation bias & over-reliance", "Under-reliance & disuse", "Confidence-reliability calibration"]
+    eticas: ["transparency-communication"]
+    nota: "Comunicar cómo de bien lo hace = niveles de precisión/métricas declarados y su comunicación."
+  HAX-G3:
+    eu_ai_act: ["Art. 14(4)(a)"]
+    nist_ai_rmf: ["MAP 3.4", "Safe"]
+    nota: "Temporizar según contexto = supervisión humana adecuada al uso y al contexto operativo."
+  HAX-G4:
+    eu_ai_act: ["Art. 13(1)", "Art. 14(4)(c)"]
+    nist_ai_rmf: ["MEASURE 2.8", "Explainable & Interpretable"]
+    interaction_risk: ["Oversight effectiveness & capacity"]
+    eticas: ["transparency-explainability-group"]
+    nota: "Información contextual relevante = salida interpretable en el punto de uso."
+  HAX-G5:
+    eu_ai_act: ["Art. 14(4)", "Art. 1"]
+    nist_ai_rmf: ["MAP 1.1", "Safe"]
+    nota: "Normas sociales = uso conforme a dignidad y contexto; supervisión que preserva al usuario."
+  HAX-G6:
+    eu_ai_act: ["Art. 10(2)(f-g)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.11", "Fair - with harmful bias managed"]
+    eticas: ["bias-fairness"]
+    nota: "Mitigar sesgos sociales = gobernanza de datos frente al sesgo y evaluación de equidad."
+  HAX-G7:
+    eu_ai_act: ["Art. 14(4)(d)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    nota: "Invocación eficiente = poder decidir usar la IA cuando aporta (parte del control humano)."
+  HAX-G8:
+    eu_ai_act: ["Art. 14(4)(d)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    interaction_risk: ["Override & hand-off friction"]
+    nota: "Descarte eficiente = poder ignorar/descartar la salida (disregard/override)."
+  HAX-G9:
+    eu_ai_act: ["Art. 14(4)(d)", "Art. 26(5)"]
+    nist_ai_rmf: ["MANAGE 4.1", "MAP 3.5"]
+    interaction_risk: ["Override & hand-off friction"]
+    eticas: ["right-to-explanation-contestation"]
+    nota: "Corrección eficiente = intervenir/corregir la salida; el responsable del despliegue supervisa."
+  HAX-G10:
+    eu_ai_act: ["Art. 14(4)(c)", "Art. 15(1)"]
+    nist_ai_rmf: ["MANAGE 2.1", "Valid & Reliable"]
+    interaction_risk: ["Confidence-reliability calibration"]
+    eticas: ["reliability"]
+    nota: "Acotar ante la duda = abstención/degradación cuando la fiabilidad no da; robustez."
+  HAX-G11:
+    eu_ai_act: ["Art. 13(1)", "Art. 86(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "Explainable & Interpretable"]
+    interaction_risk: ["Oversight effectiveness & capacity"]
+    eticas: ["transparency-explainability-group"]
+    nota: "Explicar el porqué = interpretabilidad de la salida y derecho a explicación de la decisión."
+  HAX-G12:
+    eu_ai_act: ["Art. 14(4)(a)"]
+    nist_ai_rmf: ["MAP 3.4"]
+    nota: "Recordar interacciones = continuidad que sostiene la supervisión humana efectiva."
+  HAX-G13:
+    eu_ai_act: ["Art. 72(1)"]
+    nist_ai_rmf: ["MANAGE 4.1"]
+    nota: "Aprender del uso = alimentar la vigilancia poscomercialización con el comportamiento real."
+  HAX-G14:
+    eu_ai_act: ["Art. 72(1)", "Art. 15(1)"]
+    nist_ai_rmf: ["MANAGE 4.1", "GOVERN 1.5"]
+    eticas: ["lack-of-change-management"]
+    nota: "Actualizar con cautela = control de cambios sin degradar precisión/robustez."
+  HAX-G15:
+    eu_ai_act: ["Art. 14(4)", "Art. 72(1)"]
+    nist_ai_rmf: ["GOVERN 5.1", "MANAGE 4.1"]
+    nota: "Feedback granular = canal de retroalimentación del usuario que retroalimenta el sistema."
+  HAX-G16:
+    eu_ai_act: ["Art. 13(1)", "Art. 14(4)(c)"]
+    nist_ai_rmf: ["MEASURE 2.8"]
+    eticas: ["transparency-communication"]
+    nota: "Transmitir consecuencias = que el usuario entienda el efecto de aceptar/anular la salida."
+  HAX-G17:
+    eu_ai_act: ["Art. 14(4)(d-e)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    interaction_risk: ["Override & hand-off friction"]
+    nota: "Controles globales = anular, ajustar y (si procede) parar el sistema (stop)."
+  HAX-G18:
+    eu_ai_act: ["Art. 13(1)", "Art. 72(1)"]
+    nist_ai_rmf: ["GOVERN 1.5"]
+    eticas: ["transparency-communication"]
+    nota: "Notificar cambios = transparencia sobre actualizaciones que alteran el comportamiento."
+
+  # --- PAIR ---
+  PAIR-UN-1:
+    eu_ai_act: ["Art. 9(2)"]
+    nist_ai_rmf: ["MAP 1.1", "GOVERN 1.1"]
+    nota: "Necesidad real = encaje/propósito del sistema; entra en la gestión de riesgo y el mapeo de contexto."
+  PAIR-UN-2:
+    eu_ai_act: ["Art. 9(2)", "Art. 14(4)"]
+    nist_ai_rmf: ["MAP 1.1", "MEASURE 2.7"]
+    interaction_risk: ["Oversight effectiveness & capacity"]
+    nota: "Coste de errores por tipo (FP/FN) = análisis de riesgo del impacto humano de cada error."
+  PAIR-MM-1:
+    eu_ai_act: ["Art. 13(1)", "Art. 26(2)"]
+    nist_ai_rmf: ["MAP 3.4"]
+    eticas: ["transparency-communication"]
+    nota: "Expectativas desde el onboarding = personas de supervisión competentes y formadas."
+  PAIR-MM-2:
+    eu_ai_act: ["Art. 13(3)(b)(iv)"]
+    nist_ai_rmf: ["Accountable & Transparent"]
+    interaction_risk: ["Automation bias & over-reliance", "Under-reliance & disuse"]
+    eticas: ["transparency-communication"]
+    nota: "Capacidades y límites honestos = información veraz de alcance y limitaciones al usuario."
+  PAIR-ET-1:
+    eu_ai_act: ["Art. 13(1)", "Art. 86(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "Explainable & Interpretable"]
+    interaction_risk: ["Under-reliance & disuse"]
+    eticas: ["right-to-explanation-contestation"]
+    nota: "Explicar salidas para confianza calibrada = interpretabilidad + derecho a explicación."
+  PAIR-ET-2:
+    eu_ai_act: ["Art. 13(3)(b)(ii-iii)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.9", "Valid & Reliable"]
+    interaction_risk: ["Confidence-reliability calibration"]
+    eticas: ["reliability"]
+    nota: "Comunicar incertidumbre = niveles de precisión y sus circunstancias comunicados."
+  PAIR-ET-3:
+    eu_ai_act: ["Art. 14(4)(b)"]
+    nist_ai_rmf: ["MEASURE 2.8", "MAP 3.5"]
+    interaction_risk: ["Automation bias & over-reliance"]
+    nota: "Evitar sobre-confianza = el 14(4)(b) obliga a medidas contra el automation bias de forma explícita."
+  PAIR-FC-1:
+    eu_ai_act: ["Art. 14(4)", "Art. 72(1)"]
+    nist_ai_rmf: ["GOVERN 5.1", "MANAGE 4.1"]
+    interaction_risk: ["Override & hand-off friction"]
+    nota: "Feedback con efecto visible = canal de retroalimentación que se integra en la vigilancia."
+  PAIR-FC-2:
+    eu_ai_act: ["Art. 14(4)(d-e)"]
+    nist_ai_rmf: ["MAP 3.5"]
+    interaction_risk: ["Override & hand-off friction"]
+    eticas: ["right-to-explanation-contestation"]
+    nota: "Control (anular/ajustar/configurar) = núcleo de la supervisión humana efectiva."
+  PAIR-EF-1:
+    eu_ai_act: ["Art. 15(1)", "Art. 9(2)"]
+    nist_ai_rmf: ["MANAGE 2.1", "Safe"]
+    eticas: ["reliability"]
+    nota: "Diseñar para el fallo = robustez y degradación segura ante error, parte del riesgo."
+  PAIR-EF-2:
+    eu_ai_act: ["Art. 13(1)", "Art. 86(1)"]
+    nist_ai_rmf: ["Explainable & Interpretable"]
+    eticas: ["right-to-explanation-contestation"]
+    nota: "Comunicar errores en términos del usuario = mensajes interpretables por la persona afectada."
+  PAIR-DE-1:
+    eu_ai_act: ["Art. 10(2)(f-g)", "Art. 15(1)"]
+    nist_ai_rmf: ["MEASURE 2.11", "Fair - with harmful bias managed"]
+    interaction_risk: ["Oversight effectiveness & capacity"]
+    eticas: ["disparate-impact-protected-groups"]
+    nota: "Evaluar por subgrupos = detección de sesgo por grupos y precisión desagregada."
+
+  # --- IX (extension propia: agencia/supervision no cubierta por HAX/PAIR ni por Eticas) ---
+  IX-1:
+    eu_ai_act: ["Art. 14(1)", "Art. 14(4)(d-e)"]
+    nist_ai_rmf: ["MAP 3.5", "GOVERN 1.1"]
+    interaction_risk: ["Loss of human agency & autonomy"]
+    nota: "Human-out-of-the-loop: decisión sin intervención humana significativa o supresión de discreción. Art. 14 (supervisión humana) y, para decisión únicamente automatizada con efecto significativo, Art. 22 del RGPD."
+  IX-2:
+    eu_ai_act: ["Art. 14(4)(b)", "Art. 26(2)", "Art. 72(1)"]
+    nist_ai_rmf: ["MEASURE 2.8", "MANAGE 4.1"]
+    interaction_risk: ["Deskilling & erosion of human judgment"]
+    nota: "Deskilling: el Art. 14(4)(b) obliga a medidas contra el automation bias; su forma longitudinal es la erosión del criterio, que solo se detecta midiendo el rendimiento humano-solo (Art. 72, vigilancia poscomercialización) y exige competencia del personal de supervisión (Art. 26(2)). Sin ancla Eticas: la taxonomía no tiene un concepto maduro de deskilling."

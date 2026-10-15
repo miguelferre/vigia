@@ -1,0 +1,65 @@
+[
+  {
+    "id": "MO-01-item-sin-contexto",
+    "description": "El item flagueado llega al revisor (modelo o humano) sin contexto suficiente (idioma, hilo, intencion); la unidad de decision carece de la informacion minima para juzgar bien.",
+    "guideline_ids": ["HAX-G4", "PAIR-ET-1"],
+    "locus": "Informacion presentada en la cola de revision",
+    "severity": "high"
+  },
+  {
+    "id": "MO-02-no-explica-regla",
+    "description": "El usuario no sabe que regla concreta violo; la notificacion no da una razon inteligible que le permita corregir o apelar con fundamento.",
+    "guideline_ids": ["HAX-G11", "PAIR-EF-2"],
+    "locus": "Contenido de la notificacion de sancion",
+    "severity": "high"
+  },
+  {
+    "id": "MO-03-no-revela-si-ia",
+    "description": "No se revela si la decision la tomo una IA o un humano; el usuario no puede calibrar cuanta confianza darle ni exigir revision humana.",
+    "guideline_ids": ["HAX-G1", "HAX-G11"],
+    "locus": "Transparencia sobre el agente que decide",
+    "severity": "medium"
+  },
+  {
+    "id": "MO-04-apelacion-sin-humano",
+    "description": "La apelacion no llega a un humano o se cierra sin recurso (negativas en <1 min, texto identico); el override del usuario es ilusorio y los falsos positivos quedan congelados.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-2"],
+    "locus": "Flujo de apelacion del usuario",
+    "severity": "high"
+  },
+  {
+    "id": "MO-05-cuota-tiempo-insuficiente",
+    "description": "La cuota de volumen y el tiempo cronometrado dejan segundos por item; el ritmo impuesto degrada la calidad de la decision humana que justifica tener humanos en el bucle.",
+    "guideline_ids": ["HAX-G3", "HAX-G8"],
+    "locus": "Ritmo/cuota del flujo de revision",
+    "severity": "medium"
+  },
+  {
+    "id": "MO-06-metrica-exactitud-proxy",
+    "description": "La 'exactitud' se mide contra auditores internos, no contra el usuario; el feedback premia coincidir con el auditor y distorsiona el modelo mental de que es una buena decision.",
+    "guideline_ids": ["HAX-G15", "PAIR-FC-1"],
+    "locus": "Metrica de feedback al moderador",
+    "severity": "medium"
+  },
+  {
+    "id": "MO-07-politicas-cambiantes-onboarding",
+    "description": "El manual de politicas cambia constantemente y a veces se contradice, con formacion insuficiente; sin un modelo mental estable, la aplicacion de criterios es inconsistente.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Onboarding y guia de politicas del moderador",
+    "severity": "medium"
+  },
+  {
+    "id": "MO-08-sobreconfianza-modelo",
+    "description": "Si la interfaz presenta el veredicto del modelo como casi cierto y no da medios para discrepar de forma calibrada, el humano deja de ser un control real y solo ratifica al sistema.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Presentacion de la prediccion del modelo al moderador",
+    "severity": "medium"
+  },
+  {
+    "id": "MO-09-sobreaplicacion-sin-abstencion",
+    "description": "El sistema retira automaticamente contenido legitimo en zonas de baja certeza en vez de pedir contexto o derivar a un humano; ejecuta acciones irreversibles sin abstenerse ante la duda.",
+    "guideline_ids": ["HAX-G10", "PAIR-EF-1"],
+    "locus": "Umbral de retirada automatica sin derivacion",
+    "severity": "high"
+  }
+]

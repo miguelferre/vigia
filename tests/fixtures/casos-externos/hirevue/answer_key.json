@@ -1,0 +1,51 @@
+[
+  {
+    "id": "HV-01-resultado-opaco-al-afectado",
+    "description": "Al candidato (usuario afectado) no se le muestra su puntuacion ni que se valoro; el resultado de la IA es opaco para quien lo sufre.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Lo que recibe el candidato tras la entrevista (paso/rechazo, sin score ni motivos)",
+    "severity": "high"
+  },
+  {
+    "id": "HV-02-caja-negra-sin-base",
+    "description": "Caja negra: no hay acceso a los factores, la logica ni las tecnicas de la decision; la base de una evaluacion concreta es opaca incluso para el empleador y a veces para el propio proveedor.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Composicion de la 'employability score' (no expuesta)",
+    "severity": "high"
+  },
+  {
+    "id": "HV-03-sin-impugnar-ni-optar-fuera",
+    "description": "El afectado no tiene via para impugnar/corregir la decision ni para optar por no ser evaluado por la maquina (no hay correccion ni apelacion).",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-2"],
+    "locus": "Ausencia de canal de correccion/apelacion para el candidato",
+    "severity": "high"
+  },
+  {
+    "id": "HV-04-automation-bias-reclutador",
+    "description": "El diseno empuja al reclutador a filtrar por el ranking de la IA sin revision independiente: sesgo de automatizacion / sobre-confianza en la puntuacion.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Flujo del reclutador: candidatos ordenados por score, filtrar por ranking",
+    "severity": "high"
+  },
+  {
+    "id": "HV-05-sin-explicacion-accionable",
+    "description": "No hay explicacion accionable: el candidato no sabe como se le valoro ni como podria mejorar. [Granularidad fina: fusionable con HV-02.]",
+    "guideline_ids": ["PAIR-ET-1", "HAX-G11"],
+    "locus": "Feedback al candidato (inexistente mas alla de paso/rechazo)",
+    "severity": "medium"
+  },
+  {
+    "id": "HV-06-onboarding-expectativas-miscalibradas",
+    "description": "El onboarding fija expectativas erroneas: la guia dice que es 'como una entrevista normal', sin explicar que evalua una IA ni como, induciendo un modelo mental incorrecto.",
+    "guideline_ids": ["HAX-G1", "PAIR-MM-1"],
+    "locus": "Guia previa al candidato",
+    "severity": "medium"
+  },
+  {
+    "id": "HV-07-sin-controles-ni-auditabilidad",
+    "description": "Opacidad como secreto comercial: sin auditoria externa independiente ni controles para el afectado sobre como se le evalua.",
+    "guideline_ids": ["HAX-G17", "PAIR-FC-2"],
+    "locus": "Gobernanza del sistema (no auditable, sin controles de usuario)",
+    "severity": "medium"
+  }
+]

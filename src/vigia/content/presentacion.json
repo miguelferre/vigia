@@ -1,0 +1,174 @@
+{
+  "diapositivas": [
+    {
+      "consultado": null,
+      "diagrama": "El logo de Vigía (círculo morado, anillo blanco, pupila morada) y, alrededor, el ciclo en tres pasos con los rótulos fuera del triángulo: el modelo decide (arriba), Vigía mide (equidad, calidad, deriva) y alguien actúa; las tres flechas en doble sentido.",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 1,
+      "kicker": "Presentación",
+      "notas": "Presentar el orden y el tiempo; la demo es la mitad de la sesión.",
+      "puntos": [
+        "¿Por qué un modelo que ya está en uso necesita vigilancia?",
+        "¿Qué hace Vigía para dársela?",
+        "Un caso completo con datos sintéticos"
+      ],
+      "titulo": "Vigía: vigilancia de modelos de IA"
+    },
+    {
+      "consultado": null,
+      "diagrama": "Dos cajas, «Datos de entrenamiento · fijos» y «Población real · cambia», con la flecha «decide sobre» entre ellas sin pisar texto; debajo, una gráfica con el tiempo en horizontal: la línea del modelo es horizontal (no cambia) y la de la población real oscila y se aleja.",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 2,
+      "kicker": "Naturaleza del modelo",
+      "notas": "Objeción habitual: «el proveedor lo certifica y declara un 95 % de acierto, ¿qué más hace falta?». Ese 95 % se midió sobre otra población y en otra fecha.",
+      "puntos": [
+        "Aprende con datos de entrenamiento y decide frente a datos reales",
+        "Nunca acierta al 100 %",
+        "Lo importante es detectar a tiempo cuándo deja de acertar"
+      ],
+      "titulo": "Un modelo comprado no es un modelo validado"
+    },
+    {
+      "consultado": null,
+      "diagrama": "Tres tarjetas, una por monitor, con el icono, el nombre, qué mide («Trato entre grupos», «Acierto frente a la etiqueta real», «Parecido con la línea base») y la pregunta que responde («¿Trata distinto a un grupo?», «¿Acierta menos que antes?», «¿Han cambiado los datos?»).",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 3,
+      "kicker": "Naturaleza del modelo",
+      "notas": "Si preguntan «¿una alerta significa que el modelo falla?»: no siempre; en equidad significa que trata distinto a un subgrupo aunque el acierto global se mantenga.",
+      "puntos": [
+        "Equidad: trata distinto a un grupo",
+        "Calidad: acierta menos",
+        "Deriva: los datos ya no se parecen a los de entrenamiento"
+      ],
+      "titulo": "Tres formas de fallar sin que nadie lo vea"
+    },
+    {
+      "consultado": null,
+      "diagrama": "A la izquierda, «Personas, aparentemente homogéneas» como puntos iguales; a la derecha, «Las mismas personas, clasificadas por subgrupos», con dos subgrupos en magenta y verde, cada uno con su etiqueta al lado («mayores de 70» y «con incidencias previas»); sin llave inferior.",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 4,
+      "kicker": "Naturaleza del modelo",
+      "notas": "Objeción: «¿la herramienta encuentra sola los subgrupos?». No: el grupo supervisado se declara; la deriva por característica y la explicabilidad ayudan a descubrir cuáles mirar. En la demo la edad no es latente (el modelo la usa); lo latente es la campaña de captación, que nadie declaró: cambia quién llega y el modelo no lo sabe.",
+      "puntos": [
+        "Una variable latente es un factor que pesa en la decisión del modelo aunque el modelo no la use como dato de entrada",
+        "Actúa por debajo: parte a las personas en subgrupos que el modelo trata distinto, sin que la métrica global se mueva",
+        "Ejemplos: mayores de 70 años, personas con varias incidencias previas, un centro con otro equipo"
+      ],
+      "titulo": "Variables latentes"
+    },
+    {
+      "consultado": null,
+      "diagrama": "Dos líneas de tiempo paralelas: con vigilancia, alerta en la semana 1 y afectados en decenas; sin vigilancia, detección externa meses después y afectados en cientos o miles.",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 5,
+      "kicker": "Naturaleza del modelo",
+      "notas": "Enlaza con la demo: es exactamente lo que se va a ver. Las cifras vienen del caso sintético de la demo, no de un incidente real.",
+      "puntos": [
+        "Sin las herramientas adecuadas, el error puede permanecer oculto",
+        "Cuando algo se aparta de la referencia, importan el cuándo y el por qué",
+        "Reducir el tiempo de detección reduce el impacto del error"
+      ],
+      "titulo": "Gobernar de forma activa"
+    },
+    {
+      "consultado": "2026-09-16",
+      "diagrama": "Una tarjeta, «Reglamento de IA», con lo que pide a quien despliega: vigilar el funcionamiento, supervisión humana competente y conservar registros, cada una con su icono.",
+      "estado": null,
+      "frase": null,
+      "fuente": [
+        {
+          "texto": "Reglamento (UE) 2024/1689, texto consolidado tras el Reglamento (UE) 2026/1744, eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng",
+          "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/2026-07-27/eng"
+        }
+      ],
+      "id": 6,
+      "kicker": "Regulación",
+      "notas": "Comprar un modelo certificado no libera a la organización de vigilarlo; es el mensaje que más cala. El Reglamento es de aplicación directa. Artículos de detalle, por si preguntan: responsable del despliegue (art. 26: instrucciones, supervisión humana, vigilancia, registros); proveedor (vigilancia poscomercialización, art. 72; incidentes graves, art. 73).",
+      "puntos": [
+        "Reglamento de IA: quien despliega vigila el funcionamiento",
+        "Garantiza una supervisión humana competente",
+        "Conserva registros"
+      ],
+      "titulo": "La ley ya lo exige a quien despliega, no solo a quien fabrica"
+    },
+    {
+      "consultado": null,
+      "diagrama": "Tres columnas: «Tu entorno» (modelo en producción, no se toca; datos para medir; Registro de uso), «Vigía, en local» (Línea base, 4 monitores, Capa humana, Diario), «Salida» (cuadro de mando, alertas, diario exportable); flechas entre columnas y, debajo, la banda «Qué viaja: salidas y variables, desidentificadas · Qué no viaja: los datos identificativos».",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 7,
+      "kicker": "Qué es Vigía",
+      "notas": "«Local» responde a la primera pregunta de toda organización: los datos no salen del equipo.",
+      "puntos": [
+        "Los modelos se quedan donde están",
+        "A Vigía solo viajan salidas y variables, desidentificadas",
+        "Línea base propia, cuatro monitores técnicos y la capa humana",
+        "Todo en local: nada sale del equipo"
+      ],
+      "titulo": "Un vigilante local para los modelos que ya usas"
+    },
+    {
+      "consultado": null,
+      "diagrama": "Dos capas, técnica (equidad, calidad, deriva) y humana (correcciones, notificaciones, uso), que convergen en «una conclusión mejor»; de ella salen tres acciones: «Problema del modelo: contener, reequilibrar», «Problema de uso: formación, protocolo», «Sin problema: seguir vigilando».",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 8,
+      "kicker": "Lo diferencial",
+      "notas": "Objeción: «¿compensa frente al criterio profesional?». El criterio individual no deja rastro ni escala; la plataforma agrega la señal de muchos casos y deja evidencia auditable. El feedback de quien usa el modelo llega con el registro de uso.",
+      "puntos": [
+        "Las plataformas comerciales miden el modelo",
+        "Vigía además recoge la señal de quien lo usa: cuándo corrige y qué notifica",
+        "Cruzar las dos capas separa un problema del modelo de un problema de uso",
+        "Si corrigen más y baja la calidad, cambió el modelo; si no cambia, cambió la práctica"
+      ],
+      "titulo": "Vigía pregunta a quien lo usa"
+    },
+    {
+      "consultado": null,
+      "diagrama": "Entradas (predicciones, etiquetas reales, registro de uso, desenlaces) → Vigía en local (carpeta del usuario) → salidas (cuadro, alertas, diario exportable, API abierta, agente de IA por el servidor MCP).",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 9,
+      "kicker": "Cómo funciona",
+      "notas": "Objeción: «¿detecta sola qué grupo está en riesgo?». No: el grupo supervisado y los umbrales se configuran; la explicabilidad ayuda a refinarlos después.",
+      "puntos": [
+        "Qué entra: predicciones, etiquetas reales y registro de uso, desidentificados",
+        "Qué sale: cuadro de mando, alertas con protocolo y diario exportable",
+        "Dónde vive: en local, en una carpeta de tu equipo",
+        "Quién la opera: la interfaz, la línea de comandos y un agente de IA por el servidor MCP"
+      ],
+      "titulo": "Qué entra, qué sale y dónde vive"
+    },
+    {
+      "consultado": null,
+      "diagrama": "El logo de Vigía y una flecha que baja hasta el botón «Ejecutar la demo», montado debajo del diagrama.",
+      "estado": null,
+      "frase": null,
+      "fuente": [],
+      "id": 10,
+      "kicker": "Demo",
+      "notas": "El responsable del modelo configura monitores y umbrales, hace el triaje de las alertas y sigue el protocolo. Quien usa el modelo aporta su criterio y, con el registro de uso, su feedback. Auditoría lee el diario y lo exporta. Aquí termina la presentación. «Ejecutar la demo» abre el paso 0 de la demo.",
+      "puntos": [
+        "Registrar un modelo",
+        "Cargar su línea base",
+        "Recibir casos nuevos",
+        "Simular un evento de alerta",
+        "Seguir la pista hasta la causa y actuar"
+      ],
+      "titulo": "Ahora, un caso de uso"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+# IX — Interaction-layer eXtension (corpus propio).
+# Riesgos de la CAPA DE INTERACCION humano-IA que ni HAX-18 ni PAIR capturan como
+# item propio. Motivado por la PoC de crosswalk sobre golden reales (robodebt,
+# arkansas): los casos de "humano fuera del lazo" (RD-05, AR-02, AR-04) quedaban
+# diluidos en automation-bias/override porque ningun guideline los distinguia.
+# Ver docs/reference/eticas_extension.yaml (rama human-ai-interaction, sub loss-of-agency).
+corpus: IX
+guidelines:
+  - id: IX-1
+    group: "Supervisión humana y agencia"
+    title: "Conservar la agencia humana efectiva sobre la decisión (Human-out-of-the-loop)"
+    description: >-
+      Riesgo de que el sistema elimine estructuralmente la capacidad humana de
+      decidir: una decisión consecuente se automatiza sin intervención humana
+      significativa, o se suprime por diseño la discreción del rol humano. El daño
+      es la ausencia de agencia en sí, con independencia de si cada salida individual
+      es correcta y supervisable. Se distingue de la sobre-confianza (el humano está
+      presente pero delega) y de la falta de capacidad de supervisión (presente pero
+      sin medios): aquí el humano está ausente o es decorativo por diseño.
+    good_example: "El clínico puede anular la asignación algorítmica y su criterio prevalece y queda registrado."
+    bad_example: "El resultado del cuestionario fija el nivel de cuidado de forma automática; la enfermera pierde toda discreción, defendido como 'quitar subjetividad' (Arkansas ARChoices)."
+    anti_patterns:
+      - "Decisión consecuente adjudicada sin revisión humana previa (Robodebt OCI, MiDAS)."
+      - "Supresión de la discreción profesional presentada como feature de objetividad."
+      - "Humano formalmente en el lazo pero sin autoridad real para revertir la decisión del sistema."
+    remediations:
+      - "Garantizar un punto de decisión humano con autoridad real para revertir la salida antes de que la decisión sea consecuente, no un visto bueno formal a posteriori."
+      - "Preservar y trazar la discreción del rol profesional: que el criterio humano pueda prevalecer y quede registrado, en lugar de suprimirlo en nombre de la objetividad."
+
+  - id: IX-2
+    group: "Evolución del criterio con el uso"
+    title: "Preservar el criterio propio ante el uso prolongado (deskilling / erosion de la supervision)"
+    description: >-
+      Riesgo de que el uso continuado del sistema erosione la capacidad del humano de juzgar
+      SIN el: con el tiempo, el criterio del profesional converge hacia la salida del modelo sin
+      que mejore su acierto contra la realidad, de modo que deja de aportar un juicio independiente
+      y se vuelve una asíntota del modelo. El daño se materializa el día que el modelo no está o se
+      equivoca y el criterio propio ya no está para rescatarlo. Es LONGITUDINAL y se distingue de la
+      sobre-confianza puntual (PAIR-ET-3: aceptar una salida concreta sin verificar) y del cambio no
+      notificado (HAX-G14: el sistema cambia su comportamiento): aquí el que cambia, despacio, es el
+      humano, y solo se detecta midiendo su rendimiento en solitario a lo largo del tiempo.
+    good_example: "Se mide periódicamente el acierto del clínico sin el modelo y se le devuelve su deriva; si su criterio en solitario se degrada, se activa reciclaje."
+    bad_example: "Tras meses apoyándose en la IA, los endoscopistas detectan menos adenomas sin ella, y nadie lo mide porque el acierto agregado (humano+modelo) sigue subiendo (Budzyn et al., 2025)."
+    anti_patterns:
+      - "Convergencia creciente del criterio humano hacia la salida del modelo sin mejora del acierto humano contra la realidad (el humano se vuelve un eco del sistema)."
+      - "Ausencia de toda medición del rendimiento humano-solo tras el despliegue: la erosión queda indetectable por diseño."
+      - "Caída sostenida de la tasa de rescate: cada vez menos discrepancias humanas correctas justo cuando el modelo se equivoca."
+      - "Formación que entrena a usar la herramienta pero nunca re-entrena el criterio sin ella."
+    remediations:
+      - "Medir el rendimiento humano-solo de forma periódica (no solo el agregado humano+modelo) y vigilar la tasa de rescate como señal temprana de erosión (ver el subcomando telemetry)."
+      - "Devolver a cada profesional su propia deriva longitudinal frente a la realidad, para que la erosión del criterio sea visible antes del 'día del apagón'."

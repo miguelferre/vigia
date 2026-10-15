@@ -1,0 +1,1234 @@
+{
+  "CX-1": {
+    "como_se_lee": "El título da la tasa de override del subgrupo frente a la del resto y su z. Un z negativo y grande dice que el subgrupo sigue al modelo más que el resto. Hacen falta 30 decisiones en el subgrupo y en el resto, y 20 casos que necesitaban la decisión favorable en cada uno para comparar los errores del modelo.",
+    "etiqueta": "Tasa de correcciones en el grupo con más error",
+    "formula": "Dispara si z del override <= -3 y z de falsos negativos >= 2. Cada z compara dos proporciones: (tasa del subgrupo - tasa del resto) / error típico de la diferencia.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "multiclase": {
+      "como_se_lee": "El título da la tasa de override del subgrupo frente a la del resto y su z. Un z negativo y grande dice que el subgrupo sigue al modelo más que el resto. Hacen falta 30 decisiones en el subgrupo y en el resto, y 20 casos con clase real favorable en cada uno para comparar los errores del modelo. En multiclase, un falso negativo es un caso con clase real favorable que el modelo no predijo en el conjunto de clases favorables. Si el modelo no tiene conjunto de clases favorables, la regla sale sin datos.",
+      "formula": "Dispara si z del override <= -3 y z de falsos negativos >= 2. Cada z compara dos proporciones: (tasa del subgrupo - tasa del resto) / error típico de la diferencia. Los falsos negativos cuentan la pertenencia al conjunto de clases favorables, no la clase exacta.",
+      "formula_vars": null,
+      "que_mide": null,
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Compara un subgrupo con el resto: si los profesionales corrigen al modelo mucho menos en ese subgrupo y, justo ahí, el modelo falla más, nadie está corrigiendo un sesgo del modelo.",
+    "umbral_por_defecto": null
+  },
+  "CX-2": {
+    "como_se_lee": "El título da el override de la ventana frente al de la referencia y su z. Un z alto con la calidad en alerta significa que el profesional no está reaccionando como lo hacía cuando el modelo iba bien. Severidad alta.",
+    "etiqueta": "Tasa de correcciones con la calidad en alerta",
+    "formula": "Dispara si la calidad está en alerta y z del override global >= 3, con z = (tasa de la ventana - tasa de la referencia) / error típico de la diferencia.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "nota": null,
+    "que_mide": "Cruza la calidad del modelo con el override global: la calidad ya está en alerta y, aun así, el override global de la ventana se aparta de la referencia de calibración del equipo.",
+    "umbral_por_defecto": null
+  },
+  "CX-3": {
+    "como_se_lee": "No abre alerta: se lee en la tarjeta de cruzadas y en Capa humana como aviso. Indica que el apoyo del modelo se está perdiendo sin que la calidad lo delate todavía.",
+    "etiqueta": "Tasa de rescate de errores del modelo",
+    "formula": "Aviso si la calidad está en ok, z del override global >= 3 y z del rescate <= -3. El rescate es la fracción de errores del modelo que el profesional corrige.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "nota": null,
+    "que_mide": "La calidad va bien y el override global sube, pero cuando el modelo se equivoca el profesional lo corrige menos que en la referencia: el rescate cae.",
+    "umbral_por_defecto": null
+  },
+  "CX-4": {
+    "como_se_lee": "El título lleva el z del nivel de acuerdo si lo hay; con solo la tendencia no lleva z. Si el modelo mejora de verdad y el rescate se mantiene, no dispara aunque la convergencia suba: eso no es erosión del criterio. Severidad alta.",
+    "etiqueta": "Pérdida de criterio profesional (deskilling)",
+    "formula": "Dispara si lo hace la señal de tendencia del diario de uso o si z del nivel de acuerdo >= 3, salvo que el modelo mejore de verdad sin que el rescate haya bajado.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "nota": null,
+    "que_mide": "Detecta que humano y modelo convergen mientras el criterio propio del profesional o su tasa de rescate caen, es decir, que el profesional deja de contrastar al modelo.",
+    "umbral_por_defecto": null
+  },
+  "CX-5": {
+    "como_se_lee": "Cuenta solo a los profesionales con al menos 30 decisiones, hacen falta dos o más y una frecuencia esperada de 5 o más por celda. Un p muy pequeño dice que los criterios difieren entre profesionales. Se muestra agregado: nunca nombra a un profesional.",
+    "etiqueta": "Diferencia de tasa de correcciones entre profesionales",
+    "formula": "Prueba chi-cuadrado sobre la tabla de overrides y aceptaciones por profesional; dispara si p < 0,001.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "nota": null,
+    "que_mide": "Mide si la frecuencia con la que cada profesional se aparta de la recomendación del modelo varía más de lo que explicaría el azar.",
+    "umbral_por_defecto": null
+  },
+  "CX-6": {
+    "como_se_lee": "El título da el override del subgrupo frente al del resto y su z. El resto deja fuera los grupos que el modelo ya señaló; hacen falta 30 decisiones en cada lado. Con dos grupos sale una alerta por pareja, y no se emite si el subgrupo ya tiene una alerta de equidad o una CX-1 viva.",
+    "etiqueta": "Diferencia de tasa de correcciones por grupo sin alerta de equidad",
+    "formula": "Dispara si |z| >= 3 con z = (tasa del subgrupo - tasa del resto) / error típico de la diferencia, y el modelo no ha alertado sobre ese subgrupo.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "nota": null,
+    "que_mide": "Un subgrupo recibe overrides con una frecuencia muy distinta a la del resto sin que el monitor de equidad haya señalado nada en él: apunta a un sesgo que el modelo no está midiendo.",
+    "umbral_por_defecto": null
+  },
+  "accuracy": {
+    "como_se_lee": "Cuanto más alto, mejor. Por debajo del umbral, el modelo falla en más de una quinta parte de los casos.",
+    "etiqueta": "Exactitud",
+    "formula": "Exactitud = (VP + VN) / (VP + FP + FN + VN)",
+    "formula_vars": [
+      "details.confusion.tp",
+      "details.confusion.tn",
+      "details.confusion.fp",
+      "details.confusion.fn"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más alto, mejor. Con k clases el azar acierta una de cada k veces: una de cada tres con tres clases. En multiclase no hay umbral de fábrica: sale de la línea base, con un suelo igual a 1 dividido entre el número de clases. Por debajo del umbral, el modelo falla más que al empezar.",
+      "formula": "Exactitud = casos con la clase predicha igual a la clase real / total de casos (la diagonal de la matriz de confusión, de clases × clases)",
+      "formula_vars": [],
+      "que_mide": "Proporción de casos en los que la clase que predijo el modelo coincide con la clase real, entre todas las clases del modelo.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Proporción de casos en los que la predicción del modelo coincidió con el resultado real.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.8
+    }
+  },
+  "area_under_pr": {
+    "como_se_lee": "Va de un valor cercano a la proporción de casos favorables (equivale al azar) hasta 1 (perfecto). El umbral no es un valor fijo: es relativo a esa proporción. Vale la proporción de casos favorables más el 80 % de lo que la línea base mejora sobre ella, y se calcula con la línea base de la versión. Antes de tener línea base no se evalúa. Un modelo que ya existía antes de este cambio conserva el umbral que tenía guardado hasta que se reevalúe su línea base. Por debajo del umbral, cuando el modelo predice el resultado favorable acierta con poca frecuencia.",
+    "etiqueta": "Área bajo la curva precisión-sensibilidad",
+    "formula": "Área bajo la curva que compara, en todos los umbrales de decisión posibles, la precisión frente a la sensibilidad.",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cada clase tiene su propio valor de azar: su proporción de casos. Por eso el promedio macro no tiene un mínimo común y se lee frente a la línea base. Una clase sin casos o sin casos de las otras queda fuera del promedio. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Área macro bajo la curva precisión-sensibilidad = promedio, sobre las clases válidas, del área bajo la curva de esa clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "Como el área bajo la ROC, pero centrada en la fiabilidad de las predicciones de cada clase, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Como el área bajo la ROC, pero centrada en la fiabilidad de las predicciones favorables: más informativa que la ROC cuando el resultado favorable es poco frecuente.",
+    "umbral_por_defecto": null
+  },
+  "area_under_roc": {
+    "como_se_lee": "Va de 0,5 (equivale a decidir al azar) a 1 (separa perfectamente los dos resultados). Por debajo del umbral, el modelo distingue mal entre quien necesita el resultado favorable y quien no.",
+    "etiqueta": "Área bajo la curva ROC",
+    "formula": "Área bajo la curva que compara, en todos los umbrales de decisión posibles, la sensibilidad frente a la tasa de falsos positivos.",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Va de 0,5 (equivale a decidir al azar) a 1 (separa cada clase de las demás sin error). En multiclase no hay umbral de fábrica: sale de la línea base. Una clase sin casos o sin casos de las otras en la ventana queda fuera del promedio y el detalle la lista. Con menos de dos clases válidas, sale sin datos.",
+      "formula": "Área macro bajo la curva ROC = promedio, sobre las clases válidas, del área bajo la curva que compara la sensibilidad con la tasa de falsos positivos de esa clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "Capacidad del modelo para separar cada clase de las demás, probando todos los umbrales de decisión a la vez, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Capacidad del modelo para distinguir entre los dos resultados posibles, probando todos los umbrales de decisión a la vez: cuanto más alto, mejor separa a quien necesita el resultado favorable de quien no.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.75
+    }
+  },
+  "average_abs_odds_difference": {
+    "como_se_lee": "No dice a qué grupo beneficia, solo cuánta distancia hay entre ambos en conjunto. Cuanto más alto, peor: por encima del umbral, la distancia entre grupos es grande, beneficie a quien beneficie.",
+    "etiqueta": "Diferencia absoluta media de falsos positivos y sensibilidad",
+    "formula": "Diferencia absoluta media = 0,5 × [|tasa de falsos positivos (grupo supervisado) − tasa de falsos positivos (grupo de referencia)| + |sensibilidad (grupo supervisado) − sensibilidad (grupo de referencia)|]",
+    "formula_vars": [
+      "fpr_unpriv",
+      "fpr_priv",
+      "tpr_unpriv",
+      "tpr_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "No dice a qué grupo beneficia, solo cuánta distancia hay entre ambos en conjunto. Cuanto más alto, peor: por encima del umbral, la distancia entre grupos es grande, beneficie a quien beneficie. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "La misma media que la diferencia media, pero sin signo: la distancia total entre grupos en esas dos tasas, sin decir a cuál beneficia. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "La misma media que la diferencia media, pero sin signo: la distancia total entre grupos en esas dos tasas, sin decir a cuál beneficia.",
+    "regresion": {
+      "como_se_lee": "No dice a qué grupo beneficia, solo cuánta distancia hay entre ambos en conjunto. Cuanto más alto, peor: por encima del umbral, la distancia entre grupos es grande, beneficie a quien beneficie. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "La misma media que la diferencia media, pero sin signo: la distancia total entre grupos en esas dos tasas, sin decir a cuál beneficia. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_superior": 0.4
+    }
+  },
+  "average_odds_difference": {
+    "como_se_lee": "Alerta cuando es muy negativo: indica que, combinando falsos positivos y sensibilidad, el grupo de referencia sale beneficiado frente al supervisado en las dos tasas a la vez.",
+    "etiqueta": "Diferencia media de falsos positivos y sensibilidad",
+    "formula": "Diferencia media = 0,5 × [(tasa de falsos positivos (grupo supervisado) − tasa de falsos positivos (grupo de referencia)) + (sensibilidad (grupo supervisado) − sensibilidad (grupo de referencia))]",
+    "formula_vars": [
+      "fpr_unpriv",
+      "fpr_priv",
+      "tpr_unpriv",
+      "tpr_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Alerta cuando es muy negativo: indica que, combinando falsos positivos y sensibilidad, el grupo de referencia sale beneficiado frente al supervisado en las dos tasas a la vez. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Promedio de dos diferencias entre grupos: cuántos más resultados favorables incorrectos y cuántos menos resultados favorables correctos recibe el grupo supervisado frente al de referencia. Conserva el signo: dice a qué grupo beneficia. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Promedio de dos diferencias entre grupos: cuántos más resultados favorables incorrectos y cuántos menos resultados favorables correctos recibe el grupo supervisado frente al de referencia. Conserva el signo: dice a qué grupo beneficia.",
+    "regresion": {
+      "como_se_lee": "Alerta cuando es muy negativo: indica que, combinando falsos positivos y sensibilidad, el grupo de referencia sale beneficiado frente al supervisado en las dos tasas a la vez. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Promedio de dos diferencias entre grupos: cuántos más resultados favorables incorrectos y cuántos menos resultados favorables correctos recibe el grupo supervisado frente al de referencia. Conserva el signo: dice a qué grupo beneficia. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": -0.4
+    }
+  },
+  "brier_score": {
+    "como_se_lee": "Cuanto más bajo, mejor (0 es la predicción perfecta). Por encima del umbral, las probabilidades del modelo están mal calibradas: dice estar más o menos seguro de lo que en realidad acierta.",
+    "etiqueta": "Puntuación de Brier",
+    "formula": "Brier = promedio, en todos los casos, de (probabilidad predicha − etiqueta real)²",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más bajo, mejor (0 es la predicción perfecta). Con varias clases el peor valor llega a 2, no a 1. Cuanto más alto, peor calibradas están las probabilidades del modelo. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Brier = promedio, en todos los casos, de la suma, sobre las clases, de (probabilidad predicha de la clase − real)², con real igual a 1 para la clase real y a 0 para las demás",
+      "formula_vars": [],
+      "que_mide": "Error medio entre las probabilidades que dio el modelo a todas las clases y el resultado real: cuanto más bajo, mejor calibradas están.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Error medio entre la probabilidad que dio el modelo y el resultado real: cuanto más bajo, mejor calibradas están las probabilidades del modelo.",
+    "umbral_por_defecto": {
+      "limite_superior": 0.25
+    }
+  },
+  "confidence_drift_score": {
+    "como_se_lee": "Cuanto más bajo, mejor. Por encima del umbral, el modelo se muestra sustancialmente más o menos seguro de sus predicciones que en la línea base, sin que eso implique necesariamente que acierte más o menos.",
+    "etiqueta": "Deriva de confianza",
+    "formula": "Distancia de Jensen-Shannon entre la distribución de confianza de la línea base y la del periodo actual (la confianza de cada predicción es el máximo entre la probabilidad predicha y su complementario).",
+    "formula_vars": null,
+    "monitor": "drift",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": "Distancia de Jensen-Shannon entre la distribución de confianza de la línea base y la del periodo actual (la confianza de cada predicción es la mayor de las probabilidades que el modelo da a las clases, con valores entre 1/k y 1, donde k es el número de clases).",
+      "formula_vars": null,
+      "que_mide": null,
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Cuánto ha cambiado, entre la línea base y el periodo actual, la seguridad con la que el modelo hace sus predicciones, tenga razón o no.",
+    "umbral_por_defecto": {
+      "limite_superior": 0.3
+    }
+  },
+  "disparate_impact": {
+    "como_se_lee": "Un valor de 1 significa igualdad entre grupos; por debajo de 1, el grupo supervisado recibe el resultado favorable en menor proporción que el de referencia. No lleva umbral propio: la versión con umbral configurado es el impacto dispar en escala 0-100.",
+    "etiqueta": "Impacto dispar",
+    "formula": "Impacto dispar = tasa favorable (grupo supervisado) / tasa favorable (grupo de referencia)",
+    "formula_vars": [
+      "rate_unpriv",
+      "rate_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 1 significa igualdad entre grupos; por debajo de 1, el grupo supervisado recibe el resultado favorable en menor proporción que el de referencia. No lleva umbral propio: la versión con umbral configurado es el impacto dispar en escala 0-100. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Ratio entre la tasa de resultado favorable del grupo supervisado y la del grupo de referencia. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Ratio entre la tasa de resultado favorable del grupo supervisado y la del grupo de referencia.",
+    "regresion": {
+      "como_se_lee": "Un valor de 1 significa igualdad entre grupos; por debajo de 1, el grupo supervisado recibe el resultado favorable en menor proporción que el de referencia. No lleva umbral propio: la versión con umbral configurado es el impacto dispar en escala 0-100. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Ratio entre la tasa de resultado favorable del grupo supervisado y la del grupo de referencia. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "error_rate_difference": {
+    "como_se_lee": "Un valor de 0 significa la misma proporción de casos mal clasificados en ambos grupos. Cuanto más alto, peor: por encima del umbral, el modelo se equivoca con mucha más frecuencia en el grupo supervisado que en el de referencia.",
+    "etiqueta": "Diferencia de tasa de error",
+    "formula": "Diferencia de tasa de error = tasa de error (grupo supervisado) − tasa de error (grupo de referencia); dentro de cada grupo, esa tasa es (FP + FN) / total del grupo",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa la misma proporción de casos mal clasificados en ambos grupos. Cuanto más alto, peor: por encima del umbral, el modelo se equivoca con mucha más frecuencia en el grupo supervisado que en el de referencia. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de casos que el modelo clasificó mal, sea cual sea el sentido del error. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de casos que el modelo clasificó mal, sea cual sea el sentido del error.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa la misma proporción de casos mal clasificados en ambos grupos. Cuanto más alto, peor: por encima del umbral, el modelo se equivoca con mucha más frecuencia en el grupo supervisado que en el de referencia. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de casos que el modelo clasificó mal, sea cual sea el sentido del error. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_superior": 0.2
+    }
+  },
+  "explain_stability_ndcg": {
+    "como_se_lee": "De 0 a 1; cuanto más alto, mejor. 1 significa que el orden de las diez variables que más pesan es el mismo que en la línea base; por debajo del umbral, el modelo ha cambiado en qué se fija. Mide el orden, no los pesos: las barras pueden moverse frente al punto de la línea base y la estabilidad seguir alta si el orden se conserva.",
+    "etiqueta": "Estabilidad de la explicación",
+    "formula": "Estabilidad = DCG / DCG ideal, con DCG = suma, para las diez primeras variables del orden actual, del peso que esa variable tenía en la línea base dividido por log2(posición + 1); DCG ideal es la misma suma con el orden de la línea base.",
+    "formula_vars": null,
+    "monitor": "explain",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Cuánto se parece el orden de las diez variables que más pesan en la explicación global de ahora al de la línea base. La explicación es la de la probabilidad del conjunto de clases favorables o, sin conjunto, la de la clase más frecuente de la línea base.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Cuánto se parece el orden de las diez variables que más pesan en la explicación global de ahora al de la explicación de la línea base: si el modelo sigue fijándose en lo mismo.",
+    "regresion": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Cuánto se parece el orden de las diez variables que más pesan en la explicación global de ahora al de la línea base. El peso de una variable es cuánto empeora el error del modelo (RMSE) al mezclar sus valores; sin valor real, cuánto cambia la predicción.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": 0.5
+    }
+  },
+  "f1_measure": {
+    "como_se_lee": "Cuanto más alto, mejor. Por debajo del umbral, el equilibrio entre precisión y sensibilidad se ha deteriorado, aunque cada una por separado pueda seguir pareciendo aceptable.",
+    "etiqueta": "Medida F1",
+    "formula": "F1 = 2 × (precisión × sensibilidad) / (precisión + sensibilidad)",
+    "formula_vars": [
+      "precision",
+      "recall"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más alto, mejor. En multiclase no hay umbral de fábrica: sale de la línea base. Por debajo del umbral, el equilibrio entre precisión y sensibilidad se ha deteriorado en alguna clase. La tabla por clase enseña cuál arrastra el promedio; esa tabla no abre alertas. La F1 ponderada, que pesa cada clase por su tamaño, queda en el detalle de la evaluación.",
+      "formula": "F1 macro = promedio, sobre las clases, de 2 × (precisión × sensibilidad) / (precisión + sensibilidad), con cada clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "Resumen único que equilibra la precisión y la sensibilidad de cada clase, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Resumen único que equilibra la precisión (cuántas de las predicciones favorables fueron correctas) y la sensibilidad (cuántos casos favorables reales detectó el modelo).",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.7
+    }
+  },
+  "fairness_value": {
+    "como_se_lee": "Un valor de 100 significa igualdad entre grupos. Cuanto más bajo, peor: por debajo del umbral, el grupo supervisado recibe el resultado favorable muchas menos veces que el de referencia.",
+    "etiqueta": "Impacto dispar (escala 0-100)",
+    "formula": "Impacto dispar (escala 0-100) = tasa favorable (grupo supervisado) / tasa favorable (grupo de referencia) × 100",
+    "formula_vars": [
+      "rate_unpriv",
+      "rate_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 100 significa igualdad entre grupos. Cuanto más bajo, peor: por debajo del umbral, el grupo supervisado recibe el resultado favorable muchas menos veces que el de referencia. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Ratio entre la tasa de resultado favorable del grupo supervisado y la del grupo de referencia, en una escala de 0 a 100. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Ratio entre la tasa de resultado favorable del grupo supervisado y la del grupo de referencia, en una escala de 0 a 100.",
+    "regresion": {
+      "como_se_lee": "Un valor de 100 significa igualdad entre grupos. Cuanto más bajo, peor: por debajo del umbral, el grupo supervisado recibe el resultado favorable muchas menos veces que el de referencia. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Ratio entre la tasa de resultado favorable del grupo supervisado y la del grupo de referencia, en una escala de 0 a 100. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": 20.0
+    }
+  },
+  "false_discovery_rate_difference": {
+    "como_se_lee": "Un valor de 0 significa que, de los resultados favorables del modelo, la misma proporción es incorrecta en ambos grupos. Cuanto más alto, peor: por encima del umbral, entre los resultados favorables del grupo supervisado hay muchos más incorrectos que en el de referencia.",
+    "etiqueta": "Diferencia de tasa de falsos descubrimientos",
+    "formula": "Diferencia de tasa de falsos descubrimientos = tasa de falsos descubrimientos (grupo supervisado) − tasa de falsos descubrimientos (grupo de referencia); dentro de cada grupo, esa tasa es FP / (FP + VP)",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa que, de los resultados favorables del modelo, la misma proporción es incorrecta en ambos grupos. Cuanto más alto, peor: por encima del umbral, entre los resultados favorables del grupo supervisado hay muchos más incorrectos que en el de referencia. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de resultados favorables del modelo que resultaron incorrectos. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de resultados favorables del modelo que resultaron incorrectos.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa que, de los resultados favorables del modelo, la misma proporción es incorrecta en ambos grupos. Cuanto más alto, peor: por encima del umbral, entre los resultados favorables del grupo supervisado hay muchos más incorrectos que en el de referencia. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de resultados favorables del modelo que resultaron incorrectos. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_superior": 0.4
+    }
+  },
+  "false_negative_rate_difference": {
+    "como_se_lee": "Un valor de 0 significa que a ambos grupos se les niega el resultado favorable que necesitaban en la misma proporción. Cuanto más alto, peor: por encima del umbral, al grupo supervisado se le niega ese resultado con mucha más frecuencia, es decir, quedan más casos sin detectar en ese grupo.",
+    "etiqueta": "Diferencia de tasa de falsos negativos",
+    "formula": "Diferencia de tasa de falsos negativos = tasa de falsos negativos (grupo supervisado) − tasa de falsos negativos (grupo de referencia)",
+    "formula_vars": [
+      "fnr_unpriv",
+      "fnr_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa que a ambos grupos se les niega el resultado favorable que necesitaban en la misma proporción. Cuanto más alto, peor: por encima del umbral, al grupo supervisado se le niega ese resultado con mucha más frecuencia, es decir, quedan más casos sin detectar en ese grupo. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de personas afectadas que necesitaban el resultado favorable y no lo recibieron. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de personas afectadas que necesitaban el resultado favorable y no lo recibieron.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa que a ambos grupos se les niega el resultado favorable que necesitaban en la misma proporción. Cuanto más alto, peor: por encima del umbral, al grupo supervisado se le niega ese resultado con mucha más frecuencia, es decir, quedan más casos sin detectar en ese grupo. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de personas afectadas que necesitaban el resultado favorable y no lo recibieron. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_superior": 0.55
+    }
+  },
+  "false_omission_rate_difference": {
+    "como_se_lee": "Un valor de 0 significa que, de los resultados no favorables del modelo, la misma proporción es incorrecta en ambos grupos. Alerta cuando es muy negativo: por debajo del umbral, entre los resultados no favorables del grupo de referencia hay muchos más incorrectos que en el grupo supervisado.",
+    "etiqueta": "Diferencia de tasa de falsos omitidos",
+    "formula": "Diferencia de tasa de falsos omitidos = tasa de falsos omitidos (grupo supervisado) − tasa de falsos omitidos (grupo de referencia); dentro de cada grupo, esa tasa es FN / (FN + VN)",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa que, de los resultados no favorables del modelo, la misma proporción es incorrecta en ambos grupos. Alerta cuando es muy negativo: por debajo del umbral, entre los resultados no favorables del grupo de referencia hay muchos más incorrectos que en el grupo supervisado. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de resultados no favorables del modelo que resultaron incorrectos. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de resultados no favorables del modelo que resultaron incorrectos.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa que, de los resultados no favorables del modelo, la misma proporción es incorrecta en ambos grupos. Alerta cuando es muy negativo: por debajo del umbral, entre los resultados no favorables del grupo de referencia hay muchos más incorrectos que en el grupo supervisado. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de resultados no favorables del modelo que resultaron incorrectos. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": -0.2
+    }
+  },
+  "false_positive_rate": {
+    "como_se_lee": "Cuanto más bajo, mejor. Por encima del umbral, el modelo da el resultado favorable a demasiados casos que no lo necesitaban.",
+    "etiqueta": "Tasa de falsos positivos",
+    "formula": "Tasa de falsos positivos = FP / (FP + VN)",
+    "formula_vars": [
+      "details.confusion.fp",
+      "details.confusion.tn"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más bajo, mejor. Una clase rara casi no aporta falsos positivos, así que este promedio suele ser bajo aunque el modelo falle en ella: léelo junto a la sensibilidad. La tabla por clase enseña cuál arrastra el promedio; esa tabla no abre alertas. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Tasa de falsos positivos macro = promedio, sobre las clases, de FP(clase) / (FP(clase) + VN(clase)), con cada clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "De los casos que de verdad no eran de una clase, la proporción a la que el modelo se la atribuyó por error, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "De los casos que de verdad no tenían el resultado favorable, la proporción a la que el modelo se lo atribuyó por error.",
+    "umbral_por_defecto": {
+      "limite_superior": 0.3
+    }
+  },
+  "false_positive_rate_difference": {
+    "como_se_lee": "Un valor de 0 significa que a ambos grupos se les da el resultado favorable por error en la misma proporción. Aquí alerta cuando es muy negativo: por debajo del umbral, el grupo de referencia recibe muchos más resultados favorables incorrectos que el grupo supervisado.",
+    "etiqueta": "Diferencia de tasa de falsos positivos",
+    "formula": "Diferencia de tasa de falsos positivos = tasa de falsos positivos (grupo supervisado) − tasa de falsos positivos (grupo de referencia)",
+    "formula_vars": [
+      "fpr_unpriv",
+      "fpr_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa que a ambos grupos se les da el resultado favorable por error en la misma proporción. Aquí alerta cuando es muy negativo: por debajo del umbral, el grupo de referencia recibe muchos más resultados favorables incorrectos que el grupo supervisado. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de personas afectadas que no necesitaban el resultado favorable y lo recibieron igualmente. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de personas afectadas que no necesitaban el resultado favorable y lo recibieron igualmente.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa que a ambos grupos se les da el resultado favorable por error en la misma proporción. Aquí alerta cuando es muy negativo: por debajo del umbral, el grupo de referencia recibe muchos más resultados favorables incorrectos que el grupo supervisado. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia, entre el grupo supervisado y el de referencia, en la proporción de personas afectadas que no necesitaban el resultado favorable y lo recibieron igualmente. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": -0.25
+    }
+  },
+  "feature_drift_score": {
+    "como_se_lee": "Cuanto más bajo, mejor. Por encima del umbral, al menos una variable de entrada se distribuye de forma notablemente distinta a como lo hacía en la línea base: puede señalar un cambio en la población de personas afectadas.",
+    "etiqueta": "Deriva de características",
+    "formula": "Máximo, entre todas las características de entrada, del estadístico de comparación entre la línea base y el periodo actual (distancia de Kolmogorov-Smirnov en numéricas, de Jensen-Shannon en categóricas).",
+    "formula_vars": null,
+    "monitor": "drift",
+    "nota": null,
+    "que_mide": "El mayor cambio detectado, entre todas las variables de entrada del modelo, en cómo se distribuyen los datos de las personas afectadas actuales frente a los de la línea base.",
+    "regresion": {
+      "como_se_lee": "Cuanto más bajo, mejor. En una regresión las variables numéricas se comparan con el mismo estadístico que la predicción, de 0 a 1 y sin unidad, así que los dos valores se leen en la misma escala. Por encima del umbral, al menos una variable de entrada se distribuye de forma notablemente distinta a como lo hacía en la línea base.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": null,
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_superior": 0.15
+    }
+  },
+  "fn": {
+    "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral; sirve para construir el resto de métricas de calidad.",
+    "etiqueta": "Falsos negativos",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral. Cuenta la pertenencia al conjunto de clases favorables, no la clase exacta. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Casos en los que el modelo no predijo una clase favorable, pero la clase real sí era favorable.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Casos en los que el modelo no predijo el resultado favorable, pero la persona afectada sí lo necesitaba.",
+    "umbral_por_defecto": null
+  },
+  "fnr_priv": {
+    "como_se_lee": "No lleva umbral propio: es el término de referencia de la diferencia de tasa de falsos negativos.",
+    "etiqueta": "Tasa de falsos negativos, grupo de referencia",
+    "formula": "Tasa de falsos negativos (grupo de referencia) = FN / (FN + VP), calculado solo dentro del grupo de referencia",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo de referencia que necesitaban el resultado favorable, la proporción a la que el modelo no se lo dio. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "De las personas afectadas del grupo de referencia que necesitaban el resultado favorable, la proporción a la que el modelo no se lo dio.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: es el término de referencia de la diferencia de tasa de falsos negativos. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo de referencia que necesitaban el resultado favorable, la proporción a la que el modelo no se lo dio. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "fnr_unpriv": {
+    "como_se_lee": "No lleva umbral propio: se compara con la del grupo de referencia en la diferencia de tasa de falsos negativos, que sí lo lleva.",
+    "etiqueta": "Tasa de falsos negativos, grupo supervisado",
+    "formula": "Tasa de falsos negativos (grupo supervisado) = FN / (FN + VP), calculado solo dentro del grupo supervisado",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo supervisado que necesitaban el resultado favorable, la proporción a la que el modelo no se lo dio. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "De las personas afectadas del grupo supervisado que necesitaban el resultado favorable, la proporción a la que el modelo no se lo dio.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: se compara con la del grupo de referencia en la diferencia de tasa de falsos negativos, que sí lo lleva. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo supervisado que necesitaban el resultado favorable, la proporción a la que el modelo no se lo dio. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "fp": {
+    "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral; sirve para construir el resto de métricas de calidad.",
+    "etiqueta": "Falsos positivos",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral. Cuenta la pertenencia al conjunto de clases favorables, no la clase exacta. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Casos en los que el modelo predijo una clase favorable, pero la clase real no era favorable.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Casos en los que el modelo predijo el resultado favorable, pero la persona afectada no lo necesitaba.",
+    "umbral_por_defecto": null
+  },
+  "fpr_priv": {
+    "como_se_lee": "No lleva umbral propio: es el término de referencia de esas mismas diferencias.",
+    "etiqueta": "Tasa de falsos positivos, grupo de referencia",
+    "formula": "Tasa de falsos positivos (grupo de referencia) = FP / (FP + VN), calculado solo dentro del grupo de referencia",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo de referencia que no necesitaban el resultado favorable, la proporción a la que el modelo se lo dio igualmente. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "De las personas afectadas del grupo de referencia que no necesitaban el resultado favorable, la proporción a la que el modelo se lo dio igualmente.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: es el término de referencia de esas mismas diferencias. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo de referencia que no necesitaban el resultado favorable, la proporción a la que el modelo se lo dio igualmente. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "fpr_unpriv": {
+    "como_se_lee": "No lleva umbral propio: se compara con la del grupo de referencia en la diferencia de tasa de falsos positivos y en las dos diferencias medias, que sí lo llevan.",
+    "etiqueta": "Tasa de falsos positivos, grupo supervisado",
+    "formula": "Tasa de falsos positivos (grupo supervisado) = FP / (FP + VN), calculado solo dentro del grupo supervisado",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo supervisado que no necesitaban el resultado favorable, la proporción a la que el modelo se lo dio igualmente. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "De las personas afectadas del grupo supervisado que no necesitaban el resultado favorable, la proporción a la que el modelo se lo dio igualmente.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: se compara con la del grupo de referencia en la diferencia de tasa de falsos positivos y en las dos diferencias medias, que sí lo llevan. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo supervisado que no necesitaban el resultado favorable, la proporción a la que el modelo se lo dio igualmente. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "gini_coefficient": {
+    "como_se_lee": "Va de -1 a 1, con 0 equivalente al azar. Por debajo del umbral, el modelo separa mal los dos resultados posibles.",
+    "etiqueta": "Coeficiente de Gini",
+    "formula": "Gini = 2 × área bajo la ROC − 1",
+    "formula_vars": [
+      "area_under_roc"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Va de -1 a 1, con 0 equivalente al azar. Cuanto más alto, mejor separa el modelo unas clases de otras. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Gini = 2 × área macro bajo la ROC − 1",
+      "formula_vars": null,
+      "que_mide": null,
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Reescala del área bajo la ROC a un rango de -1 a 1, donde 0 equivale a un modelo que acierta al azar.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.6
+    }
+  },
+  "human_review_zero": {
+    "como_se_lee": "El título da la tasa y las decisiones de la ventana. Una tasa baja no prueba que el modelo acierte siempre: dice que casi nadie lo contradice, y con menos de 300 decisiones no se valora. Un diario normal tiene más del 1 % de overrides. Mira si los profesionales ven la recomendación antes de decidir y si hay presión para aceptarla.",
+    "etiqueta": "Tasa de correcciones del modelo",
+    "formula": "Tasa de override = decisiones distintas de la recomendación del modelo / decisiones de la ventana. Dispara si la tasa es menor que 1 % con al menos 300 decisiones.",
+    "formula_vars": null,
+    "monitor": "cross",
+    "nota": null,
+    "que_mide": "La tasa de override de la ventana de vigilancia: el porcentaje de decisiones en que el profesional se apartó de la recomendación del modelo. Si es casi cero, puede que nadie esté revisando lo que el modelo propone.",
+    "regresion": {
+      "como_se_lee": "Una tasa casi cero dice que casi nadie cambia de lado del rango favorable lo que propone el modelo. Si el profesional ajusta las cifras pero rara vez cruza el rango, la señal puede saltar aunque haya revisión real: mira la diferencia media entre la cifra del profesional y la del modelo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "La tasa de override de la ventana de vigilancia. En regresión, una corrección es una cifra del profesional que cruza el rango favorable respecto a la del modelo: ajustar el valor sin cambiar de lado del rango no cuenta como corrección.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "impact_score": {
+    "como_se_lee": "Es la misma comparación que el impacto dispar, con su propio umbral. En la práctica casi nunca lo cruza, porque es una proporción entre tasas que no puede ser negativa.",
+    "etiqueta": "Puntuación de impacto",
+    "formula": "Puntuación de impacto = impacto dispar",
+    "formula_vars": [
+      "disparate_impact"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Es la misma comparación que el impacto dispar, con su propio umbral. En la práctica casi nunca lo cruza, porque es una proporción entre tasas que no puede ser negativa. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "La misma comparación que el impacto dispar, publicada como medida aparte con su propio umbral. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "La misma comparación que el impacto dispar, publicada como medida aparte con su propio umbral.",
+    "regresion": {
+      "como_se_lee": "Es la misma comparación que el impacto dispar, con su propio umbral. En la práctica casi nunca lo cruza, porque es una proporción entre tasas que no puede ser negativa. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "La misma comparación que el impacto dispar, publicada como medida aparte con su propio umbral. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": 0.0
+    }
+  },
+  "input_metadata_drift_score": {
+    "como_se_lee": "Vigía no calcula esta medida porque no mide esos metadatos. Se muestra en estado 'sin datos'.",
+    "etiqueta": "Deriva de metadatos de entrada",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "drift",
+    "nota": "Mide deriva en metadatos de la petición (cliente, canal). Vigía no mide estos metadatos.",
+    "que_mide": "Cambio en información técnica de cómo llegó la petición al modelo (por ejemplo, el canal o el sistema de origen), no en los datos de la persona afectada. El simulador de Vigía no genera esa información.",
+    "umbral_por_defecto": {
+      "limite_superior": 0.15
+    }
+  },
+  "label_rate": {
+    "como_se_lee": "No lleva umbral propio: sirve de referencia para compararla con la de la línea base (ver sesgo de etiqueta).",
+    "etiqueta": "Tasa de etiqueta favorable",
+    "formula": "Tasa de etiqueta favorable = filas con etiqueta favorable / total de filas con etiqueta",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "No lleva umbral propio: sirve de referencia para compararla con la de la línea base (ver sesgo de etiqueta). El reparto por clase está en el detalle. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": "Tasa de etiqueta favorable = filas con clase real favorable / total de filas con etiqueta",
+      "formula_vars": null,
+      "que_mide": "Proporción de casos de la ventana evaluada cuya clase real está en el conjunto de clases favorables.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Proporción de casos de la ventana evaluada que tuvieron, en la realidad, el resultado favorable.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: sirve de referencia para compararla con la de la línea base (ver sesgo de etiqueta). Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": "Tasa de etiqueta favorable = filas con valor real dentro del rango favorable / total de filas con valor real",
+      "formula_vars": null,
+      "que_mide": "Proporción de casos de la ventana evaluada cuyo valor real cae dentro del rango favorable.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "label_skew": {
+    "como_se_lee": "Un valor de 0 significa que la proporción de resultados favorables reales no ha cambiado frente a la línea base. Por debajo de -0,5 o por encima de 0,5, la población de personas afectadas puede estar cambiando de forma sustancial.",
+    "etiqueta": "Sesgo de etiqueta",
+    "formula": "Sesgo de etiqueta = tasa de etiqueta favorable de la ventana − tasa de etiqueta favorable de la línea base",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa que la proporción de resultados favorables reales no ha cambiado frente a la línea base. Por debajo de -0,5 o por encima de 0,5, la población de personas afectadas puede estar cambiando de forma sustancial. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": "Sesgo de etiqueta = tasa de etiqueta favorable de la ventana − tasa de etiqueta favorable de la línea base",
+      "formula_vars": null,
+      "que_mide": "Diferencia entre la proporción de resultados reales favorables de la ventana evaluada y la de la línea base: si cambia mucho, la población de personas afectadas puede estar cambiando incluso antes de que baje el acierto del modelo. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia entre la proporción de resultados reales favorables de la ventana evaluada y la de la línea base: si cambia mucho, la población de personas afectadas puede estar cambiando incluso antes de que baje el acierto del modelo.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa que la proporción de resultados favorables reales no ha cambiado frente a la línea base. Por debajo de -0,5 o por encima de 0,5, la población de personas afectadas puede estar cambiando de forma sustancial. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": "Sesgo de etiqueta = tasa de etiqueta favorable de la ventana − tasa de etiqueta favorable de la línea base",
+      "formula_vars": null,
+      "que_mide": "Diferencia entre la proporción de resultados reales favorables de la ventana evaluada y la de la línea base: si cambia mucho, la población de personas afectadas puede estar cambiando incluso antes de que baje el acierto del modelo. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": -0.5,
+      "limite_superior": 0.5
+    }
+  },
+  "log_loss": {
+    "como_se_lee": "Cuanto más bajo, mejor (0 es la predicción perfecta). Por encima del umbral, las probabilidades del modelo se alejan mucho del resultado real, incluso cuando la predicción final acierta.",
+    "etiqueta": "Pérdida logarítmica",
+    "formula": "Log loss = promedio, en todos los casos, de −[etiqueta real × log(probabilidad predicha) + (1 − etiqueta real) × log(1 − probabilidad predicha)]",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más bajo, mejor (0 es la predicción perfecta, con toda la probabilidad en la clase real). En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Log loss = promedio, en todos los casos, de −log(probabilidad que el modelo dio a la clase real)",
+      "formula_vars": [],
+      "que_mide": "Penalización por lo alejada que estuvo la probabilidad que el modelo dio a la clase real de 1: cuanto más segura estaba una predicción equivocada, mayor es el castigo.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Penalización por lo alejada que estuvo la probabilidad que dio el modelo del resultado real: cuanto más segura estaba una predicción equivocada, mayor es el castigo.",
+    "umbral_por_defecto": {
+      "limite_superior": 1.0
+    }
+  },
+  "matthews_correlation_coefficient": {
+    "como_se_lee": "Va de -1 (siempre se equivoca) a 1 (siempre acierta), con 0 equivalente al azar. Por debajo del umbral, el acuerdo entre predicción y realidad es débil.",
+    "etiqueta": "Coeficiente de correlación de Matthews",
+    "formula": "MCC = (VP × VN − FP × FN) / √[(VP + FP) × (VP + FN) × (VN + FP) × (VN + FN)]",
+    "formula_vars": [
+      "details.confusion.tp",
+      "details.confusion.tn",
+      "details.confusion.fp",
+      "details.confusion.fn"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Va de -1 (siempre se equivoca) a 1 (siempre acierta), con 0 equivalente al azar. Cuanto más bajo, más débil es el acuerdo entre predicción y realidad. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "MCC multiclase = (aciertos × casos − Σ predichas(clase) × reales(clase)) / √[(casos² − Σ predichas²) × (casos² − Σ reales²)], con aciertos = diagonal de la matriz de confusión",
+      "formula_vars": [],
+      "que_mide": "Medida única de acuerdo entre la clase predicha y la clase real, calculada con toda la matriz de confusión, poco sensible a que una clase sea mucho más frecuente que las otras.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Medida única de acuerdo entre la predicción y el resultado real que tiene en cuenta a la vez los aciertos y los errores en ambos sentidos, poco sensible a que un resultado sea mucho más frecuente que el otro.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.6
+    }
+  },
+  "mean_absolute_error": {
+    "como_se_lee": "Cuanto más bajo, mejor (0 es la predicción perfecta). Por encima del umbral, el modelo se equivoca más de lo que se equivocaba al empezar. También se publica por grupo, sin umbral, para ver a quién falla más el modelo.",
+    "etiqueta": "Error absoluto medio (MAE)",
+    "formula": "MAE = promedio, en los casos con valor real, de |predicción − valor real|",
+    "formula_vars": null,
+    "monitor": "quality",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Cuánto se equivoca el modelo de media, sin importar si se pasa o se queda corto. Va en la unidad de la salida: con un modelo de horas de atención por semana, un MAE de 3 es una equivocación media de 3 horas por semana.",
+    "umbral_por_defecto": {}
+  },
+  "mean_absolute_error_difference": {
+    "como_se_lee": "Cerca de 0 es lo bueno. Un valor positivo quiere decir que el modelo se equivoca más con el grupo supervisado. Por encima del umbral, la diferencia es mayor que la de la línea base. Esta medida no depende del rango favorable: se publica también sin rango. Un grupo con menos filas que el mínimo por grupo no se mide: sale sin datos y el detalle da solo su número de filas y el motivo.",
+    "etiqueta": "Diferencia de error entre grupos",
+    "formula": "Diferencia de MAE = MAE del grupo supervisado − MAE del grupo de referencia",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Cuánto más se equivoca el modelo con el grupo supervisado que con el de referencia, en la unidad de la salida.",
+    "umbral_por_defecto": {}
+  },
+  "mean_absolute_error_ratio": {
+    "como_se_lee": "1 es el mismo error en los dos grupos. Más de 1, el modelo se equivoca más con el grupo supervisado: 1,5 quiere decir que el error es una vez y media el del otro grupo. Por encima del umbral, la razón es mayor que la de la línea base. Un grupo con menos filas que el mínimo por grupo no se mide: sale sin datos y el detalle da solo su número de filas y el motivo.",
+    "etiqueta": "Razón de error entre grupos",
+    "formula": "Razón de MAE = MAE del grupo supervisado / MAE del grupo de referencia",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Cuántas veces más se equivoca el modelo con el grupo supervisado que con el de referencia. No tiene unidad.",
+    "umbral_por_defecto": {}
+  },
+  "mean_error": {
+    "como_se_lee": "Cerca de 0 es lo bueno. Un valor negativo quiere decir que el modelo infraestima: predice menos de lo real. Un valor positivo, que sobreestima. Un sesgo medio cercano a 0 no prueba que el modelo acierte: los errores por arriba y por abajo se compensan al promediar con signo. Mira también el error absoluto medio. El umbral tiene un límite inferior y uno superior. También se publica por grupo, sin umbral, para ver a quién falla más el modelo.",
+    "etiqueta": "Sesgo medio (error medio)",
+    "formula": "Sesgo medio = promedio, en los casos con valor real, de (predicción − valor real)",
+    "formula_vars": null,
+    "monitor": "quality",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Hacia qué lado se equivoca el modelo de media: el promedio de predicción menos valor real, con signo y en la unidad de la salida.",
+    "umbral_por_defecto": {}
+  },
+  "mean_error_difference": {
+    "como_se_lee": "Cerca de 0 es lo bueno. Un valor negativo quiere decir que el modelo predice al grupo supervisado por debajo de lo real más que al de referencia: lo infraestima. Uno positivo, lo contrario. El umbral tiene un límite inferior y uno superior. Un grupo con menos filas que el mínimo por grupo no se mide: sale sin datos y el detalle da solo su número de filas y el motivo.",
+    "etiqueta": "Diferencia de sesgo entre grupos",
+    "formula": "Diferencia de sesgo = sesgo medio del grupo supervisado − sesgo medio del grupo de referencia",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Cuánto se diferencian los dos grupos en el lado hacia el que se equivoca el modelo, en la unidad de la salida. Es la medida que ve un recorte: un grupo al que el modelo da de menos.",
+    "umbral_por_defecto": {}
+  },
+  "mean_squared_error": {
+    "como_se_lee": "Cuanto más bajo, mejor. Es una medida de detalle: para leer el error en la unidad de la salida, mira el RMSE.",
+    "etiqueta": "Error cuadrático medio (MSE)",
+    "formula": "MSE = promedio de (predicción − valor real)²",
+    "formula_vars": null,
+    "monitor": "quality",
+    "nota": "Se publica sin umbral y no abre alertas.",
+    "que_mide": "El promedio de los errores elevados al cuadrado. Es el RMSE sin la raíz y va en la unidad de la salida al cuadrado.",
+    "umbral_por_defecto": {}
+  },
+  "median_absolute_error": {
+    "como_se_lee": "Cuanto más bajo, mejor. Si es mucho menor que el error absoluto medio, unos pocos casos con errores grandes empujan la media hacia arriba.",
+    "etiqueta": "Error absoluto mediano",
+    "formula": "Error absoluto mediano = mediana de |predicción − valor real|",
+    "formula_vars": null,
+    "monitor": "quality",
+    "nota": "Se publica sin umbral y no abre alertas.",
+    "que_mide": "El error típico del modelo sin que lo arrastren unos pocos casos muy malos: en la mitad de los casos el modelo se equivoca menos que esto. Va en la unidad de la salida.",
+    "umbral_por_defecto": {}
+  },
+  "model_quality_score": {
+    "como_se_lee": "Vigía no calcula esta medida porque no tiene una equivalente. Se muestra en estado 'sin datos', con el motivo en esta nota.",
+    "etiqueta": "Desviación en calidad modelo",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "drift",
+    "nota": "Sin equivalente local: exige estimar la calidad a partir de las predicciones en producción, sin acceso a verdad de terreno. Vigía mide la calidad con verdad de terreno y no usa esa estimación.",
+    "que_mide": "Estimación de cuánto se habría deteriorado la calidad del modelo, calculada solo a partir de las predicciones en producción, sin usar el resultado real. Vigía usa en su lugar el monitor de calidad, que mide con el resultado real.",
+    "umbral_por_defecto": {
+      "limite_superior": 0.1
+    }
+  },
+  "n": {
+    "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral.",
+    "etiqueta": "Tamaño de la ventana de calidad",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Número de casos con clase real conocida usados para calcular las métricas de calidad de esta evaluación. Los casos con una clase real que el modelo no declara quedan fuera y se cuentan en el detalle.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Número de casos con etiqueta real usados para calcular las métricas de calidad de esta evaluación.",
+    "regresion": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Número de casos con valor real conocido usados para calcular las medidas de error de esta evaluación.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "output_metadata_drift_score": {
+    "como_se_lee": "Vigía no calcula esta medida porque no mide esos metadatos. Se muestra en estado 'sin datos'.",
+    "etiqueta": "Deriva de metadatos de salida",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "drift",
+    "nota": "Mide deriva en metadatos de la respuesta del modelo (tiempo de inferencia, versión servida). Vigía no mide estos metadatos.",
+    "que_mide": "Cambio en información técnica de cómo respondió el modelo (por ejemplo, el tiempo de respuesta o la versión que atendió la petición), no en los datos de la persona afectada. El simulador de Vigía no genera esa información.",
+    "umbral_por_defecto": {
+      "limite_superior": 0.15
+    }
+  },
+  "precision": {
+    "como_se_lee": "Cuanto más alto, mejor. Por debajo del umbral, una parte importante de los resultados favorables que da el modelo son incorrectos.",
+    "etiqueta": "Precisión",
+    "formula": "Precisión = VP / (VP + FP)",
+    "formula_vars": [
+      "details.confusion.tp",
+      "details.confusion.fp"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más alto, mejor. La tabla por clase enseña cuál arrastra el promedio; esa tabla no abre alertas. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Precisión macro = promedio, sobre las clases, de VP(clase) / (VP(clase) + FP(clase)), con cada clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "De los casos en los que el modelo predijo una clase, la proporción en la que acertó, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "De los casos en los que el modelo predijo el resultado favorable, la proporción en la que acertó.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.7
+    }
+  },
+  "prediction_drift_score": {
+    "como_se_lee": "Cuanto más bajo, mejor (0 es ningún cambio). Por encima del umbral, el modelo está dando el resultado favorable con una frecuencia notablemente distinta a la de la línea base.",
+    "etiqueta": "Deriva de las predicciones",
+    "formula": "Deriva de la predicción = |tasa de predicción favorable actual − tasa de predicción favorable de la línea base|",
+    "formula_vars": [
+      "details.prediction.rate_cur",
+      "details.prediction.rate_base"
+    ],
+    "monitor": "drift",
+    "multiclase": {
+      "como_se_lee": "Cuanto más bajo, mejor (0 es ningún cambio). En multiclase el umbral sale de la línea base. Por encima del umbral, el modelo reparte sus predicciones entre las clases de forma notablemente distinta a la de la línea base.",
+      "formula": "Deriva de la predicción = distancia de Jensen-Shannon entre la distribución de la clase predicha del periodo actual y la de la línea base",
+      "formula_vars": [],
+      "que_mide": "Cuánto ha cambiado el reparto de las clases que predice el modelo entre la línea base y el periodo actual. El detalle nombra la clase que más ha cambiado.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "Cuánto ha cambiado la proporción de predicciones favorables del modelo entre la línea base y el periodo actual.",
+    "regresion": {
+      "como_se_lee": "De 0 a 1 y sin unidad; cuanto más bajo, mejor (0 es ningún cambio). Es la mayor distancia entre las dos distribuciones acumuladas. En regresión no hay valor de fábrica: el umbral sale de la línea base al congelarla. Una subida brusca suele indicar un cambio de unidad, por ejemplo minutos en vez de horas, o una población distinta a la de la línea base.",
+      "formula": "Deriva de la predicción = estadístico de Kolmogorov-Smirnov entre la distribución de la predicción del periodo actual y la de la línea base",
+      "formula_vars": [],
+      "que_mide": "Cuánto ha cambiado el reparto de los valores que predice el modelo entre la línea base y el periodo actual. Si el modelo empieza a predecir valores más altos, más bajos o más dispersos, sube. El detalle da la diferencia de medias en la unidad de la salida.",
+      "umbral_por_defecto": {}
+    },
+    "umbral_por_defecto": {
+      "limite_superior": 0.08
+    }
+  },
+  "prediction_rate": {
+    "como_se_lee": "No lleva umbral propio: permite comparar cuánto predice el modelo el resultado favorable frente a lo que ocurre en realidad (tasa de etiqueta favorable).",
+    "etiqueta": "Tasa de predicción favorable",
+    "formula": "Tasa de predicción favorable = predicciones favorables / total de filas evaluadas",
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "No lleva umbral propio: permite comparar cuánto predice el modelo una clase favorable frente a lo que ocurre en realidad (tasa de etiqueta favorable). Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": "Tasa de predicción favorable = predicciones en una clase favorable / total de filas evaluadas",
+      "formula_vars": null,
+      "que_mide": "Proporción de casos de la ventana evaluada para los que el modelo predijo una clase del conjunto de clases favorables.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Proporción de casos de la ventana evaluada para los que el modelo predijo el resultado favorable.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: permite comparar cuánto predice el modelo valores favorables frente a lo que ocurre en realidad (tasa de etiqueta favorable). Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": "Tasa de predicción favorable = predicciones dentro del rango favorable / total de filas evaluadas",
+      "formula_vars": null,
+      "que_mide": "Proporción de casos de la ventana evaluada cuya predicción cae dentro del rango favorable.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "r2": {
+    "como_se_lee": "Cuanto más alto, mejor. 1 es la predicción perfecta, 0 es lo mismo que predecir siempre la media y por debajo de 0 es peor que eso. Por debajo del umbral, el modelo explica menos que al empezar. Si el valor real no varía en la ventana, R² no está definido y sale sin datos.",
+    "etiqueta": "Coeficiente de determinación (R²)",
+    "formula": "R² = 1 − suma de (valor real − predicción)² / suma de (valor real − media del valor real)²",
+    "formula_vars": null,
+    "monitor": "quality",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Qué parte de la variación del valor real explica el modelo, frente a predecir siempre la media. No tiene unidad.",
+    "umbral_por_defecto": {}
+  },
+  "rate_priv": {
+    "como_se_lee": "No lleva umbral propio: es el término de referencia del impacto dispar y de la diferencia de paridad estadística.",
+    "etiqueta": "Tasa favorable, grupo de referencia",
+    "formula": "Tasa favorable (grupo de referencia) = positivos del grupo de referencia / total del grupo de referencia",
+    "formula_vars": [
+      "details.counts.positives_priv",
+      "details.counts.n_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": "Tasa favorable (grupo de referencia) = casos del grupo con predicción en una clase favorable / total del grupo de referencia",
+      "formula_vars": null,
+      "que_mide": "Proporción de las personas afectadas del grupo de referencia para las que el modelo predice el resultado favorable. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Proporción de las personas afectadas del grupo de referencia para las que el modelo predice el resultado favorable.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: es el término de referencia del impacto dispar y de la diferencia de paridad estadística. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": "Tasa favorable (grupo de referencia) = casos del grupo con predicción dentro del rango favorable / total del grupo de referencia",
+      "formula_vars": null,
+      "que_mide": "Proporción de las personas afectadas del grupo de referencia para las que el modelo predice el resultado favorable. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "rate_unpriv": {
+    "como_se_lee": "No lleva umbral propio: se usa para calcular el impacto dispar y la diferencia de paridad estadística, que sí lo llevan.",
+    "etiqueta": "Tasa favorable, grupo supervisado",
+    "formula": "Tasa favorable (grupo supervisado) = positivos del grupo supervisado / total del grupo supervisado",
+    "formula_vars": [
+      "details.counts.positives_unpriv",
+      "details.counts.n_unpriv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": "Tasa favorable (grupo supervisado) = casos del grupo con predicción en una clase favorable / total del grupo supervisado",
+      "formula_vars": null,
+      "que_mide": "Proporción de las personas afectadas del grupo supervisado para las que el modelo predice el resultado favorable. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Proporción de las personas afectadas del grupo supervisado para las que el modelo predice el resultado favorable.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: se usa para calcular el impacto dispar y la diferencia de paridad estadística, que sí lo llevan. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": "Tasa favorable (grupo supervisado) = casos del grupo con predicción dentro del rango favorable / total del grupo supervisado",
+      "formula_vars": null,
+      "que_mide": "Proporción de las personas afectadas del grupo supervisado para las que el modelo predice el resultado favorable. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "recall": {
+    "como_se_lee": "Cuanto más alto, mejor. Por debajo del umbral, el modelo deja sin detectar una parte importante de los casos que sí necesitaban el resultado favorable.",
+    "etiqueta": "Sensibilidad (recall)",
+    "formula": "Sensibilidad = VP / (VP + FN)",
+    "formula_vars": [
+      "details.confusion.tp",
+      "details.confusion.fn"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más alto, mejor. La tabla por clase enseña cuál arrastra el promedio; esa tabla no abre alertas. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Sensibilidad macro = promedio, sobre las clases, de VP(clase) / (VP(clase) + FN(clase)), con cada clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "De los casos que de verdad eran de una clase, la proporción que el modelo detectó, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente. Es la misma métrica que la sensibilidad.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "De los casos que de verdad tenían el resultado favorable, la proporción que el modelo detectó. Es la misma métrica que la sensibilidad.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.7
+    }
+  },
+  "root_mean_squared_error": {
+    "como_se_lee": "Cuanto más bajo, mejor. Siempre es igual o mayor que el error absoluto medio. Si se separan mucho, el modelo acierta casi siempre pero falla por mucho en pocos casos. Por encima del umbral, el modelo se equivoca más que al empezar.",
+    "etiqueta": "Raíz del error cuadrático medio (RMSE)",
+    "formula": "RMSE = raíz cuadrada del promedio de (predicción − valor real)²",
+    "formula_vars": null,
+    "monitor": "quality",
+    "nota": "No hay valor de fábrica en la unidad de la salida: el umbral sale de la línea base al congelarla.",
+    "que_mide": "Como el error absoluto medio, pero cada error se eleva al cuadrado antes de promediar, así que los errores grandes pesan más. Va en la unidad de la salida.",
+    "umbral_por_defecto": {}
+  },
+  "statistical_parity_difference": {
+    "como_se_lee": "Un valor de 0 significa que ambos grupos reciben el resultado favorable en la misma proporción. Cuanto más negativo, peor: por debajo del umbral, el grupo supervisado lo recibe con mucha menos frecuencia que el de referencia.",
+    "etiqueta": "Diferencia de paridad estadística",
+    "formula": "Diferencia de paridad estadística = tasa favorable (grupo supervisado) − tasa favorable (grupo de referencia)",
+    "formula_vars": [
+      "rate_unpriv",
+      "rate_priv"
+    ],
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": "Un valor de 0 significa que ambos grupos reciben el resultado favorable en la misma proporción. Cuanto más negativo, peor: por debajo del umbral, el grupo supervisado lo recibe con mucha menos frecuencia que el de referencia. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos y la equidad solo compara la exactitud y la F1 macro de cada grupo, sin umbral.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia entre la proporción de resultados favorables del grupo supervisado y la del grupo de referencia. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Diferencia entre la proporción de resultados favorables del grupo supervisado y la del grupo de referencia.",
+    "regresion": {
+      "como_se_lee": "Un valor de 0 significa que ambos grupos reciben el resultado favorable en la misma proporción. Cuanto más negativo, peor: por debajo del umbral, el grupo supervisado lo recibe con mucha menos frecuencia que el de referencia. Si el modelo no tiene rango favorable, esta medida sale sin datos y la equidad solo compara el error de cada grupo: la diferencia y la razón del error absoluto medio, y la diferencia del sesgo.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Diferencia entre la proporción de resultados favorables del grupo supervisado y la del grupo de referencia. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": {
+      "limite_inferior": -0.6
+    }
+  },
+  "tn": {
+    "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral; sirve para construir el resto de métricas de calidad.",
+    "etiqueta": "Verdaderos negativos",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral. Cuenta la pertenencia al conjunto de clases favorables, no la clase exacta. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Casos en los que el modelo no predijo una clase favorable y la clase real tampoco era favorable.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Casos en los que el modelo no predijo el resultado favorable y la persona afectada de verdad no lo necesitaba.",
+    "umbral_por_defecto": null
+  },
+  "tp": {
+    "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral; sirve para construir el resto de métricas de calidad.",
+    "etiqueta": "Verdaderos positivos",
+    "formula": null,
+    "formula_vars": null,
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Es un recuento, no una proporción: no tiene sentido de mejor o peor y no lleva umbral. Cuenta la pertenencia al conjunto de clases favorables, no la clase exacta: la matriz de clases × clases completa está en el detalle. Si el modelo no tiene conjunto de clases favorables, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "Casos en los que el modelo predijo una clase favorable y la clase real también era favorable.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "Casos en los que el modelo predijo el resultado favorable y la persona afectada de verdad lo necesitaba.",
+    "umbral_por_defecto": null
+  },
+  "tpr_priv": {
+    "como_se_lee": "No lleva umbral propio: es el término de referencia de esas mismas diferencias.",
+    "etiqueta": "Sensibilidad, grupo de referencia",
+    "formula": "Sensibilidad (grupo de referencia) = VP / (VP + FN), calculado solo dentro del grupo de referencia",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo de referencia que necesitaban el resultado favorable, la proporción a la que el modelo se lo dio. Es la sensibilidad calculada solo sobre ese grupo. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "De las personas afectadas del grupo de referencia que necesitaban el resultado favorable, la proporción a la que el modelo se lo dio. Es la sensibilidad calculada solo sobre ese grupo.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: es el término de referencia de esas mismas diferencias. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo de referencia que necesitaban el resultado favorable, la proporción a la que el modelo se lo dio. Es la sensibilidad calculada solo sobre ese grupo. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "tpr_unpriv": {
+    "como_se_lee": "No lleva umbral propio: se compara con la del grupo de referencia en las dos diferencias medias, que sí lo llevan.",
+    "etiqueta": "Sensibilidad, grupo supervisado",
+    "formula": "Sensibilidad (grupo supervisado) = VP / (VP + FN), calculado solo dentro del grupo supervisado",
+    "formula_vars": null,
+    "monitor": "fairness",
+    "multiclase": {
+      "como_se_lee": null,
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo supervisado que necesitaban el resultado favorable, la proporción a la que el modelo se lo dio. Es la sensibilidad calculada solo sobre ese grupo. En multiclase, «resultado favorable» es que la clase esté en el conjunto de clases favorables del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no la clase exacta.",
+      "umbral_por_defecto": null
+    },
+    "nota": null,
+    "que_mide": "De las personas afectadas del grupo supervisado que necesitaban el resultado favorable, la proporción a la que el modelo se lo dio. Es la sensibilidad calculada solo sobre ese grupo.",
+    "regresion": {
+      "como_se_lee": "No lleva umbral propio: se compara con la del grupo de referencia en las dos diferencias medias, que sí lo llevan. Si el modelo no tiene rango favorable, esta medida sale sin datos.",
+      "formula": null,
+      "formula_vars": null,
+      "que_mide": "De las personas afectadas del grupo supervisado que necesitaban el resultado favorable, la proporción a la que el modelo se lo dio. Es la sensibilidad calculada solo sobre ese grupo. En regresión, «resultado favorable» es que el valor caiga dentro del rango favorable del modelo, y acertar o fallar es acertar o fallar esa pertenencia, no el valor exacto.",
+      "umbral_por_defecto": null
+    },
+    "umbral_por_defecto": null
+  },
+  "true_positive_rate": {
+    "como_se_lee": "Cuanto más alto, mejor. Por debajo del umbral, el modelo deja sin detectar una parte importante de los casos que sí necesitaban el resultado favorable.",
+    "etiqueta": "Tasa de verdaderos positivos",
+    "formula": "Sensibilidad = VP / (VP + FN)",
+    "formula_vars": [
+      "details.confusion.tp",
+      "details.confusion.fn"
+    ],
+    "monitor": "quality",
+    "multiclase": {
+      "como_se_lee": "Cuanto más alto, mejor. La tabla por clase enseña cuál arrastra el promedio; esa tabla no abre alertas. En multiclase esta medida se publica sin umbral de fábrica y no abre alertas.",
+      "formula": "Sensibilidad macro = promedio, sobre las clases, de VP(clase) / (VP(clase) + FN(clase)), con cada clase contra el resto",
+      "formula_vars": [],
+      "que_mide": "De los casos que de verdad eran de una clase, la proporción que el modelo detectó, con promedio macro: se calcula para cada clase contra el resto y se promedia sin ponderar, así que una clase rara pesa igual que una frecuente. Es la sensibilidad macro, la misma métrica que recall.",
+      "umbral_por_defecto": {}
+    },
+    "nota": null,
+    "que_mide": "De los casos que de verdad tenían el resultado favorable, la proporción que el modelo detectó. Es la sensibilidad, la misma métrica que recall.",
+    "umbral_por_defecto": {
+      "limite_inferior": 0.7
+    }
+  }
+}

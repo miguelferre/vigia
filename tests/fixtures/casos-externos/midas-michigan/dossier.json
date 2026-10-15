@@ -1,0 +1,79 @@
+{
+  "system_name": "MiDAS — Michigan Integrated Data Automated System",
+  "domain": "Administración pública / seguro de desempleo (detección automatizada de fraude)",
+  "summary": "MiDAS fue el sistema informático que Michigan (DTMB) contrató a Fast Enterprises, LLC (con CSG Government Solutions y el motor analítico de SAS Institute) por 47 millones de dólares para sustituir un mainframe de 30 años en la Agencia de Seguro de Desempleo (UIA). Implementado por completo en octubre de 2013. Cruzaba de forma automática los registros de los solicitantes con los de sus empleadores en busca de discrepancias (incluyendo casos donde el sistema repartía por igual ingresos puntuales entre todo un trimestre). Cuando detectaba una discrepancia, generaba un cuestionario o carta de determinación de fraude que se publicaba en la cuenta web del solicitante (MiWAM) y/o se enviaba por correo. El solicitante disponía de 10 días para responder en línea. Si no respondía en ese plazo (incluyendo casos en que la notificación se había enviado a una dirección desactualizada o a una cuenta que la persona ya no revisaba tras agotar sus prestaciones), el sistema determinaba fraude de forma automática, sin revisión adicional por un empleado. Esta auto-adjudicación estuvo vigente desde octubre de 2013 hasta agosto de 2015. Una vez determinado el fraude, la ley preveía una multa del 400% del importe reclamado más intereses; la agencia podía iniciar de inmediato embargo de nóminas y retención de devoluciones de impuestos. Una revisión estatal de ~22.000 determinaciones puramente algorítmicas encontró una tasa de error del 93%; unas 40.000 personas fueron acusadas en ese periodo. En 2015 se presentó Cahoo v. Fast Enterprises et al. y la UIA cesó la auto-adjudicación. La demanda colectiva Bauserman v. UIA se resolvió en 2022 con 20 millones de dólares.",
+  "sources": [
+    {
+      "id": "doc-auditor-general-2016",
+      "kind": "document",
+      "label": "Informe de auditoria de desempeno — Oficina del Auditor General del Estado de Michigan (febrero 2016)",
+      "content": "MiDAS es un sistema automatizado usado por la UIA para recaudar impuestos de desempleo de los empleadores y pagar prestaciones a los solicitantes elegibles. El DTMB contrato a Fast Enterprises, LLC por 47 millones de dolares para disenar, configurar e implementar MiDAS, sustituyendo un mainframe de 30 anos. Sistema comercial (COTS) personalizado, implementado por completo en octubre de 2013. En el ejercicio fiscal 2014 la UIA pago 1.000 millones de dolares en prestaciones para 611.503 reclamaciones. El objetivo de la auditoria no incluyo revisar el proceso de identificacion de fraude. Hallazgos: 33 de 1.245 cuentas de usuario de MiDAS pertenecian a personas que ya no eran empleadas del Estado; 283 de 1.245 cuentas no se habian usado en mas de 120 dias sin desactivar; pagos de ~65.000 dolares a numeros de seguridad social coincidentes con personas encarceladas; prestaciones pagadas a domicilios coincidentes con los de 62 empleados de la propia UIA. El numero de apelaciones pendientes paso de 2.280 en junio de 2013 a 22.473 en junio de 2015. Entre octubre de 2013 y junio de 2015 se enviaron 51.207 apelaciones al MAHS, de las cuales 3.460 eran casos de misrepresentation (fraude); de estos, el MAHS confirmo la decision de la UIA en el 8% y la revoco en el 19%; en el 22% devolvio el expediente por falta de informacion."
+    },
+    {
+      "id": "doc-mechanism-timeline",
+      "kind": "document",
+      "label": "Ficha de hechos — funcionamiento y cronologia del proceso automatizado (compilacion de fuentes periodisticas, judiciales y academicas)",
+      "content": "El sistema comparaba los datos declarados por los solicitantes con los registros de nomina de los empleadores, buscando discrepancias, incluyendo casos en que repartia ingresos puntuales de manera uniforme a lo largo de todo un trimestre, generando la apariencia de que la persona habia cobrado nomina mientras recibia prestaciones. Al detectar una discrepancia, generaba una carta o cuestionario de determinacion de fraude, publicado en la cuenta en linea (MiWAM) y/o enviado por correo, con plazo de respuesta de 10 dias. Si el solicitante no respondia a tiempo (lo que ocurria con frecuencia si ya no revisaba su cuenta tras dejar de recibir prestaciones o si la carta iba a una direccion desactualizada), el sistema determinaba fraude de manera automatica, sin intervencion de un empleado en esa fase. La auto-adjudicacion estuvo vigente desde octubre de 2013 hasta agosto de 2015. Tras la determinacion, la legislacion preveia una multa del 400% sobre el importe reclamado mas intereses (luego reducida al 100%). La agencia podia iniciar de inmediato el embargo de nominas y la retencion de devoluciones de impuestos estatales y federales. Las notificaciones indicaban el importe del sobrepago, la multa, los intereses y el saldo pendiente, pero los reclamantes que llamaban por telefono reportaban que el personal no siempre podia explicarles el motivo concreto de la acusacion, con tiempos de espera de hasta 45 minutos y multiples transferencias. El proceso de apelacion: protesta ante la UIA, re-determinacion, y audiencia ante un juez administrativo del MAHS, con plazo de 30 dias. Una revision interna de ~22.000 determinaciones encontro que el 93% resultaron incorrectas. En septiembre de 2015 se presento Cahoo v. Fast Enterprises et al. contra la UIA y las contratistas. En noviembre de 2015 el Departamento de Trabajo de EE. UU. concluyo que la determinacion automatica sin revision humana vulneraba la normativa federal. Bauserman v. UIA se resolvio en 2022 con 20 millones de dolares."
+    },
+    {
+      "id": "tech-uia-statements",
+      "kind": "technician",
+      "label": "Declaraciones de representantes de la UIA y del Auditor General",
+      "content": "Un manual de formacion interno de la UIA declaraba: 'Regardless of the manner in which the information is gathered, maintained, or processed, all UI functions are ultimately performed by MiDAS'. En su respuesta a la revision federal, la directora de la UIA, Sharon A. Moffett-Massey, indico que la interpretacion de la agencia sobre la normativa federal 'does not reveal any substantive limitation' sobre el uso de la auto-adjudicacion; la UIA desactivo esas funcionalidades en agosto de 2015. En su respuesta al informe del Auditor General de 2016, la UIA y el DTMB declararon estar de acuerdo con los 8 hallazgos, indicando que las cuentas de personal ya no empleado se habian corregido y que el proceso de apelacion ante un juez administrativo es 'inherently a more robust and thorough opportunity' para revisar las re-determinaciones. Tras el acuerdo de 20 millones en Bauserman (2022), Wanda M. Stokes declaro: 'We're glad to bring this matter to a close'. Dave Murray, portavoz, califico la brecha de datos y los errores del sistema de fraude como 'very, very different issues' y dijo: 'Our No. 1 focus at the UIA is serving Michigan residents'."
+    },
+    {
+      "id": "tech-litigation-vendors",
+      "kind": "technician",
+      "label": "Hechos procesales y papel de las contratistas (Fast Enterprises, CSG, SAS)",
+      "content": "El Estado contrato a Fast Enterprises, LLC (Colorado) para disenar, configurar e implementar MiDAS (2011-2013) por 47 millones de dolares. CSG Government Solutions (Illinois) participo en el desarrollo e instalacion. SAS Institute / SAS Analytics (Carolina del Norte) proporciono las capacidades analiticas del motor de deteccion de fraude. En septiembre de 2015 se presento la demanda federal (Cahoo v. Fast Enterprises LLC, CSG, et al.) alegando diseno negligente del producto y vulneracion del debido proceso. En 2021 un juez federal del Distrito Este de Michigan resolvio que las empresas podian ser objeto de la demanda (rechazando sus mociones de desestimacion)."
+    },
+    {
+      "id": "user-jason-doss",
+      "kind": "end_user",
+      "label": "Testimonio de Jason Doss, empleado de Ford Motor Co., Detroit (Bridge Michigan)",
+      "content": "A Jason Doss le retuvieron mas de 14.000 dolares de su nomina durante casi dos anos tras una determinacion de fraude de MiDAS. A pesar del acuerdo posterior, seguia debiendo 70.000 dolares, de los cuales mas de 62.000 eran multas. No recibio notificacion por correo postal; los avisos se enviaron unicamente a su cuenta en linea, que dejo de revisar tras cerrarla. Esperaba su primer hijo y tenia dificultades con la hipoteca. Declaro: 'If I dwell on it, I could go crazy. It's like being robbed'. Y: 'You want to provide for your family and your child and right now I really can't do that. It's put a toll on my life and marriage'."
+    },
+    {
+      "id": "user-robert-nevins",
+      "kind": "end_user",
+      "label": "Testimonio de Robert Nevins, operador de maquinaria, condado de Eaton (Bridge Michigan)",
+      "content": "La UIA embargo 4.000 dolares de la cuenta de ahorros de Robert Nevins y redujo su paga quincenal de 1.000 a 650 dolares tras determinar que debia 21.000 dolares por fraude. No entendia por que habia sido senalado, pese a haber solicitado desempleo antes sin problemas: 'I have never had a problem with it before'. Gano su caso en diciembre; el juez ordeno devolver 6.000 dolares y anular intereses y multas. Antes de su audiencia recibio otra carta de fraude con un nombre incorrecto y un empleador que no reconocia. Declaro: 'It makes you wonder what is going on. It's very shady'. Y sobre su reaccion: 'Anger, pretty much'."
+    },
+    {
+      "id": "user-nancy-derocco",
+      "kind": "end_user",
+      "label": "Testimonio de Nancy DeRocco, Sterling Heights (Bridge Michigan)",
+      "content": "El Estado embargo el 25% de la nomina de Nancy DeRocco y retuvo mas de 2.000 dolares de sus devoluciones de impuestos, por una deuda de mas de 14.000 dolares derivada de un presunto sobrepago de 3.000 en 2012. Solicito una exencion por dificultad economica; la UIA la denego: 'Your overpayment account was established due to fraud, and therefore cannot be waived'. Se declaro en bancarrota en octubre de 2015. Declaro: 'I couldn't understand who the heck was taking my taxes', y: 'You really feel like a victim. They go after the working people and that isn't right'. Su abogada, Jennifer Lord: 'We are still scratching our heads trying to figure out how she was flagged with fraud. There is absolutely no evidence that she intentionally deceived anyone'."
+    },
+    {
+      "id": "user-kevin-grifka",
+      "kind": "end_user",
+      "label": "Testimonio de Kevin Grifka, electricista, condado de Washtenaw (Bridge Michigan)",
+      "content": "Kevin Grifka recibio una notificacion de fraude por 13.000 dolares justo antes de la Navidad de 2014, primera senal de que algo iba mal. Tenia documentacion (recibos de nomina y notificacion sindical de despido) que mostraba que no tuvo ingresos durante el periodo en que cobro desempleo. Visito la oficina de la UIA tres veces; el personal le decia: 'You got to fill out this paperwork. They might look at it'. El Estado le retuvo la totalidad de su devolucion de impuestos federales de 2014 (~8.500 dolares); el sistema habia repartido incorrectamente sus ingresos de 9.407,13 dolares, percibidos antes de su despido, a lo largo de todo el trimestre. El Estado revirtio la decision en verano de 2015. Declaro: 'We had just bought presents for the kids and we were wondering, Do we have to take it all back? You see your wife crying before Christmas and it's tough'."
+    },
+    {
+      "id": "user-brian-russell",
+      "kind": "end_user",
+      "label": "Testimonio de Brian Russell (Undark, Bridge Michigan)",
+      "content": "Brian Russell declaro: 'They were charging me $22,000, and I had no idea what was going on'. Se declaro en bancarrota despues de que MiDAS le acusara erroneamente de fraude en 2015. Sobre a quien atribuia la responsabilidad: 'As sad as it sounds, I didn't put much of the blame of what happened on the governor or the administration'."
+    },
+    {
+      "id": "user-carmelita-colvin",
+      "kind": "end_user",
+      "label": "Testimonio de Carmelita Colvin, Detroit (Undark)",
+      "content": "En 2014 Carmelita Colvin recibio una carta de la UIA indicando que habia cometido fraude y debia mas de 13.000 dolares, derivado de prestaciones cobradas en 2013 tras ser despedida de una empresa de limpieza. Declaro: 'This has got to be impossible. I just don't believe it'. Sobre el impacto: 'I can't get the job I wanted, because they suggested that I was a criminal'. Le llevo casi seis anos y una demanda colectiva limpiar su nombre; la determinacion de fraude perjudico repetidamente sus solicitudes de empleo, incluida una para la oficina del sheriff del condado de Wayne."
+    },
+    {
+      "id": "user-perry-family",
+      "kind": "end_user",
+      "label": "Caso de Lindsay y Justin Perry (Time)",
+      "content": "Lindsay Perry estaba en la semana 30 de embarazo y en reposo absoluto cuando su marido, Justin, fue acusado de fraude de desempleo y multado con 10.000 dolares tras perder su empleo como cocinero en 2014. Sus devoluciones de impuestos fueron retenidas durante tres anos consecutivos y su furgoneta fue embargada. En 2017 se declararon en bancarrota."
+    },
+    {
+      "id": "user-attorney-paris",
+      "kind": "end_user",
+      "label": "Declaracion de Anthony Paris, abogado del Sugar Law Center, sobre clientes afectados (Undark, The Register)",
+      "content": "Anthony Paris, que represento a cientos de personas acusadas de fraude por MiDAS entre 2013 y 2015, declaro que existieron al menos dos suicidios en el estado vinculados a las penalizaciones financieras derivadas de las acusaciones de fraude de MiDAS, y anadio que dos de sus propios clientes habian llegado a escribir notas de suicidio a raiz de la situacion."
+    }
+  ]
+}

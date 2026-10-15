@@ -1,0 +1,20 @@
+{
+  "_nota": "PRUEBA C1 (control de falsos positivos). Sistema de IA BIEN DISENADO: cumple buenas practicas en TODAS las dimensiones de interaccion. Golden VACIO (no hay problemas conocidos). Un buen revisor deberia encontrar pocos o ningun hallazgo; el que invente muchos esta dando falsos positivos.",
+  "system_name": "Asistente de priorizacion de derivacion (version bien disenada)",
+  "domain": "Atencion Primaria. Apoyo a la decision de derivacion; sistema disenado siguiendo buenas practicas de interaccion humano-IA.",
+  "summary": "Clasificador de apoyo que recomienda priorizar o no una derivacion. Es apoyo, no decision: el medico decide. La capa de interaccion se diseno con cuidado y se describe abajo.",
+  "sources": [
+    {
+      "id": "doc-diseno",
+      "kind": "document",
+      "label": "Especificacion de la interaccion (implementada)",
+      "content": "Output al medico: etiqueta + score CALIBRADO con banda de incertidumbre, 2-3 factores del paciente en lenguaje clinico (p. ej. 'calprotectina elevada', 'anemia ferropenica'), un framing cualitativo ('senal debil/moderada/fuerte') y un indicador de fiabilidad por subgrupo ('en pacientes 18-35 el modelo es menos fiable'). Explicacion por paciente disponible siempre. Captura del motivo SIMETRICA: se pide un motivo breve con taxonomia estructurada tanto si el medico sigue como si se aparta de la recomendacion, y se informa al medico de que ese registro alimenta la monitorizacion. Integracion AMBIENTAL no intrusiva (no interrumpe; aparece como elemento del episodio), agregada con las demas alertas del HIS para evitar duplicidades, descartable y silenciable, con umbrales y avisos CONFIGURABLES por el usuario. Ante datos insuficientes el sistema SE ABSTIENE y lo indica ('no hay datos suficientes para una recomendacion fiable'); si falla, muestra un mensaje claro de indisponibilidad. Onboarding con modulo obligatorio inicial y reciclaje anual que cubre limites por subgrupo. Cuando el modelo se recalibra, se AVISA proactivamente al medico. Canal de feedback granular disponible. Monitorizacion por subgrupos automatica con alertas."
+    },
+    {
+      "id": "user-medico",
+      "kind": "end_user",
+      "label": "Medico de familia",
+      "content": "Me aparece la recomendacion de forma discreta dentro del episodio, sin interrumpirme. Veo el score con su banda y dos o tres factores que la explican en lenguaje clinico, y un aviso si el modelo es menos fiable para este tipo de paciente. Si no estoy de acuerdo lo cambio, y me pide el motivo igual que cuando le hago caso, asi que no siento que me fiscalice solo al discrepar; ademas se me dice que eso sirve para vigilar el modelo. Puedo silenciar o ajustar los avisos. Cuando no hay datos suficientes, me lo dice en vez de inventarse una recomendacion. Nos dieron formacion y hay un reciclaje anual. Si actualizan el modelo, me avisan."
+    }
+  ]
+}

@@ -1,0 +1,803 @@
+{
+  "dominio": {
+    "PC_Diagnosis_L01": "Dolor abdominal generalizado",
+    "PC_Diagnosis_L02": "Ardor o acidez (pirosis)",
+    "PC_Diagnosis_L03": "Dolor epigástrico",
+    "PC_Diagnosis_L04": "Dolor abdominal localizado, otro",
+    "PC_Diagnosis_L05": "Picor perianal",
+    "PC_Diagnosis_L07": "Síntomas dentales o de encías",
+    "PC_Diagnosis_L08": "Gases, flatulencia y eructos",
+    "PC_Diagnosis_L09": "Náuseas",
+    "PC_Diagnosis_L10": "Vómitos",
+    "PC_Diagnosis_L11": "Ictericia",
+    "PC_Diagnosis_L12": "Síntomas de boca, lengua o labios",
+    "PC_Diagnosis_L13": "Hematemesis (vómito con sangre)",
+    "PC_Diagnosis_L14": "Melenas (heces negras)",
+    "PC_Diagnosis_L15": "Dispepsia (digestión pesada)",
+    "PC_Diagnosis_L16": "Dolor rectal o anal",
+    "PC_Diagnosis_L17": "Sangrado rectal",
+    "PC_Diagnosis_L18": "Incontinencia fecal",
+    "PC_Diagnosis_L18.01": "Síndrome del intestino irritable",
+    "PC_Diagnosis_L19": "Dificultad para tragar (disfagia)",
+    "PC_Diagnosis_L20": "Miedo a un cáncer digestivo",
+    "PC_Diagnosis_L28": "Discapacidad del aparato digestivo",
+    "PC_Diagnosis_L29": "Otros síntomas digestivos",
+    "PC_Diagnosis_L83": "Infección gastrointestinal",
+    "PC_Diagnosis_L84": "Gastroenteritis presunta",
+    "PC_Diagnosis_L85": "Anomalía digestiva congénita",
+    "PC_Diagnosis_L86": "Diarrea",
+    "PC_Diagnosis_L87": "Estreñimiento",
+    "PC_Diagnosis_L88": "Cálculos o inflamación de vesícula biliar",
+    "PC_Diagnosis_L88.01": "Colitis ulcerosa o enteritis crónica",
+    "PC_Diagnosis_L89": "Hernia inguinal",
+    "PC_Diagnosis_L90": "Cáncer colorrectal",
+    "PC_Diagnosis_L91": "Enfermedad diverticular",
+    "PC_Diagnosis_L92": "Enfermedad del esófago",
+    "PC_Diagnosis_L93": "Úlcera duodenal",
+    "PC_Diagnosis_L94": "Tumor digestivo benigno",
+    "PC_Diagnosis_L95": "Enfermedad hepática crónica",
+    "PC_Diagnosis_L98": "Otra hernia abdominal",
+    "PC_Diagnosis_L99": "Otra enfermedad digestiva",
+    "PC_Diagnosis_T92": "Úlcera péptica, otra"
+  },
+  "fases": {
+    "b1": {
+      "descripcion": "El lote de referencia: el modelo funcionando con normalidad",
+      "etiqueta": "Línea base"
+    },
+    "b2": {
+      "descripcion": "Una semana normal más de uso, evaluada contra la línea base",
+      "etiqueta": "Semana 2"
+    },
+    "b3": {
+      "descripcion": "Una semana normal más de uso, evaluada contra la línea base",
+      "etiqueta": "Semana 3"
+    },
+    "b4": {
+      "descripcion": "Una semana normal más de uso, evaluada contra la línea base",
+      "etiqueta": "Semana 4"
+    },
+    "b5": {
+      "descripcion": "Una semana normal más de uso, evaluada contra la línea base",
+      "etiqueta": "Semana 5"
+    },
+    "e1_evento": {
+      "descripcion": "El lote en el que cambia la población atendida",
+      "etiqueta": "Casos nuevos"
+    },
+    "e1_recovery": {
+      "descripcion": "El lote posterior a las acciones correctivas (solo en el reproductor y el laboratorio)",
+      "etiqueta": "Tras las medidas"
+    },
+    "lab:*": {
+      "descripcion": "Lotes generados con los parámetros que mueve el usuario; no avanzan el caso",
+      "etiqueta": "Laboratorio"
+    }
+  },
+  "guion": {
+    "domain": "digestivo",
+    "scenario_key": "caso_digestivo",
+    "with_human": true
+  },
+  "laboratorio": {
+    "parametros": [
+      {
+        "clave": "n_total",
+        "etiqueta": "Tamaño del lote",
+        "max": 1000,
+        "min": 50,
+        "paso": 50,
+        "por_defecto": 450
+      },
+      {
+        "clave": "frac_young",
+        "etiqueta": "Proporción de 18 a 35 años",
+        "max": 1.0,
+        "min": 0.0,
+        "paso": 0.05,
+        "por_defecto": 0.33
+      },
+      {
+        "clave": "bias_additive",
+        "etiqueta": "Sesgo: hacia mayores (negativo) o hacia jóvenes (positivo)",
+        "max": 3.0,
+        "min": -3.0,
+        "paso": 0.1,
+        "por_defecto": 1.1
+      },
+      {
+        "clave": "age_mean",
+        "etiqueta": "Edad media",
+        "max": 80,
+        "min": 30,
+        "paso": 1,
+        "por_defecto": 62.4
+      },
+      {
+        "clave": "age_std",
+        "etiqueta": "Dispersión de la edad",
+        "max": 30,
+        "min": 5,
+        "paso": 1,
+        "por_defecto": 15.4
+      },
+      {
+        "clave": "temperature",
+        "etiqueta": "Seguridad del modelo",
+        "max": 3.0,
+        "min": 0.1,
+        "paso": 0.1,
+        "por_defecto": 1.0
+      }
+    ]
+  },
+  "pasos": [
+    {
+      "capacidad": "reproductor",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": null,
+        "ruta": null
+      },
+      "fase_minima": 0,
+      "frase": "Vas a registrar un modelo, cargar su línea base, recibir un lote de casos nuevos y seguir la pista hasta la causa. Los datos son sintéticos.",
+      "hace": "Pulsa «Empezar». Los formularios vienen precargados: solo tienes que confirmar. Si Vigía responde que ya hay 50 proyectos de demo (error 409), es el máximo: borra alguno con «Borrar despliegue», en la Configuración del modelo, y vuelve a empezar.",
+      "id": 0,
+      "kicker": "Demo",
+      "opcional": false,
+      "tipo": "diapositiva",
+      "titulo": "Un caso de uso de la herramienta",
+      "ve": null
+    },
+    {
+      "capacidad": "alta de modelo",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "crear-modelo",
+        "ruta": "/modelos"
+      },
+      "fase_minima": 0,
+      "frase": "El modelo corre en el sistema de la organización; aquí se declara qué es y qué decide: derivar o no derivar. La etiqueta favorable es «derivar», porque no derivar a quien lo necesita es el error que más cuesta.",
+      "hace": "Abre «Crear modelo», comprueba los campos precargados (nombre «Derivación a Digestivo (demo)», dominio Digestivo, tipo «modelo simulado de la demo», etiqueta favorable «derivar») y pulsa Crear. En un despliegue real el tipo sería «ficheros externos»; el simulado es lo que permite a la demo calcular explicaciones y usar el laboratorio.",
+      "id": 1,
+      "kicker": "Conectar el modelo",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Vigía no ejecuta tu modelo: lo registra",
+      "ve": "La tarjeta del modelo en la portada, todavía sin datos: las cuatro luces grises de los monitores significan «sin datos» (la leyenda completa está en /ayuda#simbolos)."
+    },
+    {
+      "capacidad": "ingesta",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "subir-datos",
+        "ruta": "/modelos/:id"
+      },
+      "fase_minima": 5,
+      "frase": "Un fichero con las predicciones del modelo y las etiquetas reales de un periodo en el que el modelo funcionaba con normalidad. Vigía valida las columnas y guarda el lote tal como llega: los datos deben venir ya desidentificados.",
+      "hace": "En «Datos», elige el fichero precargado de la línea base, tipo «combinado», fase «línea base», acepta el mapeo de columnas y pulsa Subir. La etiqueta del lote la pone Vigía («Línea base»); no hace falta escribirla.",
+      "id": 2,
+      "kicker": "Subir datos",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "La línea base: contra qué se compara todo",
+      "ve": "El lote #1 etiquetado «Línea base», con su número de filas y el reparto por grupo. Vigía la fija como línea base y, sola, carga y evalúa cuatro semanas normales más (semana 2 a semana 5), hasta tener cinco puntos de referencia."
+    },
+    {
+      "capacidad": "configuración de monitores con motivo",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "monitores",
+        "ruta": "/modelos/:id"
+      },
+      "fase_minima": 5,
+      "frase": "Antes de que entre un solo lote de producción, el responsable declara el grupo supervisado (18 a 35 años frente al resto), la muestra mínima de la ventana y el umbral de cada monitor: equidad, calidad y deriva. La explicación global se calcula sola tras cada lote.",
+      "hace": "Revisa los tres monitores y su umbral; cambia uno si quieres (pide motivo) y vuelve a dejarlo.",
+      "id": 3,
+      "kicker": "Configurar",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El montaje de la vigilancia",
+      "ve": "Cuatro monitores activos: la diferencia de falsos negativos con umbral 0,55 y, en calidad, el umbral de exactitud de esta demo, fijado en 0,75."
+    },
+    {
+      "capacidad": "cuadro de mando",
+      "dato": {
+        "esperado": 0.88,
+        "estado": "ok",
+        "metric_key": "accuracy",
+        "umbral": 0.75,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "tarjetas",
+        "ruta": "/cuadro"
+      },
+      "fase_minima": 5,
+      "frase": "Las cinco semanas de línea base evaluadas: ningún monitor en alerta y ninguna alerta abierta. La exactitud se mantiene por encima del umbral de 0,75. La explicación global ya está calculada: la edad, los episodios previos y el diagnóstico son lo que más pesa en la decisión.",
+      "hace": "Abre el cuadro de mando.",
+      "id": 4,
+      "kicker": "Estado normal",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Así se ve un despliegue sano",
+      "ve": "Equidad, calidad, deriva y explicabilidad en correcto, con cinco semanas en el gráfico, y la tabla de alertas vacía."
+    },
+    {
+      "capacidad": "monitor de equidad",
+      "dato": {
+        "esperado": 0.305,
+        "estado": "ok",
+        "metric_key": "false_negative_rate_difference",
+        "umbral": 0.55,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "rejilla",
+        "ruta": "/monitores/equidad"
+      },
+      "fase_minima": 5,
+      "frase": "Compara la tasa de resultado favorable entre el grupo supervisado (18 a 35 años) y el de referencia. Con las cinco semanas de línea base, no hay diferencia que vigilar.",
+      "hace": "Abre el monitor de equidad desde su tarjeta.",
+      "id": 5,
+      "kicker": "Equidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El monitor de equidad, con la línea base",
+      "ve": "La diferencia de falsos negativos en correcto, con el grupo supervisado y el de referencia nombrados."
+    },
+    {
+      "capacidad": "monitor de calidad",
+      "dato": {
+        "esperado": 0.88,
+        "estado": "ok",
+        "metric_key": "accuracy",
+        "umbral": 0.75,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "rejilla",
+        "ruta": "/monitores/calidad"
+      },
+      "fase_minima": 5,
+      "frase": "Compara el acierto del modelo, cuando llega la etiqueta real, con el umbral configurado. Con las cinco semanas de línea base, la exactitud se mantiene por encima de 0,75.",
+      "hace": "Abre el monitor de calidad desde su tarjeta.",
+      "id": 6,
+      "kicker": "Calidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El monitor de calidad, con la línea base",
+      "ve": "La exactitud en correcto, semana a semana."
+    },
+    {
+      "capacidad": "monitor de deriva",
+      "dato": {
+        "esperado": 0.0,
+        "estado": "ok",
+        "metric_key": "confidence_drift_score",
+        "umbral": 0.3,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "rejilla",
+        "ruta": "/monitores/deriva"
+      },
+      "fase_minima": 5,
+      "frase": "Compara los datos de cada semana con la línea base: confianza del modelo, patrón de predicción y características. Con las cinco semanas de línea base, no hay deriva que vigilar.",
+      "hace": "Abre el monitor de deriva desde su tarjeta.",
+      "id": 7,
+      "kicker": "Deriva",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El monitor de deriva, con la línea base",
+      "ve": "Las tres medidas de deriva en correcto."
+    },
+    {
+      "capacidad": "vista de alertas",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": null,
+        "ruta": "/alertas"
+      },
+      "fase_minima": 5,
+      "frase": "La tabla de alertas que requieren acción. Con la línea base, está vacía.",
+      "hace": "Abre Alertas.",
+      "id": 8,
+      "kicker": "Alertas",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Así se ve un modelo sano",
+      "ve": "La lista vacía: así se ve un modelo sano."
+    },
+    {
+      "capacidad": "explicación global automática",
+      "dato": {
+        "esperado": 1.0,
+        "estado": "ok",
+        "metric_key": "explain_stability_ndcg",
+        "umbral": 0.5,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "estado",
+        "ruta": "/explicabilidad"
+      },
+      "fase_minima": 5,
+      "frase": "La explicación global ordena las variables por lo que pesan en la decisión, con los nombres del dominio. Es la referencia: si más adelante cambia el orden, habrá cambiado el modelo; si no cambia y aun así falla, habrá cambiado el mundo.",
+      "hace": "Abre Explicabilidad.",
+      "id": 9,
+      "kicker": "Explicabilidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "En qué se fija el modelo",
+      "ve": "El ranking de variables con los nombres del dominio y la estabilidad de la explicación en correcto: cinco semanas con el mismo orden."
+    },
+    {
+      "capacidad": "navegación y diario",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": null,
+        "ruta": "/diario"
+      },
+      "fase_minima": 5,
+      "frase": "Todo lo que hagas a partir de ahora deja rastro aquí, en cuatro carriles: Usuario (lo que haces tú), Agente de IA (lo que hace un asistente conectado), Vigía (lo que calcula sobre el modelo) y Sistema (las tareas internas).",
+      "hace": "Abre el diario.",
+      "id": 10,
+      "kicker": "Diario",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El diario: todo queda registrado",
+      "ve": "La barra lateral, con acceso a cada pantalla, y lo que ya ha quedado registrado en los carriles Usuario y Vigía: creación del modelo, ingesta y evaluación de las cinco semanas de línea base."
+    },
+    {
+      "capacidad": "reproducción con progreso en vivo",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "tarjetas",
+        "ruta": "/cuadro"
+      },
+      "fase_minima": 6,
+      "frase": "Un lote de producción: las derivaciones de las semanas siguientes. En un despliegue real lo subirías igual que la línea base; aquí Vigía lo carga por ti y lo evalúa en vivo.",
+      "hace": "Pulsa «Cargar el lote de casos nuevos» y espera a que termine la evaluación.",
+      "id": 11,
+      "kicker": "Producción",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Llegan casos nuevos",
+      "ve": "El progreso en vivo y, al terminar, el lote de casos nuevos evaluado y las tarjetas de monitor que cambian de color."
+    },
+    {
+      "capacidad": "estados y alertas del cuadro",
+      "dato": {
+        "esperado": 0.86,
+        "estado": "ok",
+        "metric_key": "accuracy",
+        "umbral": 0.75,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "tarjetas",
+        "ruta": "/cuadro"
+      },
+      "fase_minima": 6,
+      "frase": "Dos monitores pasan a alerta y la exactitud baja a 0,860: sigue en correcto, muy por encima del umbral de 0,75. Mirando solo la calidad, nadie vería nada: el sesgo es invisible en la métrica agregada.",
+      "hace": "Mira las tarjetas de monitor y la tabla «Alertas que requieren acción».",
+      "id": 12,
+      "kicker": "Punto de inflexión",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Algo cambia",
+      "ve": "Equidad y deriva en alerta, calidad en correcto, explicabilidad en correcto. El panel enseña la leyenda de estados (correcto, aviso, alerta, inestable, sin datos), con enlaces a los símbolos de la ayuda y a los monitores del modelo."
+    },
+    {
+      "capacidad": "monitor de equidad",
+      "dato": {
+        "esperado": 0.631,
+        "estado": "alerta",
+        "metric_key": "false_negative_rate_difference",
+        "umbral": 0.55,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "rejilla",
+        "ruta": "/monitores/equidad"
+      },
+      "fase_minima": 6,
+      "frase": "La diferencia de falsos negativos entre el grupo supervisado (18 a 35 años) y el de referencia llega a 0,631, sobre un umbral de 0,55. La edad está en el modelo, no excluida: el sesgo aparece por cómo cambia la composición de quien llega, no por exclusión de la variable.",
+      "hace": "Abre el monitor de equidad desde su tarjeta.",
+      "id": 13,
+      "kicker": "Equidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El modelo deja de derivar a los jóvenes",
+      "ve": "La diferencia de falsos negativos en alerta y las tasas de error de los dos grupos, con el grupo supervisado y el de referencia nombrados."
+    },
+    {
+      "capacidad": "cálculo instanciado",
+      "dato": {
+        "esperado": 19.5,
+        "estado": "inestable",
+        "metric_key": "fairness_value",
+        "umbral": 20.0,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "calculo",
+        "ruta": "/monitores/equidad?metrica=fairness_value"
+      },
+      "fase_minima": 6,
+      "frase": "El impacto dispar vale 19,50 sobre 100, bajo el umbral de 20, pero el intervalo de las últimas ventanas va de 19,50 a 20,98 y lo cruza: el estado es inestable, no alerta. Con solo 5 resultados favorables del grupo supervisado en esta ventana de 200 registros, declarar alerta sería decir más de lo que los datos sostienen.",
+      "hace": "Abre «Cómo se ha calculado» del impacto dispar.",
+      "id": 14,
+      "kicker": "Equidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El impacto dispar tiembla en el umbral",
+      "ve": "Numerador, denominador, división, umbral y la columna Intervalo."
+    },
+    {
+      "capacidad": "cálculo instanciado",
+      "dato": {
+        "esperado": 0.631,
+        "estado": "alerta",
+        "metric_key": "false_negative_rate_difference",
+        "umbral": 0.55,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "calculo",
+        "ruta": "/monitores/equidad?metrica=false_negative_rate_difference"
+      },
+      "fase_minima": 6,
+      "frase": "De las personas de 18 a 35 años que necesitaban derivación, el modelo dejó sin derivar al 80,6 % (25 de 31); del grupo de referencia, al 17,5 % (17 de 97). La diferencia entre las dos tasas, 0,631, es la métrica: cuánto más a menudo se le niega al grupo supervisado la derivación que necesitaba. Su umbral es 0,55.",
+      "hace": "Abre «Cómo se ha calculado» de la diferencia de tasa de falsos negativos.",
+      "id": 15,
+      "kicker": "Equidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "La tasa de falsos negativos, grupo a grupo",
+      "ve": "Las dos tasas con su numerador y denominador, la resta y el umbral."
+    },
+    {
+      "capacidad": "monitor de deriva",
+      "dato": {
+        "esperado": 0.37,
+        "estado": "alerta",
+        "metric_key": "confidence_drift_score",
+        "umbral": 0.3,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "rejilla",
+        "ruta": "/monitores/deriva"
+      },
+      "fase_minima": 6,
+      "frase": "La deriva de confianza sube a 0,370 sobre un umbral de 0,30: el modelo ya no está tan seguro como en la línea base. El patrón global de predicción apenas cruza el suyo (0,082 sobre 0,080): el modelo predice casi lo mismo, pero con menos seguridad.",
+      "hace": "Abre el monitor de deriva.",
+      "id": 16,
+      "kicker": "Deriva",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "La confianza del modelo se mueve",
+      "ve": "La deriva de confianza en alerta; el patrón de predicción y las características, según lo que confirme el paso 18."
+    },
+    {
+      "capacidad": "distribuciones",
+      "dato": {
+        "esperado": 0.37,
+        "estado": "alerta",
+        "metric_key": "confidence_drift_score",
+        "umbral": 0.3,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "histograma-confianza",
+        "ruta": "/monitores/deriva"
+      },
+      "fase_minima": 6,
+      "frase": "El eje horizontal es la confianza con la que el modelo toma cada decisión, de 0,5 (moneda al aire) a 1 (seguridad total): la probabilidad que da a la clase que predice. El vertical, el porcentaje de casos de la ventana en cada tramo. Con todas las decisiones, las que superan 0,80 pasan del 2 % de la línea base al 30 % del lote. Cambia de clase con el selector: en «derivar» apenas se mueven (del 5 % al 9 %); en «no derivar» pasan del 0,4 % al 41 %. La seguridad nueva está en no derivar, y son justo los falsos negativos que la equidad ha detectado. Un modelo más seguro y con más falsos negativos: esa contradicción es la pista.",
+      "hace": "Baja al bloque «Distribuciones» y, en la tarjeta de confianza, cambia el selector de «Todas» a «Derivar» y a «No derivar»; lee la frase calculada bajo el gráfico.",
+      "id": 17,
+      "kicker": "Investigar",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Más seguro que antes, y con más falsos negativos",
+      "ve": "Con «Todas», la cola derecha del lote (barras) por encima del escalón de la línea base entre 0,80 y 0,95; con «No derivar», la frase calculada: por encima de 0,80, 0,4 % en la línea base y 40,5 % en el lote."
+    },
+    {
+      "capacidad": "panel de variables y lote a lote",
+      "dato": {
+        "esperado": 0.189,
+        "estado": "alerta",
+        "metric_key": "feature_drift_score",
+        "umbral": 0.15,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "ranking-deriva",
+        "ruta": "/monitores/deriva"
+      },
+      "fase_minima": 6,
+      "frase": "En el ranking de deriva por característica, la edad encabeza con un estadístico de Kolmogorov-Smirnov de 0,189, sobre el umbral de 0,15. Es una característica más del modelo, no una variable latente: su desplazamiento es la pista que faltaba.",
+      "hace": "Abre el panel de variables y, si quieres, la pestaña «Lote a lote».",
+      "id": 18,
+      "kicker": "Investigar",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "La edad es la característica que más cambia",
+      "ve": "La edad encabeza el ranking; su histograma frente a la línea base y, en «Lote a lote», el violín del lote frente al de la línea base."
+    },
+    {
+      "capacidad": "composición del lote",
+      "dato": {
+        "esperado": 32.9,
+        "estado": null,
+        "metric_key": "composicion_grupo_supervisado_pct",
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "composicion",
+        "ruta": "/datos/:batch"
+      },
+      "fase_minima": 6,
+      "frase": "La proporción de personas de 18 a 35 años pasa del 14,9 % en la línea base al 32,9 % en el lote de casos nuevos, más del doble. El modelo no cambió: quien llega sí.",
+      "hace": "Abre el lote de casos nuevos y compara su reparto por grupo, con los grupos etiquetados por edad, con el de la línea base.",
+      "id": 19,
+      "kicker": "Composición",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Un cambio de población, no de modelo",
+      "ve": "Los dos repartos uno junto a otro: el grupo de 18 a 35 pasa del 15 % de la línea base al 33 %."
+    },
+    {
+      "capacidad": "estabilidad de la explicación",
+      "dato": {
+        "esperado": 0.984,
+        "estado": "ok",
+        "metric_key": "explain_stability_ndcg",
+        "umbral": 0.5,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "estado",
+        "ruta": "/explicabilidad"
+      },
+      "fase_minima": 6,
+      "frase": "La explicación global del lote nuevo ordena las variables casi igual que la de la línea base. Es la prueba que cierra el análisis: no ha cambiado en qué se fija el modelo, ha cambiado a quién se le aplica.",
+      "hace": "Abre Explicabilidad.",
+      "id": 20,
+      "kicker": "Explicabilidad",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "El modelo sigue siendo el mismo",
+      "ve": "La estabilidad en correcto y el mismo ranking que en el paso 9."
+    },
+    {
+      "capacidad": "alertas cruzadas CX-1 a CX-6",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "cruzadas",
+        "ruta": "/capa-humana"
+      },
+      "fase_minima": 6,
+      "frase": "La organización confirma la causa: una campaña de captación de personas jóvenes que no existía cuando se entrenó el modelo. La capa humana añade una prueba que los tres monitores no pueden ver, porque no está en los datos del modelo sino en lo que los profesionales hacen con él: en el grupo de 18 a 35 años casi nadie corrige la predicción, justo donde el modelo más se equivoca.",
+      "hace": "Abre Capa humana y baja a «Alertas cruzadas»: mira la tarjeta «Tasa de correcciones en el grupo con más error» (CX-1) del grupo 18-35.",
+      "id": 21,
+      "kicker": "Capa humana",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Lo que el profesional ya no corrige",
+      "ve": "«Tasa de correcciones en el grupo con más error» en alerta: el grupo joven corrige al modelo en el 4,1 % de sus casos frente al 9,1 % del resto (desviación −3,6 · supera el umbral), mientras el modelo deja sin derivar al 61,7 % de los jóvenes que lo necesitaban, frente al 14,2 % del resto. Seguir al modelo sin discrepar deja el error sin registrar."
+    },
+    {
+      "capacidad": "panel de alerta y triaje con motivo",
+      "dato": {
+        "esperado": 0.631,
+        "estado": "alerta",
+        "metric_key": "false_negative_rate_difference",
+        "umbral": 0.55,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "fila",
+        "ruta": "/alertas"
+      },
+      "fase_minima": 6,
+      "frase": "La alerta de equidad trae qué significa, cómo se ha calculado y el protocolo en cinco hitos: detección, triaje, investigación, decisión y seguimiento. La detección ya está hecha: la hizo Vigía. El botón principal ofrece siempre el hito siguiente.",
+      "hace": "Abre la alerta de la diferencia de falsos negativos y pulsa «Hacer el triaje» con un motivo: la alerta pasa a «En observación».",
+      "id": 22,
+      "kicker": "Alerta",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Qué significa y qué hacer",
+      "ve": "El hito «Triaje» hecho con tu nombre, el estado «En observación» y el botón principal, que ya dice «Registrar la investigación»."
+    },
+    {
+      "capacidad": "investigación y decisión registradas por hitos",
+      "dato": {
+        "esperado": 0.631,
+        "estado": "alerta",
+        "metric_key": "false_negative_rate_difference",
+        "umbral": 0.55,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "protocolo",
+        "ruta": "/alertas/:id"
+      },
+      "fase_minima": 6,
+      "frase": "La investigación se registra con sus hallazgos: comparación con la línea base y causa confirmada por el profesional. La decisión se registra con las acciones del catálogo y un motivo: contener el uso del modelo en el grupo de 18 a 35 años, revisión retrospectiva de las derivaciones no hechas en las semanas previas, petición de reentrenamiento al proveedor y un riesgo nuevo, el efecto latente de la edad. Correctivas las tres primeras; preventiva la última.",
+      "hace": "En el detalle de la alerta, pulsa «Registrar la investigación» con los hallazgos y después «Registrar la decisión», eligiendo esas cuatro acciones con el motivo.",
+      "id": 23,
+      "kicker": "Decisión",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "De la alerta a la acción",
+      "ve": "Los hitos 1 a 4 hechos, el estado «En seguimiento» y el seguimiento en curso con los próximos lotes; ya no hay botón principal: el seguimiento avanza solo."
+    },
+    {
+      "capacidad": "configuración del protocolo por monitor",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "configurar",
+        "ruta": "/monitores/equidad"
+      },
+      "fase_minima": 6,
+      "frase": "Aquí se escribe qué se hace en cada hito, quién y en cuánto tiempo; es lo que después avanza en la alerta. Los cinco hitos son los mismos para todos los monitores; sus textos, entregables, responsable y plazo se editan por monitor, con motivo, y aparecen en cada alerta suya.",
+      "hace": "Abre «Configurar» en el monitor de equidad y baja a «Protocolo de respuesta»: cambia el responsable o el plazo de un hito si quieres (pide motivo) y guarda.",
+      "id": 24,
+      "kicker": "Protocolo",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Dónde se configura el protocolo",
+      "ve": "Los cinco hitos editables, con descripción, entregables, responsable y plazo, y las «Notas del protocolo» debajo."
+    },
+    {
+      "capacidad": "deskilling",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "deskilling",
+        "ruta": "/capa-humana"
+      },
+      "fase_minima": 6,
+      "frase": "Deskilling es la erosión del criterio propio: el profesional deja de discrepar del modelo y, a la vez, acierta menos por su cuenta. Vigía lo mide por ventanas sobre el mismo diario de uso, agregado y sin nombrar a nadie, y solo da señal cuando las dos cosas pasan juntas.",
+      "hace": "Sigue en Capa humana y sube al bloque «Deskilling»: mira las cuatro ventanas y la línea de apoyo.",
+      "id": 25,
+      "kicker": "Capa humana",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Cuánto se apoya el profesional en el modelo",
+      "ve": "«Sin señal»: el apoyo al modelo no sube (0,93 y 0,91 en la primera y la última ventana), así que la caída del acierto del profesional (0,887 a 0,853) no es dependencia, y la tasa de rescate sigue en 0,29. Esto es lo que se vigila cada semana, incluso cuando no hay nada que señalar."
+    },
+    {
+      "capacidad": "matriz de riesgos",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "matriz",
+        "ruta": "/riesgos"
+      },
+      "fase_minima": 6,
+      "frase": "La cuarta acción de la decisión era preventiva: el efecto latente de la edad. Un riesgo no se cierra con el lote; se registra, se sitúa en la matriz y se mueve con motivo cuando cambia. El monitor propone impacto y probabilidad según qué ha fallado y con cuánta gravedad, y el profesional los corrige si no está de acuerdo.",
+      "hace": "Abre la alerta de la diferencia de falsos negativos, pulsa «Registrar riesgo» y acepta la propuesta del monitor; el aviso te trae de vuelta aquí con «Ver en Riesgos».",
+      "id": 26,
+      "kicker": "Riesgo",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Un riesgo nace de la alerta",
+      "ve": "R-001 en la celda Severo por Probable, nivel crítico, con el enlace a la alerta que lo originó y su entrada en «Movimiento · 7 días»."
+    },
+    {
+      "capacidad": "cierre",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": null,
+        "ruta": null
+      },
+      "fase_minima": 6,
+      "frase": "De un sesgo invisible en la métrica agregada a una causa confirmada y una decisión con protocolo. El caso arrancó con un evento claro, pero no todos lo tienen: cuando el cambio es gradual, la detección depende del cribado periódico, no de un disparo automático.",
+      "hace": "Pulsa «Ir al laboratorio».",
+      "id": 27,
+      "kicker": "Cierre",
+      "opcional": false,
+      "tipo": "diapositiva",
+      "titulo": "Fin del caso",
+      "ve": null
+    },
+    {
+      "capacidad": "laboratorio",
+      "dato": {
+        "esperado": null,
+        "estado": null,
+        "metric_key": null,
+        "umbral": null,
+        "verificacion": null
+      },
+      "destino": {
+        "ancla": "laboratorio",
+        "ruta": "/demo"
+      },
+      "fase_minima": 6,
+      "frase": "El laboratorio genera un lote nuevo con los parámetros que elijas y lo evalúa sin avanzar el caso: proporción de personas jóvenes, edad media y su dispersión, tamaño del lote, dirección e intensidad del sesgo (hacia jóvenes o hacia mayores) y acierto de la etiqueta. Sirve para ver desde qué magnitud dispara cada umbral.",
+      "hace": "Elige «sesgo hacia mayores» con la misma proporción de jóvenes y lanza el lote.",
+      "id": 28,
+      "kicker": "Laboratorio",
+      "opcional": false,
+      "tipo": "paso",
+      "titulo": "Mueve la población y mira qué pasa",
+      "ve": "Las cifras de los tres monitores frente a sus umbrales y el evento del laboratorio en el diario."
+    }
+  ]
+}

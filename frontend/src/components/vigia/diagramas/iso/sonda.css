@@ -1,0 +1,115 @@
+/*
+ * La sonda de la portada. Todo cuelga de `.iso-sonda` (el `<svg>` de la
+ * figura) para no tocar ningún otro SVG de la página. Los tonos de la figura
+ * salen de los tokens de la aplicación; el acento es el violeta de Vigía
+ * (`--primary` y `--chart-1`). Claro por defecto; `.dark` los redefine.
+ */
+
+.iso-sonda-holder {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  background: radial-gradient(ellipse 50% 45% at 50% 52%, transparent, transparent);
+  transition: background 0.5s;
+}
+.iso-sonda-holder.glow {
+  background: radial-gradient(ellipse 50% 45% at 50% 52%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 72%);
+}
+
+.iso-sonda {
+  --panel: var(--background);
+  --line: color-mix(in srgb, var(--muted-foreground) 62%, var(--background));
+  --detail: color-mix(in srgb, var(--border) 55%, var(--background));
+  --body: color-mix(in srgb, var(--background) 94%, var(--foreground));
+  --deck: var(--card);
+  --recess: color-mix(in srgb, var(--background) 90%, var(--foreground));
+  --glass: color-mix(in srgb, var(--background) 88%, var(--foreground));
+  --ink: var(--muted-foreground);
+  --ink-hi: var(--foreground);
+  --accent: var(--primary);
+  --accent-hi: color-mix(in srgb, var(--primary) 78%, black);
+  --accent-dim: color-mix(in srgb, var(--accent) 8%, transparent);
+  --glass-on: color-mix(in srgb, var(--accent) 12%, var(--background));
+  --viva: var(--accent);
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  display: block;
+  width: 100%;
+  height: auto;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.dark .iso-sonda {
+  --line: color-mix(in srgb, var(--border) 60%, var(--background));
+  --detail: color-mix(in srgb, var(--border) 28%, var(--background));
+  --body: color-mix(in srgb, var(--background) 90%, black);
+  --deck: color-mix(in srgb, var(--background) 92%, var(--foreground));
+  --recess: color-mix(in srgb, var(--background) 70%, black);
+  --glass: color-mix(in srgb, var(--background) 78%, black);
+  --accent: color-mix(in srgb, var(--chart-1) 50%, var(--primary));
+  --accent-hi: color-mix(in srgb, var(--primary) 70%, white);
+  --accent-dim: color-mix(in srgb, var(--accent) 10%, transparent);
+  --glass-on: color-mix(in srgb, var(--accent) 9%, var(--background));
+  --viva: var(--accent-hi);
+}
+.iso-sonda:focus {
+  outline: none;
+}
+.iso-sonda:focus-visible {
+  outline: 1px dashed var(--line);
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+.iso-sonda text {
+  font-family: var(--mono);
+}
+
+/* vocabulario de la figura */
+.iso-sonda .face { fill: var(--body); stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.iso-sonda .face.top { fill: var(--deck); }
+.iso-sonda .face.recess { fill: var(--recess); }
+.iso-sonda .detail { fill: none; stroke: var(--detail); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.iso-sonda .label { fill: var(--ink); font-family: var(--mono); }
+.iso-sonda .glass { fill: var(--glass); transition: fill 0.3s, stroke 0.3s; }
+.iso-sonda .glass.hot { fill: var(--glass-on); stroke: var(--accent); }
+.iso-sonda .halo { fill: var(--accent); opacity: 0; transition: opacity 0.4s; }
+.iso-sonda .halo.hot { opacity: 0.22; }
+.iso-sonda .led { fill: var(--detail); transition: fill 0.2s; }
+.iso-sonda .led.hot { fill: var(--accent); }
+.iso-sonda .wire { fill: none; stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.4s; }
+.iso-sonda .wire.hot { stroke: var(--accent); }
+.iso-sonda .wire-under { fill: none; stroke: var(--panel); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.iso-sonda .pulse { fill: none; stroke: var(--accent-hi); stroke-width: 2.2; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 70 1200; stroke-dashoffset: 70; opacity: 0; }
+.iso-sonda .pulse.go { animation: sonda-flow 0.55s linear; }
+.iso-sonda .press { cursor: pointer; transition: transform 60ms ease-out; }
+.iso-sonda .press.down { transform: translateY(3px); }
+.iso-sonda .press .face { transition: fill 0.6s ease-out, stroke 0.6s ease-out; }
+.iso-sonda .press.lit .face { fill: var(--accent); stroke: var(--accent-hi); transition: none; }
+.iso-sonda .press.lit .face.top { fill: var(--accent-hi); }
+.iso-sonda .press.lit { filter: url(#sonda-glow); }
+.iso-sonda .press:hover .face.top { stroke: var(--ink); }
+@keyframes sonda-flow { 0% { stroke-dashoffset: 70; opacity: 1; } 90% { opacity: 1; } 100% { stroke-dashoffset: -1000; opacity: 0; } }
+@keyframes sonda-blink { 50% { opacity: 0; } }
+
+/* lo propio de la sonda */
+.iso-sonda .trace { fill: none; stroke: var(--line); stroke-width: 1.2; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.iso-sonda.on .trace { stroke: var(--viva); }
+.iso-sonda .ico { fill: none; stroke: var(--line); stroke-width: 1.3; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.iso-sonda.on .ico.mon, .iso-sonda .ico.vivo { stroke: var(--viva); }
+.iso-sonda .mal .trace, .iso-sonda .mal .led.hot { animation: sonda-blink 0.8s steps(1) infinite; }
+.iso-sonda .tick { fill: var(--line); }
+.iso-sonda.on .tick { fill: var(--accent); }
+.iso-sonda.on .tick.corr { fill: var(--accent-hi); }
+.iso-sonda #so-probe { transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.3, 1); }
+.iso-sonda .nn { stroke: color-mix(in srgb, var(--accent) 22%, var(--line)); stroke-width: 0.8; vector-effect: non-scaling-stroke; }
+.iso-sonda.on .nn { stroke: color-mix(in srgb, var(--accent) 38%, var(--line)); }
+.iso-sonda .nd.go { animation: sonda-nd 0.9s ease-out; }
+.iso-sonda #so-user { cursor: pointer; }
+.iso-sonda .persona { stroke-width: 1.2; stroke-linejoin: round; }
+.iso-sonda .oculto { display: none; }
+@keyframes sonda-nd { 0% { fill: var(--accent-hi); } 100% { fill: var(--detail); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-sonda .press, .iso-sonda .glass, .iso-sonda .halo, .iso-sonda .press .face, .iso-sonda .wire, .iso-sonda #so-probe, .iso-sonda-holder { transition: none; }
+  .iso-sonda .mal .trace, .iso-sonda .mal .led.hot, .iso-sonda .nd.go, .iso-sonda .pulse.go { animation: none; }
+}

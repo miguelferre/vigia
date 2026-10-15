@@ -1,0 +1,326 @@
+{
+  "alertas_por_lote": {
+    "definicion": "Al agregar el panel por día u hora, la línea divide las alertas del tramo entre los lotes evaluados en él: un lote abre como mucho una alerta por comprobación, así que un salto de 4 a 65 viene de sumar lotes, no de que el modelo haya empeorado de golpe. El recuento bruto y el número de lotes van en el tooltip y en la etiqueta del eje; el reparto por severidad se enseña siempre al 100 %.",
+    "etiqueta": "Alertas por lote evaluado"
+  },
+  "backend_llm": {
+    "definicion": "El modelo de lenguaje que usan las revisiones p3 y auto del dossier; apagado por defecto. Ollama es local; el backend no local exige, antes de activarlo, una confirmación explícita de que el dossier (los formularios y, si se pide, el resumen de deskilling) no lleva datos de personas afectadas, que queda registrada en el diario con actor y fecha. Se configura en Ajustes.",
+    "etiqueta": "Backend de lenguaje"
+  },
+  "cadena_correlacion": {
+    "definicion": "Los eventos del diario que comparten `correlation_id` son la misma operación: fase, ingesta, evaluación, alertas y explicación. El diario los agrupa y los enseña juntos, plegados por defecto.",
+    "etiqueta": "Cadena de correlación"
+  },
+  "calibracion_cruzadas": {
+    "definicion": "Periodo, fijado al crear el proyecto, en el que las alertas cruzadas acumulan diario de uso como referencia sin llegar a alertar. Al vencer, esa referencia queda fijada y el monitor pasa a vigilancia; mientras dura, ninguna de las seis reglas cruzadas abre alerta.",
+    "etiqueta": "Calibración (cruzadas)"
+  },
+  "carril_agente": {
+    "definicion": "Eventos del diario que registra un agente de IA conectado a Vigía (por el servidor MCP o por la API), con el mismo actor nominal y motivo que una persona: así se distingue lo que hizo el asistente de lo que hizo el usuario.",
+    "etiqueta": "Carril Agente de IA"
+  },
+  "carril_humano": {
+    "definicion": "Eventos del diario que registra una persona desde la interfaz: crear o reiniciar la demo, hacer el triaje de una alerta, registrar la investigación o la decisión, editar un protocolo, anotar algo. Llevan siempre actor nominal y, en las acciones que cambian algo, motivo.",
+    "etiqueta": "Carril Usuario"
+  },
+  "carril_modelo": {
+    "definicion": "Lo que Vigía calcula y registra sobre el modelo vigilado: cada lote ingerido, cada evaluación de un monitor, cada alerta que abre o pasa a seguimiento, cada explicación. Son mediciones, no decisiones de una persona.",
+    "etiqueta": "Carril Vigía"
+  },
+  "carril_sistema": {
+    "definicion": "Tareas internas de la propia aplicación: arranque, migraciones de la base de datos, colas de trabajo, reproducción de la demo. No las provoca ninguna persona ni son cálculos sobre el modelo.",
+    "etiqueta": "Carril Sistema"
+  },
+  "comparacion_versiones": {
+    "definicion": "Pone dos versiones lado a lado, métrica a métrica, con los umbrales del modelo. De cada una enseña su valor en la línea base y en el último lote evaluado (o la media de todos sus lotes), y dice si la segunda mejora, empeora o queda igual. Un lado sin lotes evaluados sale sin datos. No compara alertas: las alertas son del modelo, no de la versión.",
+    "etiqueta": "Comparación de versiones"
+  },
+  "comprobaciones_umbral": {
+    "definicion": "Lo que cuenta la cifra «Correctas» de cada tarjeta de monitor del cuadro: medidas del último lote evaluado que quedaron dentro de su umbral. En equidad cada grupo supervisado es una comprobación; en cruzadas hay siete: las seis reglas, CX-1 a CX-6, y la señal «Tasa de correcciones del modelo». Una alerta abierta puede seguir contando como abierta aunque su métrica ya haya vuelto a umbral y esté en observación.",
+    "etiqueta": "Comprobaciones dentro de umbral"
+  },
+  "crosswalk": {
+    "definicion": "La correspondencia entre los hallazgos de una revisión del dossier y los marcos regulatorios que citan, por ejemplo la norma de gestión de riesgos o el AI Act. Se genera junto a la revisión y se enseña agrupada por marco en el informe.",
+    "etiqueta": "Crosswalk"
+  },
+  "cx1": {
+    "definicion": "Alerta cruzada: un subgrupo de personas afectadas sigue la recomendación del modelo mucho más que el resto (apenas hay overrides de los profesionales) justo en el subgrupo donde el modelo más se equivoca. Es la señal de que nadie está corrigiendo un sesgo del modelo.",
+    "etiqueta": "Tasa de correcciones en el grupo con más error (CX-1)"
+  },
+  "cx2": {
+    "definicion": "Alerta cruzada: el monitor de calidad ya está en alerta y, aun así, el profesional sigue apartándose del modelo con la misma frecuencia de siempre, por encima de su patrón de referencia, en vez de corregirlo más. Severidad alta cuando dispara.",
+    "etiqueta": "Tasa de correcciones con la calidad en alerta (CX-2)"
+  },
+  "cx3": {
+    "definicion": "Alerta informativa (no abre alerta en la tabla): la calidad va bien y el profesional se aparta del modelo con normalidad, pero cuando el modelo se equivoca ya no lo corrige tanto como antes, la tasa de rescate cae frente a su referencia. Se lee en la tarjeta de cruzadas y en Capa humana: el apoyo del modelo se está perdiendo sin que la calidad lo delate todavía.",
+    "etiqueta": "Tasa de rescate de errores del modelo (CX-3)"
+  },
+  "cx4": {
+    "definicion": "Alerta cruzada: se dispara la señal de deskilling del diario de uso, humano y modelo convergen mientras la tasa de rescate cae, y no se cumple el bloqueo por mejora real del modelo. Severidad alta cuando dispara; si el modelo mejora de verdad y el rescate no ha bajado, no dispara aunque la señal de deskilling esté activa.",
+    "etiqueta": "Pérdida de criterio profesional (deskilling, CX-4)"
+  },
+  "cx5": {
+    "definicion": "Alerta cruzada: la frecuencia con la que los profesionales se apartan de la recomendación del modelo varía mucho de uno a otro, de forma estadísticamente significativa. Se muestra agregada, sin nombrar a ningún profesional.",
+    "etiqueta": "Diferencia de tasa de correcciones entre profesionales (CX-5)"
+  },
+  "cx6": {
+    "definicion": "Alerta cruzada: un subgrupo de personas afectadas recibe overrides de los profesionales con una frecuencia muy distinta a la del resto, pero el monitor de equidad no ha señalado ningún problema en ese subgrupo. Apunta a un sesgo que el modelo no está midiendo. Con dos grupos sale una sola alerta por pareja, anclada en el grupo que menos se aparta del modelo. Tampoco se emite mientras el monitor de equidad tenga una alerta viva (abierta, reconocida o en observación) sobre ese grupo, ni en un grupo con una alerta CX-1 viva: esa señal ya está cubierta, y CX-6 sigue callada en el grupo hasta que alguien cierre esa alerta.",
+    "etiqueta": "Diferencia de tasa de correcciones por grupo sin alerta de equidad (CX-6)"
+  },
+  "deriva_lote_a_lote": {
+    "definicion": "Segunda pestaña del panel de variables del monitor de deriva: una variable numérica a lo largo de todos los lotes evaluados, con un violín por lote y la línea base destacada. La silueta de cada violín suaviza los tramos con los que se calculó el PSI (diez como máximo, cortados por los cuantiles de la línea base), su anchura es la proporción de filas del lote en cada valor y el punto es la mediana. Responde a cuándo cambió la variable y si volvió, no solo a cómo está el último lote frente a la línea base. Solo para variables numéricas; las filas fuera del rango de la línea base no entran ni en el violín ni en el PSI.",
+    "etiqueta": "Deriva lote a lote"
+  },
+  "deskilling": {
+    "definicion": "Cómo evoluciona, ventana a ventana, la coincidencia entre el profesional y el modelo, el acierto de cada uno y la tasa de rescate (cuánto corrige el profesional cuando el modelo falla), sobre el diario de uso acumulado. Una señal avisa cuando humano y modelo convergen mientras el rescate cae, patrón compatible con una pérdida de criterio propio; no es una conclusión, es una invitación a investigar.",
+    "etiqueta": "Deskilling"
+  },
+  "distribuciones_deriva": {
+    "definicion": "Compara, tramo a tramo, cómo se repartían los datos en la línea base y cómo se reparten en el lote: la confianza del modelo, es decir la probabilidad de la clase predicha, las clases predichas y cada variable de entrada. La confianza y las clases predichas van junto a las variables porque la deriva puede estar en la población que entra o en lo que el modelo responde, y las tres se calculan sobre esos repartos. Un tramo es un intervalo de valores del histograma o una categoría: en la lectura, el lote se dibuja en barras y la línea base como escalón con un punto por tramo, y las etiquetas señalan los tres tramos que más cambian.",
+    "etiqueta": "Distribuciones (deriva)"
+  },
+  "dossier": {
+    "definicion": "Documento con tres formularios (perfil del sistema, experiencia de uso e inventario de documentos) que describe cómo se usa el sistema, con el resumen de deskilling adjunto si se elige incluirlo. Se genera con el paquete interaction_review, que cubre sistemas de cualquier sector. Es la base sobre la que se lanza una revisión.",
+    "etiqueta": "Dossier de auditoría"
+  },
+  "entregable": {
+    "definicion": "Lo que queda registrado al completar un hito del protocolo: por ejemplo, la severidad confirmada en el triaje, los hallazgos de la investigación o las acciones elegidas en la decisión. La lista de entregables de cada hito se edita por monitor en la hoja «Configurar» y la enseñan todas sus alertas.",
+    "etiqueta": "Entregable"
+  },
+  "estado_alerta": {
+    "definicion": "El valor cruza el umbral inferior o superior configurado.",
+    "etiqueta": "Alerta"
+  },
+  "estado_aviso": {
+    "definicion": "El valor está dentro de los umbrales pero a menos del 10 % de distancia de uno de ellos: sigue correcto, conviene vigilarlo. En equidad por lote, también es «aviso» el valor que cruza el umbral en un lote con menos filas que la muestra mínima, si su intervalo todavía toca el lado bueno.",
+    "etiqueta": "Aviso"
+  },
+  "estado_despliegue": {
+    "definicion": "Desarrollo, validación o producción: se elige al dar de alta, se edita en Configuración y se enseña como chip en la tarjeta del modelo. Demo se reserva a datos sintéticos, que se enseñan siempre como tales.",
+    "etiqueta": "Estado de despliegue"
+  },
+  "estado_inestable": {
+    "definicion": "El valor puntual está dentro de los umbrales, pero el intervalo de ventanas deslizantes recientes cruza alguno de ellos: tiene prioridad sobre 'alerta'. En el método por lote, «inestable» es el valor que cruza el umbral con un intervalo que todavía toca el lado bueno; si el lote tiene menos filas que la muestra mínima de equidad (200 por defecto), ese caso sale como «aviso» y no como «inestable», porque un lote pequeño no basta para confirmar el cruce. Si todo el intervalo cae del lado malo, es «alerta» aunque el lote sea pequeño.",
+    "etiqueta": "Inestable"
+  },
+  "estado_ok": {
+    "definicion": "El valor está dentro de los umbrales configurados, sin estar cerca de ningún límite.",
+    "etiqueta": "Correcto"
+  },
+  "estado_sin_datos": {
+    "definicion": "No hay valor: la ventana no llegó a la muestra mínima, o el monitor no tiene datos suficientes para calcular la métrica.",
+    "etiqueta": "Sin datos"
+  },
+  "etapa_alerta": {
+    "definicion": "El último hito hecho del protocolo: «Detectada» (Vigía la ha abierto), «En observación» (triaje hecho), «En investigación» (investigación registrada), «En seguimiento» (decisión registrada, o la métrica ha vuelto dentro del umbral en un lote posterior) y «Cerrada». El botón principal de la alerta ofrece siempre el hito siguiente.",
+    "etiqueta": "Estado de la alerta"
+  },
+  "etapa_despliegue": {
+    "definicion": "En qué punto de su vida está el modelo: desarrollo, validación o producción. Se elige al dar de alta, sin valor preseleccionado, y se cambia en Configuración. Se enseña como chip en la tarjeta del modelo.",
+    "etiqueta": "Etapa de despliegue"
+  },
+  "etiqueta_favorable": {
+    "definicion": "La decisión del modelo que beneficia a la persona afectada, por ejemplo «aprobar» en un modelo que decide si se aprueba una solicitud. Se declara al crear el modelo y es el resultado que miden las tasas de equidad y las métricas de calidad basadas en positivos. En un modelo multiclase se declara un conjunto de clases favorables, de una a todas menos una, o ninguna: la equidad y las tasas favorables miden si la clase cae dentro de ese conjunto. Un modelo de regresión no tiene valor favorable: declara, si quiere, un rango favorable.",
+    "etiqueta": "Valor favorable"
+  },
+  "etiqueta_lote": {
+    "definicion": "Nota de texto libre sobre un lote (por ejemplo, qué fase de una campaña o de una demo representa). Es opcional y no afecta a ningún cálculo: solo ayuda a identificar el lote en pantalla.",
+    "etiqueta": "Etiqueta del lote"
+  },
+  "evaluacion": {
+    "definicion": "El resultado de ejecutar un monitor (equidad, calidad, deriva o explicabilidad) sobre una ventana de datos: un valor por métrica, su estado y la configuración con la que se calculó.",
+    "etiqueta": "Evaluación"
+  },
+  "explicacion_automatica": {
+    "definicion": "Tras cada lote evaluado, Vigía calcula qué variables pesan más en las predicciones del modelo, sin que haga falta lanzarla a mano. Usa importancia por permutación por defecto; SHAP queda disponible a demanda. La estabilidad del ranking compara esa explicación con la de referencia de la versión: con menos de dos explicaciones todavía no hay nada que comparar, y se muestra 'sin comparación todavía'.",
+    "etiqueta": "Explicación automática"
+  },
+  "explicacion_global": {
+    "definicion": "Explica el comportamiento general del modelo: qué características pesan más, en promedio, en sus predicciones sobre un conjunto de casos. Responde a en qué se apoya el modelo en general, no en una decisión concreta.",
+    "etiqueta": "Explicación global"
+  },
+  "explicacion_local": {
+    "definicion": "Explica una predicción concreta: qué características pesaron más, y en qué sentido, en la decisión sobre un caso concreto. Responde a por qué el modelo dijo lo que dijo en ese caso.",
+    "etiqueta": "Explicación local"
+  },
+  "fase_dataset": {
+    "definicion": "El momento del despliegue en que se recogieron los datos de un dataset: línea base o producción.",
+    "etiqueta": "Fase"
+  },
+  "grupo_referencia": {
+    "definicion": "El grupo de personas afectadas con el que se compara al grupo supervisado; se define en la configuración de la versión del modelo (en la demo, edades de 36 a 75 años). El impacto dispar divide la tasa favorable del grupo supervisado por la de este grupo.",
+    "etiqueta": "Grupo de referencia"
+  },
+  "grupo_supervisado": {
+    "definicion": "El grupo de personas afectadas cuyo trato por parte del modelo se vigila; se define en la configuración de la versión del modelo (en la demo, edades de 18 a 35 años). Sus tasas se comparan siempre con las del grupo de referencia.",
+    "etiqueta": "Grupo supervisado"
+  },
+  "hito": {
+    "definicion": "Cada uno de los cinco pasos con los que se sigue la respuesta a una alerta: detección, triaje, investigación, decisión y seguimiento. La detección la hace Vigía; el triaje, la investigación y la decisión se registran con el botón principal de la alerta, que siempre ofrece el siguiente hito; el seguimiento avanza solo con los lotes que llegan después. Los textos de cada hito (qué se hace, entregables, responsable y plazo) se editan por monitor en su hoja «Configurar».",
+    "etiqueta": "Hito"
+  },
+  "impacto": {
+    "definicion": "Cuánto dañaría a las personas afectadas si un riesgo llegara a materializarse, en cinco niveles de menor a mayor: Insignificante, Menor, Moderado, Mayor y Severo. Es uno de los dos ejes de la matriz de riesgos; combinado con la probabilidad, sitúa cada riesgo en una celda con su nivel final (bajo, medio, alto o crítico).",
+    "etiqueta": "Impacto"
+  },
+  "importancia_caracteristica": {
+    "definicion": "El peso que tiene una característica de entrada (una variable como la edad o el importe) en las predicciones del modelo, calculado por el método de explicabilidad elegido. Cuanto mayor, más influye esa característica.",
+    "etiqueta": "Importancia de característica"
+  },
+  "intervalo": {
+    "definicion": "El rango de valores que tomó una métrica de equidad sobre varias ventanas recientes. Si ese rango cruza un umbral, el estado es «inestable» aunque el valor puntual esté dentro de los límites: la señal existe pero no es estable.",
+    "etiqueta": "Intervalo"
+  },
+  "ks": {
+    "definicion": "Distancia máxima entre las dos distribuciones acumuladas, la de la línea base y la del lote, para una variable. Viene con su p-valor: cuanto más pequeño, menos probable que la diferencia sea azar.",
+    "etiqueta": "KS (Kolmogorov-Smirnov)"
+  },
+  "linea_base": {
+    "definicion": "El lote contra el que se mide la deriva. Se fija una vez por versión del modelo y no cambia después: se congela sola al ingerir el dataset con rol línea base, y se evalúa al confirmar los umbrales del alta (o con el botón Evaluar).",
+    "etiqueta": "Línea base"
+  },
+  "linea_base_version": {
+    "definicion": "El lote de referencia propio de cada versión. La deriva de una versión se mide contra su línea base, no contra la de otra. Por eso una versión nueva necesita la suya antes de activarse: súbela y congélala.",
+    "etiqueta": "Línea base de una versión"
+  },
+  "lote": {
+    "definicion": "Conjunto de registros ingeridos de una vez; unidad de evaluación y de orden.",
+    "etiqueta": "Lote"
+  },
+  "metodo_permutacion": {
+    "definicion": "Mide la importancia de una característica por cuánto empeora la predicción del modelo cuando se baraja esa columna al azar, dejando las demás intactas. Es el método por defecto para la explicación global: siempre disponible y determinista.",
+    "etiqueta": "Importancia por permutación"
+  },
+  "metodo_shap": {
+    "definicion": "Mide la contribución de cada característica a una predicción repartiendo la diferencia entre esa predicción y la media del modelo. Es más costoso de calcular que la permutación y, si la librería SHAP no está instalada en el equipo, no está disponible.",
+    "etiqueta": "SHAP"
+  },
+  "metrica_principal": {
+    "definicion": "La métrica de calidad que resume el monitor en el cuadro de mando. Se elige en la configuración del monitor de calidad; por defecto es la primera métrica con umbral configurado, o la exactitud si ninguna lo tiene.",
+    "etiqueta": "Métrica principal"
+  },
+  "monitor_cross": {
+    "definicion": "Cruza lo que hace el modelo con lo que hacen las personas que lo usan: correcciones que no llegan donde el modelo más falla, profesionales que corrigen de forma muy distinta y grupos que reciben más correcciones sin aviso de equidad. Es la capa que no vigila ninguna plataforma comercial.",
+    "etiqueta": "Alertas cruzadas"
+  },
+  "monitor_drift": {
+    "definicion": "Vigila si los datos que entran hoy se parecen a los de la línea base. Responde a si ha cambiado la población atendida, que es lo que suele estropear un modelo antes de que baje el acierto.",
+    "etiqueta": "Monitor de deriva"
+  },
+  "monitor_explain": {
+    "definicion": "Enseña en qué variables se apoya el modelo para decidir, en conjunto y en un caso concreto. Responde a por qué el modelo dijo lo que dijo.",
+    "etiqueta": "Monitor de explicabilidad"
+  },
+  "monitor_fairness": {
+    "definicion": "Compara los resultados que el modelo da al grupo supervisado con los que da al grupo de referencia. Responde a si el modelo trata distinto a un grupo de personas, y cuánto.",
+    "etiqueta": "Monitor de equidad"
+  },
+  "monitor_quality": {
+    "definicion": "Mide cuánto acierta el modelo frente a la etiqueta real, cuando esa etiqueta llega. Responde a si el modelo sigue siendo tan bueno como el día que se aprobó.",
+    "etiqueta": "Monitor de calidad"
+  },
+  "motivo": {
+    "definicion": "El texto que justifica una acción que cambia algo: ajustar un umbral, poner una alerta en observación, cerrarla o escalarla. Vigía lo exige antes de guardar el cambio y lo conserva en el diario junto al actor y la hora.",
+    "etiqueta": "Motivo"
+  },
+  "muestra_minima": {
+    "definicion": "El número de registros por debajo del cual una evaluación no es fiable y se marca incompleta. Depende del monitor: en equidad, 200 predicciones para las tasas de resultado favorable, 100 registros con etiqueta real para las tasas de error y 20 por grupo; en calidad, 100 registros con etiqueta. Deriva no tiene mínimo: si la línea base o el lote están vacíos, sale «sin datos».",
+    "etiqueta": "Muestra mínima"
+  },
+  "orden_manipulado": {
+    "definicion": "Marca de los datasets de la demo cuyas filas vienen reordenadas a propósito para provocar una ventana de equidad concreta. Son datos sintéticos y se ingieren siempre marcados como tales; un despliegue real nunca produce ese orden.",
+    "etiqueta": "Orden manipulado"
+  },
+  "outcome": {
+    "definicion": "Un resultado del sistema combinado, humano más modelo, agregado por periodo y métrica, con su origen. No tiene línea base ni objetivo, y nunca abre alerta por sí mismo. Sirve para seguir cómo evoluciona el resultado conjunto en el tiempo, aparte de lo que mide cada monitor.",
+    "etiqueta": "Outcome"
+  },
+  "override": {
+    "definicion": "Una decisión del profesional distinta de la recomendación del modelo, sobre una fila del diario de uso. Se agrega por subgrupo, por fase del despliegue o entre profesionales, nunca por nombre, con la frecuencia con la que cada grupo se aparta del modelo. Sirve para ver si alguien corrige al modelo donde más se equivoca, o si nadie lo hace.",
+    "etiqueta": "Override"
+  },
+  "perfil_variable": {
+    "definicion": "Lo que enseña el panel de una variable en el monitor de deriva: el histograma de la línea base frente al del lote, el PSI, el KS, el tamaño de cada muestra (n) y el rango de valores.",
+    "etiqueta": "Perfil de variable"
+  },
+  "plantilla_mapeo": {
+    "definicion": "Las columnas que se repiten en todos los ficheros del modelo: identificador, predicción, probabilidad, etiqueta, fecha, variables y atributo del grupo, más la clase favorable (en un modelo multiclase, el conjunto de clases favorables y una columna de probabilidad por clase; en un modelo de regresión, la unidad de la salida y el rango favorable, sin clase favorable ni probabilidad). Se fija al dar de alta el modelo y Vigía la propone en cada subida. Si un fichero se aparta de ella, la subida sigue y el apartamiento queda en el diario.",
+    "etiqueta": "Plantilla de mapeo"
+  },
+  "probabilidad": {
+    "definicion": "Cuán probable es que un riesgo llegue a materializarse, en cinco niveles de menor a mayor: Raro, Improbable, Posible, Probable y Casi seguro. Es el segundo eje de la matriz de riesgos; combinada con el impacto, sitúa cada riesgo en una celda con su nivel final (bajo, medio, alto o crítico).",
+    "etiqueta": "Probabilidad"
+  },
+  "protocolo": {
+    "definicion": "La pauta de respuesta ante una alerta, en cinco hitos: detección, triaje, investigación, decisión y seguimiento. Se edita por monitor, en su hoja «Configurar», y cada alerta hereda la del monitor en el momento en que se abre; admite hitos extra informativos, que no mueven la etapa de la alerta ni piden acción.",
+    "etiqueta": "Protocolo"
+  },
+  "psi": {
+    "definicion": "Cuánto ha cambiado la distribución de una variable entre la línea base y el lote evaluado. Lectura habitual: menos de 0,1 es estable, entre 0,1 y 0,25 es un cambio moderado, más de 0,25 es un cambio fuerte. Es una medida de cada variable y no es la cifra de la alerta de deriva: esa es la mayor puntuación KS o JS entre todas las variables. El panel ordena sus variables por esa puntuación, no por el PSI.",
+    "etiqueta": "PSI (índice de estabilidad de población)"
+  },
+  "rango_favorable": {
+    "definicion": "En un modelo de regresión, los valores de la salida que benefician a la persona afectada, por ejemplo «desde 12 horas por semana» en un modelo que predice horas de atención. Son de uno a tres intervalos, y un intervalo puede no tener extremo inferior o superior. Es opcional y se fija al crear el modelo o al congelar la línea base; después no cambia. Con rango, la equidad y las tasas favorables miden si el valor cae dentro de él y la capa humana cuenta como decisión si el valor cae dentro o fuera. Sin rango, la equidad solo compara el error de cada grupo y la capa humana no está disponible.",
+    "etiqueta": "Rango favorable"
+  },
+  "residuo": {
+    "definicion": "El error de una predicción de regresión: la predicción menos el valor real, en la unidad de la salida. Un residuo negativo es una infraestimación y uno positivo, una sobreestimación. El histograma de residuos enseña cómo se reparten los errores del modelo; si el centro no está en 0, el modelo tiene sesgo.",
+    "etiqueta": "Residuo"
+  },
+  "revision_dossier": {
+    "definicion": "Analiza un dossier contra 32 directrices de auditoría con dos enfoques: b0, sin modelo de lenguaje y la opción por defecto, o p3/auto, con un backend de lenguaje configurado en Ajustes. Da hallazgos con severidad y un informe en HTML, con la versión del paquete, el hash del corpus de directrices y el sha256 del dossier y del prompt, para poder reproducirla.",
+    "etiqueta": "Revisión del dossier"
+  },
+  "riesgo": {
+    "definicion": "Un problema identificado a partir de una alerta que se registra aparte para seguir su gestión en el tiempo, con un impacto y una probabilidad asignados. Se ubica en una celda de la matriz de impacto por probabilidad, con un código propio (`R-nnn`) y su alerta de origen. Es el formato que conoce auditoría (normas de gestión de riesgos, AI Act).",
+    "etiqueta": "Riesgo"
+  },
+  "rol": {
+    "definicion": "El perfil con el que se usa Vigía: responsable del modelo (configura y sigue el protocolo), profesional (consulta y aporta su criterio con los overrides), auditoría (lee y exporta el diario) o cliente (vista reducida, sin laboratorio, mapeos, registros en bruto ni ajustes avanzados). Los botones que no corresponden al rol activo aparecen desactivados.",
+    "etiqueta": "Rol"
+  },
+  "sesgo_medio": {
+    "definicion": "El promedio de los residuos: hacia qué lado se equivoca el modelo de media. Negativo quiere decir que infraestima, predice menos de lo real; positivo, que sobreestima. Se mide en la unidad de la salida y se compara entre grupos para ver a quién le da el modelo de menos o de más.",
+    "etiqueta": "Sesgo medio"
+  },
+  "severidad": {
+    "definicion": "El nivel de una alerta abierta: alta cuando el monitor está en alerta, media cuando está inestable. Se confirma en el hito de triaje del protocolo y se enseña como chip en la tabla y en el panel de la alerta.",
+    "etiqueta": "Severidad"
+  },
+  "tipo_dataset": {
+    "definicion": "Qué contiene un dataset ingerido: predicciones del modelo, etiquetas reales o desenlaces, registro de uso del modelo, o varias de esas cosas combinadas en un solo fichero. En el registro de uso, cada fila compara la decisión humana con la del modelo: `refer` (o 1) es la decisión favorable para la persona afectada, en el mismo sentido que la etiqueta favorable del modelo; `no-refer` (o 0) es la contraria.",
+    "etiqueta": "Tipo de dataset"
+  },
+  "token_mcp": {
+    "definicion": "Credencial que un agente de IA debe mandar en cada petición para que la API le acepte como agente. Se enmascara en Ajustes y se revela con el botón «Revelar»; sin un token válido, la API rechaza la petición del agente.",
+    "etiqueta": "Token del servidor MCP"
+  },
+  "trabajo": {
+    "definicion": "Tarea que se ejecuta en segundo plano en una de las dos colas del servidor: ingerir un fichero, evaluar un monitor, calcular una explicación, avanzar una fase de la demo o evaluar las alertas cruzadas. Tiene estado y progreso, visibles en el distintivo de la cabecera mientras está en curso.",
+    "etiqueta": "Trabajo"
+  },
+  "unidad_salida": {
+    "definicion": "La unidad en la que el modelo de regresión da su predicción, por ejemplo «días» o «horas por semana». Se escribe al crear el modelo y no cambia después. Las medidas de error y los umbrales de calidad se leen en esa unidad. La deriva de la predicción, R² y la razón de errores no llevan unidad.",
+    "etiqueta": "Unidad de la salida"
+  },
+  "valor_fragil": {
+    "definicion": "Un valor de equidad calculado con muy pocos resultados favorables en algún grupo (por defecto, menos de 5). El estado no cambia por ser frágil, pero el valor puede oscilar mucho entre ejecuciones por tener pocos casos detrás; se marca en la medida y esas ventanas se excluyen del intervalo.",
+    "etiqueta": "Valor frágil"
+  },
+  "ventana": {
+    "definicion": "El conjunto de registros sobre el que se calcula una evaluación: cuántos son, cuántos hacían falta, de qué lotes vienen, con qué versión del modelo y si quedó completa. Cada evaluación lleva la suya, y se ve en la cabecera del monitor.",
+    "etiqueta": "Ventana"
+  },
+  "version": {
+    "definicion": "Una edición concreta del modelo: tiene su línea base, sus lotes y sus evaluaciones. Una sola versión está activa y recibe los lotes nuevos. Los monitores, los umbrales y las alertas son del modelo, no de la versión: una versión nueva hereda los mismos.",
+    "etiqueta": "Versión del modelo"
+  },
+  "vista_previa": {
+    "definicion": "Las cinco primeras filas del fichero subido, con el papel que Vigía asigna a cada columna: identificador, etiqueta, predicción, probabilidad, fecha, variable, atributo del grupo o sin usar. Sirve para comprobar el mapeo antes de guardarlo.",
+    "etiqueta": "Vista previa"
+  },
+  "vista_propia": {
+    "definicion": "Las curvas de un profesional frente a la media y el rango del resto del equipo, sobre el diario de uso de una versión del modelo. Se elige el propio pseudónimo desde el rol Profesional, sin inicio de sesión; nadie más ve a quién corresponde. Compara la propia frecuencia de apartarse del modelo con la del equipo, ventana a ventana.",
+    "etiqueta": "Vista propia"
+  }
+}

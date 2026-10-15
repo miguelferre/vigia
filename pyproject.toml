@@ -1,0 +1,79 @@
+[project]
+name = "vigia"
+# La versión sale de src/vigia/__init__.py: una sola fuente.
+dynamic = ["version"]
+description = "Vigía: monitorización local de modelos de IA en producción con capa humana"
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+license = "MIT"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Miguel Ferreiro García" }]
+dependencies = [
+  # Motor (versiones del venv del experimento del 2026-09-08; son el contrato de los números de aceptación)
+  "numpy==2.5.3",
+  "pandas==3.0.5",
+  "scipy==1.18.1",
+  "scikit-learn==1.9.0",
+  "lime==0.2.0.1",
+  # Servidor y persistencia (versiones exactas fijadas con `uv lock`)
+  "fastapi",
+  "uvicorn[standard]",
+  "sqlmodel",
+  "python-multipart",
+  "sse-starlette",
+  "pydantic>=2.7,<3",
+  "pyyaml>=6,<7",
+  "httpx>=0.27,<1",
+  # Capa humana: `interaction_review` va vendorizado en src/vigia/human/_vendor (C1); aquí van sus dependencias
+  "anthropic>=0.40,<1",
+  "pypdf>=4,<6",
+  "mcp>=1.28,<2",
+  "skl2onnx>=1.20.0",
+  "onnx==1.23.0",
+  "onnxruntime>=1.30.0",
+]
+
+[project.optional-dependencies]
+shap = ["shap==0.52.0", "numba==0.67.0", "llvmlite==0.49.0"]
+parquet = ["pyarrow"]
+dev = ["pytest", "pytest-asyncio", "ruff"]
+
+[project.scripts]
+vigia = "vigia.cli:main"
+vigia-mcp = "vigia.mcp.server:main"
+
+[tool.uv]
+# Producto solo Windows: evita resolver splits de darwin/linux (shap 0.52.0 exige llvmlite<0.46 en darwin x86_64)
+environments = ["sys_platform == 'win32'"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/vigia/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/vigia"]
+# La estética privada no viaja en el wheel ni en el zip: sin este fichero el
+# backend solo admite el tema `miguel`. Sale de build/publico/privados.txt; `build.py`
+# comprueba que ninguna ruta de esa lista (bajo src/) llegue al wheel.
+exclude = ["src/vigia/app/services/temas_privados.py"]
+
+# Los datos enlatados de la demo viajan dentro del paquete (vigia/data/demo) para que
+# el reproductor funcione en el paquete de Windows. La carpeta del repositorio sigue
+# siendo la fuente y no se mueve; esto solo la copia.
+[tool.hatch.build.targets.wheel.force-include]
+"data/demo" = "vigia/data/demo"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = ["slow: pruebas lentas (ejecuciones largas del motor o de la validación)"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+# La copia vendorizada de `interaction_review` se queda tal cual salió de su origen
+# (src/vigia/human/_vendor/interaction_review/PROCEDENCIA.md): no se reformatea.
+extend-exclude = ["src/vigia/human/_vendor"]

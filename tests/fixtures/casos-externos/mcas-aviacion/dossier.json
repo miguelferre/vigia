@@ -1,0 +1,38 @@
+{
+  "_nota": "HELD-OUT no clinico (publico). Dossier NEUTRALIZADO (hechos/observaciones, sin etiquetar el problema) sintetizado de informes oficiales independientes: NTSB ASR-19-01 (2019); U.S. House Committee on Transportation, 'Final Committee Report: The Boeing 737 MAX' (2020); KNKT Final Report PK-LQP (Lion Air 610). Entrada ciega para validar el revisor. La aerodinamica del encabritado por los motores es causa raiz fisica, NO de la capa de interaccion.",
+  "system_name": "Sistema de aumento de maniobra de cabina (MCAS) — interaccion tripulacion-automatizacion en el Boeing 737 MAX",
+  "domain": "Automatizacion de cabina en aviacion comercial: un software que mueve automaticamente el estabilizador (trim de morro abajo) en vuelo manual, y como la tripulacion lo percibe, lo entiende y puede anularlo.",
+  "summary": "El MCAS se activa en vuelo manual con flaps recogidos cuando el angulo de ataque (AoA) medido supera un umbral; ordena trim de morro abajo y, si la condicion persiste, repite la orden cada ~5 segundos. En la version implicada dependia de un unico sensor de AoA. La tripulacion interactua con el a traves de la rueda de trim, los interruptores de trim y los avisos de cabina. La decision de volar el avion es del piloto.",
+  "sources": [
+    {
+      "id": "doc-ficha",
+      "kind": "document",
+      "label": "Documentacion de certificacion del sistema (sintesis NTSB)",
+      "content": "El MCAS ordena trim de morro abajo y repite la orden a los 5 segundos si el AoA sigue alto tras una correccion del piloto. En la version implicada se activaba con la lectura de un unico sensor de AoA, sin reconciliar con el segundo. La evaluacion de riesgos clasifico la activacion no comandada como 'mayor' suponiendo que el piloto la reconoceria de inmediato y la trataria como un trim descontrolado, contrarrestable con los interruptores de corte. Las suposiciones de diseno daban por hecho que las entradas no comandadas son facilmente reconocibles, contrarrestables sin procedimientos especificos, sin pericia ni fuerza excepcionales, y que el piloto re-trimaria de inmediato (la guia asume respuesta en ~4 segundos)."
+    },
+    {
+      "id": "ingenieria",
+      "kind": "technician",
+      "label": "Ingenieria del fabricante",
+      "content": "Tratamos el MCAS como una extension de un sistema de trim ya existente; describirlo como 'funcion nueva' habria tenido mayor impacto de certificacion y de entrenamiento. En 2012 esbozamos un anunciador que avisara al piloto del estado del MCAS, pero no se implemento; se reutilizo un aviso existente. En 2015 se planteo internamente si el MCAS era vulnerable a un fallo de un solo sensor de AoA y aun asi se entrego dependiente de un unico sensor. En una prueba en simulador, un piloto de pruebas tardo mas de 10 segundos en reaccionar a una activacion no comandada, escenario calificado de 'catastrofico'."
+    },
+    {
+      "id": "factores-humanos",
+      "kind": "technician",
+      "label": "Experta en factores humanos (testimonio)",
+      "content": "Es critico que el modo y el estado de la automatizacion se muestren de forma clara y saliente. Una indicacion de que el MCAS esta activo, cada vez que actua y su efecto sobre el trim, habria dado a los pilotos una pista clave de lo que el sistema estaba haciendo. Si el piloto anula y desactiva el sistema, eso tambien deberia mostrarse, para darle retroalimentacion clara de su estado. El alerta 'AOA DISAGREE', que avisa de que los sensores de angulo de ataque discrepan, quedo ligado por error a una opcion de pago y estuvo inoperativo en mas del 80% de la flota."
+    },
+    {
+      "id": "piloto-cabina",
+      "kind": "end_user",
+      "label": "Piloto en cabina",
+      "content": "Nada mas rotar se disparo la bastonera y no paro. Mi velocidad y altitud no cuadraban con las del copiloto y no habia ningun aviso de discrepancia de sensores. Tras recoger flaps, el morro empezo a bajar solo; corregia con el trim y a los pocos segundos volvia a bajar, una y otra vez, mas de veinte veces, mientras sonaban varias alarmas a la vez. Nunca me habian hablado de un sistema llamado MCAS. Cuando cortamos el trim con los interruptores, el avion seguia descompensado morro abajo y la rueda de trim manual estaba durisima por la carga aerodinamica."
+    },
+    {
+      "id": "piloto-formacion",
+      "kind": "end_user",
+      "label": "Piloto / instructor (sobre la formacion)",
+      "content": "Pase del modelo anterior al MAX con un curso de diferencias de unas dos horas en ordenador, sin simulador, que era el objetivo de entrenamiento fijado. En el curso no aparecia el MCAS, ni como se manifiesta su fallo, ni que el reflejo de tirar de la columna para frenar el trim de morro abajo (que funcionaba en el modelo anterior) ya no interrumpe al MCAS en el MAX. Llegue a la cabina sin un modelo mental de un sistema que podia empujar el morro abajo por su cuenta."
+    }
+  ]
+}

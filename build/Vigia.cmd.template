@@ -1,0 +1,52 @@
+@echo off
+setlocal DisableDelayedExpansion
+
+set "APPDIR=%~dp0"
+set "PYW=%APPDIR%runtime\python\pythonw.exe"
+
+rem La carpeta de datos del argumento se lee sin comillas externas y se
+rem rechaza si lleva comillas, &, |, <, >, ^ o %. %1 se sustituye en una linea sin
+rem comillas previas y el valor llega a las comprobaciones por expansion retardada.
+if [%1]==[] goto :sin_carpeta
+set "VIGIA_ARG="
+for %%A in (%1) do set "VIGIA_ARG=%%~A"
+call :validar_carpeta
+if errorlevel 1 (
+    echo La carpeta de datos no puede llevar comillas ni los caracteres ^& ^| ^< ^> ^^ %%
+    exit /b 2
+)
+set "VIGIA_HOME=%VIGIA_ARG%"
+:sin_carpeta
+
+if not exist "%PYW%" (
+    echo No se encuentra "%PYW%".
+    echo El paquete parece incompleto o movido de sitio. Reinstala Vigia.
+    pause
+    exit /b 1
+)
+
+rem La app abre el navegador ella misma en cuanto /api/health responde.
+start "" "%PYW%" -m vigia serve
+
+endlocal
+goto :eof
+
+:validar_carpeta
+setlocal EnableDelayedExpansion
+set "A=!VIGIA_ARG!"
+set "B=!A:"=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+set "B=!A:&=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+set "B=!A:|=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+set "B=!A:<=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+set "B=!A:>=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+set "B=!A:^=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+set "B=!A:%%=!"
+if not "!B!"=="!A!" endlocal & exit /b 1
+endlocal
+exit /b 0

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "cc-01-sin-explicacion-al-cliente",
+    "description": "El cliente recibe la notificación de cierre sin ningún motivo: opacidad total del «por qué». No puede entender qué disparó la marca ni, por tanto, defenderse o corregir su comportamiento. La salida es una caja negra sin explicación accesible para el afectado.",
+    "guideline_ids": ["HAX-G11", "PAIR-ET-1"],
+    "locus": "Contenido de la notificación de cierre al cliente (sin motivo)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "cc-02-operador-no-entiende-la-senal",
+    "description": "El operador que atiende al cliente actúa sobre una marca del modelo sin ver qué movimiento la disparó, con qué certeza ni qué factores pesaron; no puede contextualizar ni explicar la decisión que está ejecutando. Explicación ausente también para el operador interno.",
+    "guideline_ids": ["HAX-G11", "PAIR-MM-2"],
+    "locus": "Información que recibe el operador junto a la alerta",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "cc-03-sin-override-ni-apelacion",
+    "description": "No existe un mecanismo real para anular o frenar el cierre cuando la marca es un falso positivo: el operador solo puede escalar y esperar, y la cuenta suele cerrarse antes; el cliente no tiene a quién apelar con pruebas. Override inexistente/ineficaz y sin vía de corrección.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-2"],
+    "locus": "Ausencia de override efectivo y de canal de apelación",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "cc-04-automation-bias-operador",
+    "description": "Al no poder comprobar la marca ni disponer de explicación, el operador acaba confiando por inercia en que «la máquina tendrá razón» y ejecuta el cierre; el camino de mínima fricción es aceptar la señal sin supervisión crítica. Automation bias del operador profesional.",
+    "guideline_ids": ["PAIR-ET-3", "HAX-G2"],
+    "locus": "Respuesta del operador a la señal que no puede verificar",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "cc-05-sin-incertidumbre-ni-rendimiento",
+    "description": "La marca se entrega como un hecho binario («estás fuera») sin nivel de confianza ni tasa de falsos positivos, pese a que el propio diseño marca de más por incentivo legal; ni operador ni cliente pueden calibrar cuánto fiarse. Confianza no comunicada y presentación con falsa autoridad.",
+    "guideline_ids": ["HAX-G2", "PAIR-ET-2"],
+    "locus": "Formato de la señal de riesgo (binaria, sin incertidumbre)",
+    "severity": "high",
+    "revealed_by": "both"
+  },
+  {
+    "id": "cc-06-modelo-opaco-propietario",
+    "description": "La lógica de scoring es secreto comercial del proveedor: ni el operador ni el cliente pueden inspeccionar o impugnar cómo se calculó la marca, y la lógica fina «casi nunca se puede reconstruir desde la pantalla». Modelo caja negra no auditable por quienes lo sufren o lo ejecutan.",
+    "guideline_ids": ["HAX-G11", "PAIR-MM-2"],
+    "locus": "Naturaleza propietaria y no inspeccionable del cálculo",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "cc-07-error-no-accionable",
+    "description": "Cuando la marca es errónea, ni el sistema ni el banco ofrecen una vía de recuperación clara: el mensaje de cierre es opaco, el cliente no sabe qué aportar para revertirlo y el operador no tiene un camino de corrección. Fallo sin degradación elegante ni mensaje accionable.",
+    "guideline_ids": ["PAIR-EF-1", "PAIR-EF-2"],
+    "locus": "Gestión del falso positivo (sin vía de recuperación)",
+    "severity": "high",
+    "revealed_by": "user_only"
+  },
+  {
+    "id": "cc-08-sin-captura-de-discrepancia",
+    "description": "El sistema registra los cierres ejecutados pero no recoge si el operador consideró la marca un falso positivo: la discrepancia humana no se captura ni alimenta la supervisión o la mejora del umbral. Override/desacuerdo no capturado de forma útil.",
+    "guideline_ids": ["HAX-G9", "PAIR-FC-1"],
+    "locus": "Captura del juicio del operador sobre la marca",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  },
+  {
+    "id": "cc-09-umbral-sesgado-a-marcar-de-mas",
+    "description": "El equilibrio entre falsos positivos y falsos negativos se fija por el incentivo legal (marcar de más para evitar sanciones), trasladando el coste del error al cliente sin que ese desequilibrio se explicite ni se gestione en la interacción. Coste de los errores por tipo no balanceado conscientemente para el afectado.",
+    "guideline_ids": ["PAIR-UN-2", "HAX-G10"],
+    "locus": "Calibración del umbral y reparto del coste del error",
+    "severity": "medium",
+    "revealed_by": "tech_only"
+  }
+]
